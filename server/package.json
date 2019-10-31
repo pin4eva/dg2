@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js --watch routes"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6-alpha.6",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.7",
+    "mongoose-auto-increment": "^5.0.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "uid-generator": "^2.0.0",
+    "unique-keygen": "^1.1.6"
+  },
+  "devDependencies": {}
+}
