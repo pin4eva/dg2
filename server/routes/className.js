@@ -32,6 +32,39 @@ router.post("/session/new", async (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
+router.post("/assignTeacher", async (req, res) => {
+  const { className, teacher } = req.body;
+  const newClass = await ClassName.findOneAndUpdate(
+    { _id: className },
+    {
+      $set: {
+        teacher: teacher
+      }
+    }
+  )
+    .then(() => {
+      suceess: true;
+    })
+    .catch(err => res.send(err));
+  const newTeacher = await Teacher.findOneAndUpdate(
+    { _id: teacher },
+    {
+      $set: {
+        className: className,
+        headTeacher: true
+      }
+    }
+  )
+    .then(() => {
+      suceess: true;
+    })
+    .catch(err => res.send(err));
+  res.send({
+    classStatus: newClass,
+    teacherStatus: newTeacher
+  });
+});
 /**
  *            delete routes
  */

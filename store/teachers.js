@@ -1,10 +1,12 @@
 import axios from "axios";
+import _ from "lodash";
 
 export const state = () => ({
   loading: false,
   teachers: [],
   teacher: {},
-  status: null
+  status: null,
+  applicationID: ""
 });
 
 export const mutations = {
@@ -21,25 +23,21 @@ export const mutations = {
   addTeacher: (state, payload) => {
     state.teachers.push(payload);
   },
+  deleteTeacher(state, payload) {
+    const teachers = state.teachers;
+    _.remove(teachers, { _id: payload });
+  },
   setStatus: (state, payload) => {
     state.status = payload;
+  },
+  setAppID(state, payload) {
+    state, (applicationID = payload);
   }
 };
 
 export const actions = {
   // Actions
-  nuxtServerinit({ commit }) {
-    axios
-      .get(`${process.env.baseUrl}/api/teacher`)
-      .then(({ data }) => {
-        console.log("dispatched from nuxtServerInit:", data);
 
-        commit("setTeachers", data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  },
   async getTeachers({ commit }) {
     await axios
       .get(`${process.env.baseUrl}/api/teacher`)
@@ -52,14 +50,10 @@ export const actions = {
   },
   async addTeacher({ commit }, payload) {
     commit("setLoading", true);
-    const teacher = await axios
+    await axios
       .post(`${process.env.baseUrl}/api/teacher/new`, payload)
-      .then(({ data }) => {
-        return data;
-      })
+      .then(({ data }) => {})
       .catch(err => new Error(err));
-    commit("addTeacher", teacher);
-    commit("setLoading", false);
   },
   async login({ commit }, payload) {
     await axios
@@ -77,17 +71,15 @@ export const actions = {
       });
   },
   async register({ commit }, payload) {
-    const newTeacher = await axios
+    const teacher = await axios
       .post(`${process.env.baseUrl}/api/teacher/register`, payload)
-      .then(data => {
+      .then(({ data }) => {
         return data;
       })
       .catch(err => new Error(err));
-    if (newTeacher) {
-      commit("setStatus", true);
-    } else {
-      commit("setStatus", false);
-    }
+    commit("addTeacher", teacher);
+    commit("setAppID", teacher.applicationNO);
+    commit("setLoading", false);
   }
 };
 
@@ -96,5 +88,6 @@ export const getters = {
   teachers: state => state.teachers,
   teacher: state => state.teacher,
   loading: state => state.loading,
-  status: state => state.status
+  status: state => state.status,
+  applicationID: state => state.applicationID
 };

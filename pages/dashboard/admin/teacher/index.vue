@@ -13,123 +13,66 @@
       </div>
       <!-- Breadcubs Area End Here -->
       <div class="row">
-        <div class="col-xl-4 col-12">
-          <div class="card height-auto">
-            <div class="card-body">
-              <div class="heading-layout1">
-                <div class="item-title">
-                  <h3>Add New Teacher</h3>
-                </div>
-                <div class="dropdown">
-                  <a
-                    class="dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-expanded="false"
-                  >...</a>
+        <div class="col-xl-12">
+          <div class="card-body">
+            <div class="heading-layout1">
+              <div class="item-title">
+                <h3>Assign class to teacher</h3>
+              </div>
+              <div class="dropdown">
+                <a
+                  class="dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >...</a>
 
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">
-                      <i class="fas fa-times text-orange-red"></i>Close
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="fas fa-cogs text-dark-pastel-green"></i>Edit
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="fas fa-redo-alt text-orange-peel"></i>Refresh
-                    </a>
-                  </div>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-times text-orange-red"></i>Close
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs text-dark-pastel-green"></i>Edit
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-redo-alt text-orange-peel"></i>Refresh
+                  </a>
                 </div>
               </div>
-              <form class="new-added-form">
-                <div class="row">
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Title *</label>
-                    <select class="form-control" v-model="teacher.title">
-                      <option value>Please Select Gender *</option>
-                      <option>Mr</option>
-                      <option>Mrs</option>
-                      <option>Ms</option>
-                      <option>Miss</option>
-                    </select>
-                  </div>
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>First Name *</label>
-                    <input type="text" placeholder class="form-control" v-model="teacher.firstName" />
-                  </div>
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Last Name *</label>
-                    <input type="text" placeholder class="form-control" v-model="teacher.lastName" />
-                  </div>
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Gender *</label>
-                    <select class="form-control" v-model="teacher.gender">
-                      <option value>Please Select Gender *</option>
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </div>
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Date Of Birth *</label>
-                    <input
-                      type="date"
-                      placeholder="dd/mm/yyyy"
-                      class="form-control air-datepicker"
-                      v-model="teacher.dob"
-                    />
-
-                    <i class="far fa-calendar-alt"></i>
-                  </div>
-
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Address</label>
-                    <input placeholder class="form-control" v-model="teacher.address" />
-                  </div>
-
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Staff ID</label>
-                    <input type="text" placeholder class="form-control" v-model="teacher.staffID" />
-                  </div>
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Phone</label>
-                    <input type="text" placeholder class="form-control" v-model="teacher.phone" />
-                  </div>
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <label>Short BIO</label>
-                    <textarea
-                      class="textarea form-control"
-                      name="message"
-                      id="form-message"
-                      cols="10"
-                      rows="9"
-                      v-model="teacher.bio"
-                    ></textarea>
-                  </div>
-                  <div class="col-xl-12 col-md-6 col-lg-3 form-group">
-                    <img :src="imagePreview" alt="studentPic" v-if="imagePreview" />
-                    <span class="d-block">Upload Student Photo (150px X 150px)</span>
-                    <label
-                      class="text-dark-medium py-3 btn btn-success form-control-file text-light"
-                    >
-                      <input type="file" @change="imageProcess" hidden />
-                      Upload Image
-                    </label>
-                  </div>
-                  <div class="col-12 form-group mg-t-8">
-                    <button
-                      type="submit"
-                      class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark"
-                      @click.prevent="addTeacher"
-                    >Save</button>
-                    <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
-                  </div>
-                </div>
-              </form>
             </div>
+            <form class="mg-b-20">
+              <div class="row gutters-8">
+                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                  <input
+                    type="text"
+                    placeholder="teacher's username"
+                    class="form-control"
+                    v-model="assignToClass.username"
+                  />
+                </div>
+                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                  <select class="form-control" v-model="assignToClass.className">
+                    <option v-for="c in classes" :key="c._id" :value="c._id">{{c.name}}</option>
+                  </select>
+                </div>
+                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                  <input type="text" placeholder="Search by Class ..." class="form-control" />
+                </div>
+                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                  <button
+                    @click.prevent="assignClass"
+                    type="submit"
+                    class="fw-btn-fill btn-success"
+                  >Assign</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="col-xl-8 col-md-12">
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-md-12">
           <div class="card-body">
             <div class="heading-layout1">
               <div class="item-title">
@@ -174,22 +117,22 @@
               </div>
             </form>
             <div class="table-responsive">
-              <table class="table display text-nowrap">
+              <table class="table display data-table text-nowrap">
                 <thead>
                   <tr>
                     <th>
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input checkAll" />
-                        <label class="form-check-label">Staff ID</label>
+                        <label class="form-check-label">Head Teacher</label>
                       </div>
                     </th>
-                    <th>Photo</th>
+
                     <th>Name</th>
                     <th>Gender</th>
-                    <th>Address</th>
-                    <th>Date Of Birth</th>
+
                     <th>Phone</th>
                     <th>E-mail</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -201,23 +144,46 @@
                     <td>
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input" />
-                        <label class="form-check-label">#{{teacher.staffID}}</label>
+                        <label class="form-check-label">{{teacher.headTeacher}}</label>
                       </div>
                     </td>
-                    <td class="text-center">
-                      <img src="/dashboard/img/figure/student2.png" alt="student" />
-                    </td>
+
                     <td>
                       <nuxt-link
                         :to="'/dashboard/admin/teacher/'+teacher._id"
                       >{{teacher.firstName}} {{teacher.lastName}}</nuxt-link>
                     </td>
                     <td>{{teacher.gender}}</td>
-                    <td>{{teacher.address}}</td>
-
-                    <td>{{teacher.dob}}</td>
 
                     <td>{{teacher.phone}}</td>
+                    <td>{{teacher.email}}</td>
+                    <td>
+                      <div class="dropdown">
+                        <a
+                          href="#"
+                          class="dropdown-toggle"
+                          data-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <span class="flaticon-more-button-of-three-dots"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <a class="dropdown-item" href="#" @click.prevent="deleteTeacher(teacher)">
+                            <i class="fas fa-times text-orange-red"></i>Delete Teacher
+                          </a>
+                          <a
+                            class="dropdown-item"
+                            href="#"
+                            @click.prevent="approveTeacher(teacher)"
+                          >
+                            <i class="fas fa-cogs text-dark-pastel-green"></i>Approve Application
+                          </a>
+                          <a class="dropdown-item" href="#" @click.prevent="assignClass(teacher)">
+                            <i class="fas fa-redo-alt text-orange-peel"></i>Assign Class
+                          </a>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -242,28 +208,83 @@ export default {
     return {
       teacher: {},
       image: "",
-      imagePreview: ""
+      imagePreview: "",
+      assignToClass: {}
     };
   },
   computed: {
     ...mapGetters({
-      teachers: "teachers/teachers"
+      teachers: "teachers/teachers",
+      classes: "class/classes"
     })
   },
   methods: {
     deleteTeacher(teacher) {
-      async function remove() {
+      this.$swal({
+        title: `Are you sure ?`,
+        text: `Do you really want to parmently delete ${teacher.firstName} ?`,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#E62C2F",
+        cancelButtonColor: "#025939",
+        confirmButtonText: "Yes, delete it"
+      }).then(() => {
+        removeTeacher();
+        this.$store.dispatch("teachers/deleteTeacher", teacher._id);
+      });
+      async function removeTeacher() {
         await Axios.delete(
           `${process.env.baseUrl}/api/teacher/delete/${teacher._id}`
         )
-          .then(data => {})
+          .then(({ data }) => {
+            if (data.success) {
+              alert("SUCCESS");
+            } else {
+              this.$swal({
+                type: "error",
+                title: "unable to delete teacher"
+              });
+            }
+          })
           .catch(err => {
             if (err) {
-              // alert("NOT SUCCESSFUL");
-              console.log(err);
+              alert(err.message);
             }
           });
       }
+    },
+    approveTeacher(teacher) {
+      this.$swal({
+        type: "warning",
+        text: `Do you want to approve ${teacher.firstName} as a Teacher ?`,
+        showCancelButton: true,
+        confirmButtonColor: "#E62C2F",
+        cancelButtonColor: "#025939",
+        confirmButtonText: "Yes"
+      }).then(() => {
+        approve();
+      });
+      async function approve() {
+        await Axios.post(`${process.env.baseUrl}/api/teacher/accept`, {
+          applicationNO: teacher.applicationNO
+        }).then(({ data }) => {
+          if (data.success) {
+            this.$swal({
+              type: "success",
+              title: "APPROVED"
+            });
+          } else {
+            this.$swal({
+              type: "error",
+              title: "Try again"
+            });
+          }
+        });
+      }
+    },
+
+    async assignClass(teacher) {
+      console.log(teacher);
     },
     async addTeacher() {
       const result = this.$store.dispatch("teachers/addTeacher", this.teacher);

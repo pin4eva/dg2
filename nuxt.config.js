@@ -1,10 +1,11 @@
+const envConfig = require("./server/config.js");
 export default {
   mode: "spa",
   /*
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || "",
+    title: envConfig.BASE_URI || "",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -16,10 +17,19 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     script: [
+      { src: "https://code.jquery.com/jquery-3.3.1.slim.min.js" },
       {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      },
+      {
+        src:
+          "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
       }
     ]
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || "http://localhost:3001"
   },
   /*
    ** Customize the progress-bar color
@@ -32,7 +42,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: "@/plugins/client.js", ssr: false }, "@/plugins/server.js"],
   /*
    ** Nuxt.js dev-modules
    */
@@ -45,7 +55,8 @@ export default {
     "bootstrap-vue/nuxt",
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
-    "@nuxtjs/pwa"
+    "@nuxtjs/pwa",
+    "vue-sweetalert2/nuxt"
   ],
   /*
    ** Axios module configuration

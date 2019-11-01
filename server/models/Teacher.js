@@ -5,7 +5,6 @@ const autoIncrement = require("mongoose-auto-increment");
  *                  Teachers Model
  */
 const TeacherSchema = new mongoose.Schema({
- 
   firstName: String,
   lastName: String,
   email: { type: String, unique: true },
@@ -21,7 +20,7 @@ const TeacherSchema = new mongoose.Schema({
   applicationNO: String,
   title: String,
   image: String,
-  gender: { type: String, default: "Female" },
+  gender: { type: String },
   maritalStatus: String,
   address: String,
   headTeacher: { type: Boolean, default: false },

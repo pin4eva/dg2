@@ -41,6 +41,9 @@ app.use(cors());
 app.use(express.static("static"));
 app.use(fileUpload());
 app.use(express.static("static"));
+app.get("/", async (req, res) => {
+  res.send("Welcome to my api");
+});
 
 /**
  *          Custom Routes

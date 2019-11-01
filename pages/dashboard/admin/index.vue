@@ -105,6 +105,7 @@
                     >Jan 20, 2019</a>
                     <div class="dropdown-menu dropdown-menu-right">
                       <a
+                        @click.prevent="setSession(session.session)"
                         class="dropdown-item"
                         href="#"
                         v-for="session in sessions"
@@ -447,7 +448,7 @@ export default {
   layout: "admin",
   data() {
     return {
-      currentSession: null,
+      currentSession: "",
       select: {},
       ids: []
     };
@@ -457,18 +458,17 @@ export default {
       sessions: "class/sessions",
       classes: "class/classes"
     })
-    // test(v) {
-    //   console.log(v);
-    // }
   },
   watch: {
-    ids(v) {},
-    test(v) {
+    currentSession(v) {
       console.log(v);
     }
   },
   methods: {
-    setSession() {},
+    setSession(s) {
+      this.currentSession = s;
+      console.log("From methods:", s);
+    },
     selected(id) {
       let ids = this.ids;
       if (!ids.includes(id)) {

@@ -215,7 +215,7 @@
                       </td>
                       <td>{{c.section}}</td>
                       <td>{{c.session.session}}</td>
-                      <td>
+                      <td v-if="c.teacher">
                         <nuxt-link
                           :to="'/dashboard/admin/teacher/'+c.teacher._id"
                         >{{c.teacher.firstName}} {{c.teacher.lastName}}</nuxt-link>
@@ -255,9 +255,7 @@ export default {
   },
   methods: {
     async addClass() {
-      await this.$store
-        .dispatch("class/addClass", this.newClass)
-        .then(data => console.log("From page", data));
+      await this.$store.dispatch("class/addClass", this.newClass);
     },
     async addSession() {
       await this.$store.dispatch("class/addSession", this.newSession);

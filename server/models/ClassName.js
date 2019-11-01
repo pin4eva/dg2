@@ -7,6 +7,7 @@ const autoIncrement = require("mongoose-auto-increment");
 const SessionSchema = new mongoose.Schema({
   session: { type: String, required: true },
   year: Number,
+  isCurrent: { type: Boolean, default: false },
   classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "ClassName" }]
 });
 
