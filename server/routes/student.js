@@ -6,18 +6,17 @@ const path = require("path");
 
 router.post("/new", async (req, res) => {
   // console.log(req.body);
-  const student = new Student({
+  const student = await Student.create({
     ...req.body
-  });
+  })
+    .then(data => data)
+    .catch(err => res.send(err));
 
   await ClassName.findOneAndUpdate(
     { _id: student.currentClass },
     { $push: { students: student._id } }
   ).catch(err => res.send(err));
-  await student
-    .save()
-    .then(data => res.send({ students: data._id }))
-    .catch(err => res.send(err));
+  res.send({ student, success: true });
 });
 /**
  *        TODOS
@@ -103,6 +102,12 @@ router.put("/update", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
   await Student.findOneAndRemove({ _id: req.params.id })
     .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+router.delete("/deletemany", async (req, res) => {
+  const { students } = req.body;
+  await Student.deleteMany({ id: { $in: [students] } })
+    .then(data => res.send({ success: true, data }))
     .catch(err => res.send(err));
 });
 module.exports = router;

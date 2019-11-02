@@ -3,11 +3,12 @@ const router = express.Router();
 const { Attendance, ClassName } = require("../models/All");
 
 router.post("/new", async (req, res) => {
-  const { student, className, attended } = req.body;
+  const { student, className, attended, day } = req.body;
   const attendance = await Attendance.create({
     date: Date.now(),
     student: student,
-    attended: attended
+    attended: attended,
+    day: day
   })
     .then(data => data)
     .catch(err => res.send(err));

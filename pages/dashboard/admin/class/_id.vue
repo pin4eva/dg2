@@ -17,7 +17,7 @@
         <div class="card-body">
           <div class="heading-layout1">
             <div class="item-title">
-              <h3>All Students Data</h3>
+              <h3>Students in {{single.name}}</h3>
             </div>
             <div class="dropdown">
               <a
@@ -62,16 +62,16 @@
               <button class="btn btn-success w-100">Mark Students as Present</button>
             </div>
             <div class="col-lg-4 col-md-12">
-              <div class="modal-box">
+              <div>
                 <button
                   type="button"
-                  class="btn btn-warning w-100 modal-trigger"
-                  uk-toggle="target:#promoteModal"
-                >Promote Students</button>
+                  class="btn btn-primary w-100"
+                  v-b-modal.assignTeacher
+                >Assign a Teacher</button>
               </div>
             </div>
             <div class="col-lg-4 col-md-12">
-              <button class="btn btn-danger w-100">Remove Students from class</button>
+              <button class="btn btn-danger w-100">Remove Students</button>
             </div>
           </div>
           <div class="table-responsive">
@@ -80,8 +80,8 @@
                 <tr>
                   <th>
                     <div>
-                      <input type="radio" class="form-check-input checkAll" />
-                      <label class="form-check-label pl-3">ReqNO</label>
+                      <input type="checkbox" class="form-check-input checkAll" />
+                      <label class="form-check-label">ReqNO</label>
                     </div>
                   </th>
                   <th>Photo</th>
@@ -96,7 +96,7 @@
                 <tr v-for="student in single.students" :key="student._id">
                   <td>
                     <div class>
-                      <input type="radio" class="form-check-input" @input="selected(student._id)" />
+                      <input type="checkbox" class="form-check-input" v-model="ids" />
                       <label class="form-check-label pl-3">{{student.reqNO}}</label>
                     </div>
                   </td>
@@ -118,22 +118,23 @@
         </div>
       </div>
       <!-- Student Table Area End Here -->
-      <!-- Modal Start here -->
-      <div>
-        <div id="promoteModal" uk-modal>
-          <div class="uk-modal-dialog uk-modal-body">
-            <div class="mb-4">
-              <h3 class="uk-modal-title">Choose Class</h3>
-              <select class="form-control col-md-6 d-block" v-model="className">
-                <option v-for="c in classes" :key="c._id" :value="c._id">{{c.name}}</option>
-              </select>
-            </div>
-            <div class="text-right">
-              <button type="button" @click="promoteStudents" class="uk-button-primary">Promote</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div>
+      <!-- Using modifiers -->
+
+      <!-- The modal -->
+      <b-modal id="assignTeacher" ref="modal" title="Select a teacher" @ok="handleOk">
+        <form ref="form" @submit.stop.prevent="handleSubmit">
+          <b-form-select v-model="teacher">
+            <option :value="null" disabled>Select a Teacher</option>
+            <option
+              v-for="teacher in teachers"
+              :key="teacher._id"
+              :value="teacher._id"
+            >{{teacher.firstName}} {{teacher.lastName}}</option>
+          </b-form-select>
+        </form>
+      </b-modal>
     </div>
   </div>
 </template>
@@ -148,17 +149,34 @@ export default {
   data() {
     return {
       ids: [],
-      className: ""
+      teacher: "",
+      className: this.$route.params.id
     };
   },
   computed: {
     ...mapGetters({
       single: "class/singleClass",
       classes: "class/classes",
-      students: "students/students"
+      students: "students/students",
+      teachers: "teachers/teachers"
     })
   },
   methods: {
+    handleOk() {
+      Axios.post(`${process.env.baseUrl}/api/class/assignTeacher`, {
+        className: this.className,
+        teacher: this.teacher
+      })
+        .then(({ data }) => {
+          if (data.classStatus) {
+            alert("Assigned successfully");
+          }
+        })
+        .catch(err => alert(err.message));
+    },
+    resetModal() {
+      console.log("Reset");
+    },
     async activateModal(id) {
       const el = await document.querySelector(`${id}`);
       el.classList.toggle("modal", "fade");

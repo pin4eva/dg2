@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="dashboard-content-one">
+      <b-alert show dismissible fade>Dismissible Alert!</b-alert>
       <!-- Breadcubs Area Start Here -->
       <div class="breadcrumbs-area">
         <h3>Teacher</h3>
@@ -12,65 +13,7 @@
         </ul>
       </div>
       <!-- Breadcubs Area End Here -->
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="card-body">
-            <div class="heading-layout1">
-              <div class="item-title">
-                <h3>Assign class to teacher</h3>
-              </div>
-              <div class="dropdown">
-                <a
-                  class="dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                >...</a>
 
-                <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-times text-orange-red"></i>Close
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs text-dark-pastel-green"></i>Edit
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-redo-alt text-orange-peel"></i>Refresh
-                  </a>
-                </div>
-              </div>
-            </div>
-            <form class="mg-b-20">
-              <div class="row gutters-8">
-                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                  <input
-                    type="text"
-                    placeholder="teacher's username"
-                    class="form-control"
-                    v-model="assignToClass.username"
-                  />
-                </div>
-                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                  <select class="form-control" v-model="assignToClass.className">
-                    <option v-for="c in classes" :key="c._id" :value="c._id">{{c.name}}</option>
-                  </select>
-                </div>
-                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                  <input type="text" placeholder="Search by Class ..." class="form-control" />
-                </div>
-                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                  <button
-                    @click.prevent="assignClass"
-                    type="submit"
-                    class="fw-btn-fill btn-success"
-                  >Assign</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-xl-12 col-md-12">
           <div class="card-body">
@@ -228,10 +171,16 @@ export default {
         confirmButtonColor: "#E62C2F",
         cancelButtonColor: "#025939",
         confirmButtonText: "Yes, delete it"
-      }).then(() => {
-        removeTeacher();
-        this.$store.dispatch("teachers/deleteTeacher", teacher._id);
-      });
+      })
+        .then(result => {
+          if (result.value) {
+            removeTeacher();
+            this.$store.commit("teachers/deleteTeacher", teacher._id);
+          } else {
+            console.log("closed");
+          }
+        })
+        .catch(() => {});
       async function removeTeacher() {
         await Axios.delete(
           `${process.env.baseUrl}/api/teacher/delete/${teacher._id}`

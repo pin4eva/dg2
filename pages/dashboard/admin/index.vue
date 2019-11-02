@@ -132,7 +132,7 @@
                           <th>Teacher</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody v-if="classes">
                         <tr v-for="c in classes" :key="c._id">
                           <td>
                             <div class="form-check">
@@ -145,7 +145,7 @@
                           </td>
                           <td>{{c.section}}</td>
                           <td>{{c.session.session}}</td>
-                          <td>
+                          <td v-if="c.teacher">
                             <nuxt-link
                               :to="'/dashboard/admin/teacher/'+c.teacher._id"
                             >{{c.teacher.firstName}} {{c.teacher.lastName}}</nuxt-link>

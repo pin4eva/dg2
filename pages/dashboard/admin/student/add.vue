@@ -8,7 +8,7 @@
           <li>
             <a href="index.html">Home</a>
           </li>
-          <li>Student Admit Form</li>
+          <li>Student Admission Form</li>
         </ul>
       </div>
       <!-- Breadcubs Area End Here -->
@@ -142,7 +142,7 @@
                 <button
                   type="submit"
                   class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark"
-                  @click.prevent="addStudent"
+                  @click.prevent.once="addStudent"
                 >Save</button>
                 <button
                   @click.prevent="newStudent=''"
@@ -184,34 +184,33 @@ export default {
       let image = this.image;
       let formData = new FormData();
       formData.append("image", image);
-      async function addNew() {
+      if (image) {
         let student = await axios
           .post(`${process.env.baseUrl}/api/student/new`, {
             ...newStudent
           })
           .then(({ data }) => {
-            axios
-              .put(
-                `${process.env.baseUrl}/api/student/upload/${data._id}`,
-                formData,
-                {
-                  headers: {
-                    "Content-Type": "multipart/form-data"
-                  }
-                }
-              )
-              .then(({ data }) => {
-                this.$store.commit("students/addStudent", data);
-
-                this.newStudent = {};
-              });
+            return data;
           })
           .catch(err => new Error(err));
-      }
-      if (image) {
-        addNew();
+        let result = await axios
+          .put(
+            `${process.env.baseUrl}/api/student/upload/${student.student._id}`,
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data"
+              }
+            }
+          )
+          .then(({ data }) => {
+            return data;
+          });
+        alert("SUCCESS");
+        this.$store.commit("students/addStudent", result);
+        this.newStudent = {};
       } else {
-        alert("Please add an Image");
+        alert("Please add image");
       }
     },
     imageProcess({ target: { files = [] } }) {

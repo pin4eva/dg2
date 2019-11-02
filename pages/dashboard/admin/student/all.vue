@@ -61,6 +61,14 @@
               </div>
             </div>
           </form>
+          <div class="d-flex justify-content-around mb-3">
+            <a href="#">
+              <i class="fa fa-trash text-danger" @click.prevent="deleteStudents"></i>
+            </a>
+            <a href="#">
+              <i class="fa fa-edit text-primary"></i>
+            </a>
+          </div>
           <div class="table-responsive">
             <table class="table display text-nowrap">
               <thead>
@@ -71,22 +79,26 @@
                       <label class="form-check-label">ReqNO</label>
                     </div>
                   </th>
-                  <th>Photo</th>
+
                   <th>Name</th>
                   <th>Gender</th>
                   <th>Class</th>
 
-                  <th>Date Of Admission</th>
                   <th>Phone</th>
                   <th>Address</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody v-if="students">
-                <tr v-for="student in students" :key="student._id" @dblclick="selected(student)">
+                <tr v-for="student in students" :key="student._id">
                   <td>
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" />
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        :value="student"
+                        v-model="ids"
+                      />
                       <label class="form-check-label">{{student.reqNO}}</label>
                     </div>
                   </td>
@@ -105,7 +117,7 @@
                     >{{student.currentClass.name}}</nuxt-link>
                   </td>
 
-                  <td>{{moment(student.admittedOn).format("YYYY-MM-DD") }}</td>
+                  <td>{{student.admittedOn | moment("YYYY-MM-DD") }}</td>
                   <td>{{student.phone}}</td>
                   <td>{{student.address}}</td>
                 </tr>
@@ -130,6 +142,7 @@ export default {
     return {
       ids: [],
       hover: false
+      // students: []
     };
   },
   computed: {
@@ -141,7 +154,16 @@ export default {
     getStudents() {
       this.$store.dispatch("students/getStudents");
     },
-    async deleteStudent() {},
+    async deleteStudents() {
+      let students = this.ids;
+      await Axios.delete(`${process.env.baseUrl}/api/student/deletemany`, {
+        students: students
+      })
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch(err => console.log(err));
+    },
     selected(student) {
       async function remove() {
         await Axios.delete(

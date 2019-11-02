@@ -44,7 +44,7 @@ router.post("/assignTeacher", async (req, res) => {
     }
   )
     .then(() => {
-      suceess: true;
+      return { suceess: true };
     })
     .catch(err => res.send(err));
   const newTeacher = await Teacher.findOneAndUpdate(
@@ -57,7 +57,7 @@ router.post("/assignTeacher", async (req, res) => {
     }
   )
     .then(() => {
-      suceess: true;
+      return { suceess: true };
     })
     .catch(err => res.send(err));
   res.send({

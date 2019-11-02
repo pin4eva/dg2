@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 // const autoIncrement = require("mongoose-auto-increment");
 
 const AttendanceSchema = new mongoose.Schema({
-  day: { type: Date, default: Date.now() },
-  student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+  date: { type: Date, default: Date.now() },
+  day: String,
+  students: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
   attended: { type: Boolean, default: false }
 });
 

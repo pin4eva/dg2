@@ -70,11 +70,18 @@ export const actions = {
     await axios
       .post(`${process.env.baseUrl}/api/class/new`, payload)
       .then(({ data }) => {
-        commit("addClass", data);
-        commit("setLoading", false);
+        if (data._id) {
+          commit("addClass", data);
+          commit("setLoading", false);
+          alert("SUCCESS !");
+        } else {
+          alert("TRY AGAIN !");
+        }
         // console.log("From Store", data);
       })
-      .catch(err => new Error(err));
+      .catch(err => {
+        alert(err.message);
+      });
   },
   async addSession({ commit }, payload) {
     commit("setLoading", true);

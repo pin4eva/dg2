@@ -80,5 +80,9 @@ export default {
 @import '~/static/dashboard/fonts/flaticon.css';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/all.css';
 @import '../assets/stylus/dashboard';
+
+.btn {
+  border-radius: 0;
+}
 </style>
 

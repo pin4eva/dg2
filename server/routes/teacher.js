@@ -172,7 +172,7 @@ router.put("/update", async (req, res) => {
 });
 router.delete("/delete/:id", async (req, res) => {
   await Teacher.findOneAndRemove({ _id: req.params.id })
-    .then(data => res.send(data))
+    .then(() => res.send({ success: true }))
     .catch(err => res.send(err));
 });
 module.exports = router;

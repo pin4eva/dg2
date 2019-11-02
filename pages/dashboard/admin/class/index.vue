@@ -256,6 +256,10 @@ export default {
   methods: {
     async addClass() {
       await this.$store.dispatch("class/addClass", this.newClass);
+      if (this.loading == false) {
+        // alert("Success !");
+        this.newClass = {};
+      }
     },
     async addSession() {
       await this.$store.dispatch("class/addSession", this.newSession);
