@@ -17,7 +17,9 @@
             <div class="item-title">
               <h3>
                 About
-                <span class="font-italic">{{teacher.firstName}} {{teacher.lastName}}</span>
+                <span
+                  class="font-italic"
+                >{{teacher.profile.firstName}} {{teacher.profile.lastName}}</span>
               </h3>
             </div>
             <div class="dropdown">
@@ -82,16 +84,16 @@
                       <td>Name:</td>
                       <td
                         class="font-medium text-dark-medium"
-                      >{{teacher.firstName}} {{teacher.lastName}}</td>
+                      >{{teacher.profile.firstName}} {{teacher.profile.lastName}}</td>
                     </tr>
                     <tr>
                       <td>Gender:</td>
-                      <td class="font-medium text-dark-medium">{{teacher.gender}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.gender}}</td>
                     </tr>
 
                     <tr>
                       <td>E-mail:</td>
-                      <td class="font-medium text-dark-medium">{{teacher.email}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.email}}</td>
                     </tr>
                     <tr>
                       <td>Subjects:</td>
@@ -112,11 +114,11 @@
                     </tr>
                     <tr>
                       <td>Address:</td>
-                      <td class="font-medium text-dark-medium">{{teacher.address}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.address}}</td>
                     </tr>
                     <tr>
                       <td>Phone:</td>
-                      <td class="font-medium text-dark-medium">{{teacher.phone}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.phone}}</td>
                     </tr>
                   </tbody>
                 </table>

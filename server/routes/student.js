@@ -1,21 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const { Student, ClassName } = require("../models/All");
+const { Student, ClassName, Profile } = require("../models/All");
 const path = require("path");
 // const Student = require("../models/Student");
 
 router.post("/new", async (req, res) => {
   // console.log(req.body);
+  const payload = { ...req.body };
+  const profile = await Profile.create({ ...payload, type: "Student" })
+    .then(data => data)
+    .catch(err => err);
+  const count = await Profile.countDocuments({ type: "Teacher" })
+    .then(data => data)
+    .catch(err => err);
+  let firstName = Profile.firstName;
+  let lastName = Profile.lastName;
+  let count1 = (count + 1).toString();
+
+  const sid = `T${firstName.charAt(0)}${lastName.charAt(0)}/${new Date(
+    payload.admittedON
+  ).getFullYear()}/${count1.padStart(4, "000")}`;
+
+  // firstName.charAt(0)
   const student = await Student.create({
-    ...req.body
+    profile: profile,
+    regNO: sid,
+    currentClass: payload.currentClass
   })
     .then(data => data)
+
     .catch(err => res.send(err));
 
   await ClassName.findOneAndUpdate(
     { _id: student.currentClass },
     { $push: { students: student._id } }
   ).catch(err => res.send(err));
+
   res.send({ student, success: true });
 });
 /**

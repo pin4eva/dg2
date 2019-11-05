@@ -1,13 +1,13 @@
-const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
-const connection = mongoose.createConnection("mongodb://localhost/schooldb", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-});
-autoIncrement.initialize(connection);
+// const mongoose = require("mongoose");
+// const autoIncrement = require("mongoose-auto-increment");
+// const connection = mongoose.createConnection("mongodb://localhost/schooldb", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false,
+//   useCreateIndex: true,
+//   useUnifiedTopology: true
+// });
+// autoIncrement.initialize(connection);
 
 /**
  *      Todo
@@ -21,6 +21,8 @@ const { ClassName, Session } = require("./ClassName");
 const Result = require("./SubjectResult");
 const Subject = require("./Subject");
 const Attendance = require("./Attendance");
+const Message = require("./Message.js");
+const Profile = require("./Profile");
 
 module.exports = {
   Student,
@@ -30,5 +32,7 @@ module.exports = {
   Teacher,
   Result,
   Attendance,
-  Session
+  Session,
+  Message,
+  Profile
 };

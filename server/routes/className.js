@@ -81,63 +81,6 @@ router.put("/delete/:classID/:student", async (req, res) => {
 });
 
 /**
- *  Get Request
- */
-router.get("/", async (req, res) => {
-  await ClassName.find()
-    .populate({
-      path: "students",
-      select: ["_id", "name"]
-    })
-    .populate({
-      path: "results",
-      populate: {
-        path: "records.student",
-        select: ["_id", "name"]
-      }
-    })
-    .populate({
-      path: "attendance",
-      populate: {
-        path: "student",
-        select: ["_id", "name"]
-      }
-    })
-    .populate({ path: "teacher" })
-    .populate({
-      path: "session"
-    })
-
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-
-router.get("/single/:id", async (req, res) => {
-  await ClassName.findOne({ _id: req.params.id })
-    .populate({ path: "students" })
-    .populate("path:teacher")
-    .populate({ path: "results" })
-    .populate({ path: "attendance" })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-router.get("/session", async (req, res) => {
-  await Session.find()
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-
-router.get("/session/single/:id", async (req, res) => {
-  await Session.findOne({ _id: req.params.id })
-    .populate({
-      path: "classes",
-      model: "ClassName"
-    })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-
-/**
  *               Automatically Push Students to class by level
  */
 
@@ -173,6 +116,67 @@ router.post("/addstudent", async (req, res) => {
     { $push: { students: newStudent } },
     { new: true }
   )
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+/**
+ *  Get Request
+ */
+router.get("/", async (req, res) => {
+  await ClassName.find()
+    .populate({
+      path: "students",
+      select: ["_id", "name"]
+    })
+    .populate({
+      path: "results",
+      populate: {
+        path: "records.student",
+        select: ["_id", "name"]
+      }
+    })
+    .populate({
+      path: "attendance",
+      populate: {
+        path: "student",
+        select: ["_id", "name"]
+      }
+    })
+    .populate({ path: "teacher" })
+    .populate({
+      path: "session"
+    })
+
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+router.get("/single/:id", async (req, res) => {
+  await ClassName.findOne({ _id: req.params.id })
+    .populate({
+      path: "students",
+      populate: { path: "profile", select: ["-password"] }
+    })
+    .populate("path:teacher")
+    .populate({ path: "results" })
+    .populate({ path: "attendance" })
+
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+router.get("/session", async (req, res) => {
+  await Session.find()
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+router.get("/session/single/:id", async (req, res) => {
+  await Session.findOne({ _id: req.params.id })
+    .populate({
+      path: "classes",
+      model: "ClassName"
+    })
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });

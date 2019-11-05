@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
+// const autoIncrement = require("mongoose-auto-increment");
 /**
  *                 ClassName Schema
  */
 
 const SessionSchema = new mongoose.Schema({
-  session: { type: String, required: true },
-  year: Number,
+  session: { type: String, required: true, unique: true },
+  year: { type: Number, required: true, unique: true },
   isCurrent: { type: Boolean, default: false },
   classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "ClassName" }]
 });
@@ -47,13 +47,6 @@ const ClassNameSchema = new mongoose.Schema({
     }
   ],
   subjects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subject" }]
-});
-
-ClassNameSchema.plugin(autoIncrement.plugin, {
-  model: "ClassName",
-  field: "serialNO",
-  startAt: 1,
-  incrementBy: 1
 });
 
 const Session = mongoose.model("Session", SessionSchema);

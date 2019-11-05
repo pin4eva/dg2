@@ -87,19 +87,19 @@
                     <td>
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input" />
-                        <label class="form-check-label">{{teacher.headTeacher}}</label>
+                        <label class="form-check-label">{{teacher.staffID}}</label>
                       </div>
                     </td>
 
                     <td>
                       <nuxt-link
                         :to="'/dashboard/admin/teacher/'+teacher._id"
-                      >{{teacher.firstName}} {{teacher.lastName}}</nuxt-link>
+                      >{{teacher.profile.firstName}} {{teacher.profile.lastName}}</nuxt-link>
                     </td>
-                    <td>{{teacher.gender}}</td>
+                    <td>{{teacher.profile.gender}}</td>
 
-                    <td>{{teacher.phone}}</td>
-                    <td>{{teacher.email}}</td>
+                    <td>{{teacher.profile.phone}}</td>
+                    <td>{{teacher.profile.email}}</td>
                     <td>
                       <div class="dropdown">
                         <a

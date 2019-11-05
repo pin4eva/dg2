@@ -65,7 +65,7 @@
             <div class="card-body">
               <div class="heading-layout1">
                 <div class="item-title">
-                  <h3>Add Class Routine</h3>
+                  <h3>Add Class</h3>
                 </div>
                 <div class="dropdown">
                   <a
@@ -145,7 +145,7 @@
             <div class="card-body">
               <div class="heading-layout1">
                 <div class="item-title">
-                  <h3>Class Routine</h3>
+                  <h3>All classes</h3>
                 </div>
                 <div class="dropdown">
                   <a
@@ -263,6 +263,10 @@ export default {
     },
     async addSession() {
       await this.$store.dispatch("class/addSession", this.newSession);
+      if (this.loading == false) {
+        // alert("Success !");
+        this.newSession = {};
+      }
     }
   }
 };

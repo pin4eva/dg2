@@ -89,6 +89,7 @@ export const actions = {
       .post(`${process.env.baseUrl}/api/class/session/new`, payload)
       .then(({ data }) => {
         commit("addSession", data);
+        alert("SUCCESS");
         commit("setLoading", false);
       });
   }

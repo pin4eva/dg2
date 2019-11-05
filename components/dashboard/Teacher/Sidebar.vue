@@ -75,24 +75,4 @@ export default {
 };
 </script>
 
-<style lang="stylus">
-#sideBar {
-  display: grid;
-  grid-template-rows: 10% 1fr;
-  height: 100vh;
-
-  .brand-header {
-    // grid-area: top;
-    background: #EFA600;
-
-    .barndMenu {
-      height: 100%;
-    }
-  }
-
-  .nav-items {
-    // grid-area: bottom;
-    background-color: #102954;
-  }
-}
-</style>
+<style lang="stylus"></style>

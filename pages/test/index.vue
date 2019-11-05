@@ -20,8 +20,10 @@ export default {
   },
   methods: {
     generate() {
-      const newGen = uniqueKeygen(6);
-      console.log(newGen);
+      let str = 5;
+      let str1 = str.toString();
+      let result = str1.padStart(3, "00");
+      console.log(result);
     }
   }
 };

@@ -104,12 +104,12 @@
                 </select>
               </div>
               <div class="col-xl-3 col-lg-6 col-12 form-group">
-                <label>Admission Date</label>
-                <input type="date" v-model="newStudent.admittedOn" class="form-control" />
+                <label>Admission Year</label>
+                <input placeholder="2018" v-model="newStudent.admittedOn" class="form-control" />
               </div>
               <div class="col-xl-3 col-lg-6 col-12 form-group">
                 <label>Registration NO</label>
-                <input type="text" placeholder class="form-control" v-model="newStudent.reqNO" />
+                <input type="text" placeholder="SAA/2018/002" class="form-control" disabled />
               </div>
               <div class="col-xl-3 col-lg-6 col-12 form-group">
                 <label>Phone</label>

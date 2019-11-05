@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment");
+// const autoIncrement = require("mongoose-auto-increment");
 
 const ResultSchema = new mongoose.Schema({
   term: String,
@@ -18,13 +18,6 @@ const ResultSchema = new mongoose.Schema({
       score: Number
     }
   ]
-});
-
-ResultSchema.plugin(autoIncrement.plugin, {
-  model: "Result",
-  field: "serialNO",
-  startAt: 1,
-  incrementBy: 1
 });
 
 const Result = mongoose.model("Result", ResultSchema);

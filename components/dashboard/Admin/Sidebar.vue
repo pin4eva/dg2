@@ -4,9 +4,9 @@
     <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
       <div class="mobile-sidebar-header d-md-none">
         <div class="header-logo">
-          <a href="index.html">
+          <nuxt-link to="/dashboard/admin">
             <img src="/main.png" alt="logo" />
-          </a>
+          </nuxt-link>
         </div>
       </div>
 
@@ -153,11 +153,8 @@
 <script>
 export default {
   name: "Sidebar",
-  methods: {
-    slideUp(p) {
-      // console.log(p);
-      console.log(this.$refs);
-    }
+  props: {
+    link: Object
   }
 };
 </script>

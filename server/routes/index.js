@@ -5,6 +5,8 @@ const subject = require("./subject");
 const className = require("./className");
 const result = require("./result");
 const attendance = require("./attendance");
+const profile = require("./profile");
+const message = require("./message");
 
 module.exports = {
   teacher,
@@ -13,5 +15,7 @@ module.exports = {
   subject,
   className,
   result,
-  attendance
+  attendance,
+  profile,
+  message
 };
