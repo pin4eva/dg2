@@ -37,20 +37,19 @@ router.post("/register", async (req, res) => {
     const sid = `DGIT${firstName.charAt(0)}${lastName.charAt(
       0
     )}/${new Date().getFullYear()}/${count1.padStart(3, "00")}`;
-    const profile = await Profile.create({
+    const profile = new Profile({
       ...req.body,
       type: "Teacher",
       password: bcrypt.hashSync(req.body.password, 10),
       username: sid
-    })
-      .then(data => data)
-      .catch(err => res.send(err));
-
+    });
     const teacher = await Teacher.create({
       profile: profile._id,
       applicationNO: uniqueKeygen(6),
       staffID: sid
     }).catch(err => err);
+    profile.userID = teacher._id;
+    profile.save().catch(err => res.json(err));
     res.send({ success: true, teacher, profile });
   }
 });
@@ -98,25 +97,18 @@ router.post("/accept", async (req, res) => {
     .catch(err => res.send(err));
 });
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  let teacher = await Teacher.findOne({ email }).catch(err => res.send(err));
+  const { username, password } = req.body;
+  let teacher = await Profile.findOne({ username }).catch(err => res.send(err));
   if (teacher) {
     bcrypt.compare(password, teacher.password).then(isMatch => {
       if (isMatch) {
-        if (teacher.isStaff == false) {
-          res.send({
-            success: false,
-            msg: `Your applicationID is ${teacher.applicationNO},Please meet the school Admin with your applicationID to complete your registration`
-          });
-        } else {
-          res.send({ success: true, teacher: teacher });
-        }
+        return res.json({ success: true, teacher: teacher });
       } else {
-        return res.send({ success: false, msg: "Incorrect Password " });
+        return res.json({ success: false, msg: "Incorrect Password " });
       }
     });
   } else {
-    res.send({ success: false, msg: "No teacher with the email found" });
+    return res.json({ success: false, msg: "No teacher with the email found" });
   }
 });
 router.post("/assignclass", async (req, res) => {

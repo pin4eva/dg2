@@ -56,8 +56,8 @@
                 aria-expanded="false"
               >
                 <div class="admin-title">
-                  <h5 class="item-title">Stevne Zone</h5>
-                  <span>Admin</span>
+                  <h5 class="item-title">{{profile.firstName}}</h5>
+                  <span>{{profile.type}}</span>
                 </div>
                 <div class="admin-img">
                   <img src="/dashboard/img/figure/admin.jpg" alt="Admin" />
@@ -263,7 +263,7 @@
 <script>
 export default {
   props: {
-    user: Object,
+    profile: Object,
     pageHome: String
   }
 };

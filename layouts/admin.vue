@@ -2,7 +2,7 @@
   <div>
     <div id="dashboard">
       <div id="page1">
-        <Navbar :user="teacher" pageHome="/dashboard/admin" />
+        <Navbar :profile="teacher.profile" pageHome="/dashboard/admin" />
         <div class="d-flex">
           <Sidebar id="sidebar" />
           <nuxt class="bg-ash w-100" />
@@ -35,11 +35,8 @@ export default {
   computed: {
     ...mapGetters({
       teacher: "teachers/teacher",
-      admin: ""
-    }),
-    user() {
-      return {};
-    }
+      profile: "teachers/profile"
+    })
   },
   methods: {
     ...mapActions({

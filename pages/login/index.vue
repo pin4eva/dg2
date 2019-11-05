@@ -127,6 +127,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Axios from "axios";
 export default {
   name: "Login-Page",
   // layout: "login",
@@ -152,7 +153,20 @@ export default {
     async loginParent() {},
     async loginAdmin() {},
     async loginTeacher() {
-      this.teacherLogin(this.teacher);
+      const profile = await Axios.post(
+        `${process.env.baseUrl}/api/teacher/login`,
+        this.teacher
+      )
+        .then(({ data }) => data)
+        .catch(err => err);
+      if (profile.success) {
+        alert("SUCCESS !");
+        if (profile.teacher.type == "Teacher") {
+          this.$store.dispatch("teachers/getTeacher", profile.teacher.userID);
+        }
+      } else {
+        alert(`${profile.msg}`);
+      }
     }
   }
 };

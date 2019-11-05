@@ -1,10 +1,12 @@
 import axios from "axios";
 import _ from "lodash";
+const cookie = require("js-cookie");
 
 export const state = () => ({
   loading: false,
   teachers: [],
   teacher: {},
+  profile: {},
   status: null,
   applicationID: ""
 });
@@ -19,6 +21,7 @@ export const mutations = {
   },
   setTeacher(state, payload) {
     state.teacher = payload;
+    state.profile = payload.profile;
   },
   addTeacher: (state, payload) => {
     state.teachers.push(payload);
@@ -43,6 +46,22 @@ export const actions = {
       .get(`${process.env.baseUrl}/api/teacher`)
       .then(({ data }) => {
         commit("setTeachers", data);
+      })
+      .catch(err => {
+        new Error(err);
+      });
+  },
+  async getTeacher({ commit }, payload) {
+    await axios
+      .get(`${process.env.baseUrl}/api/teacher/single/${payload}`)
+      .then(({ data }) => {
+        commit("setTeacher", data);
+        cookie.set("Teacher", data);
+        if (data.isAdmin) {
+          this.$router.push("/dashboard/admin");
+        } else {
+          this.$router.push("/dashboard/teacher");
+        }
       })
       .catch(err => {
         new Error(err);
@@ -89,5 +108,6 @@ export const getters = {
   teacher: state => state.teacher,
   loading: state => state.loading,
   status: state => state.status,
+  profile: state => state.profile,
   applicationID: state => state.applicationID
 };

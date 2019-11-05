@@ -66,7 +66,7 @@
                     <th>
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input checkAll" />
-                        <label class="form-check-label">Head Teacher</label>
+                        <label class="form-check-label">ID</label>
                       </div>
                     </th>
 
@@ -79,11 +79,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    v-for="teacher in teachers"
-                    :key="teacher._id"
-                    @dblclick="deleteTeacher(teacher)"
-                  >
+                  <tr v-for="teacher in teachers" :key="teacher._id">
                     <td>
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input" />
@@ -112,17 +108,17 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                           <a class="dropdown-item" href="#" @click.prevent="deleteTeacher(teacher)">
-                            <i class="fas fa-times text-orange-red"></i>Delete Teacher
+                            <i class="fas fa-times text-orange-red pr-3"></i> Delete Teacher
                           </a>
                           <a
                             class="dropdown-item"
                             href="#"
                             @click.prevent="approveTeacher(teacher)"
                           >
-                            <i class="fas fa-cogs text-dark-pastel-green"></i>Approve Application
+                            <i class="fas fa-cogs text-dark-pastel-green pr-3"></i> Approve Application
                           </a>
                           <a class="dropdown-item" href="#" @click.prevent="assignClass(teacher)">
-                            <i class="fas fa-redo-alt text-orange-peel"></i>Assign Class
+                            <i class="fas fa-redo-alt text-orange-peel pr-3"></i> Assign Class
                           </a>
                         </div>
                       </div>
