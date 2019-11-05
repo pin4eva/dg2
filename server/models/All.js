@@ -23,6 +23,7 @@ const Subject = require("./Subject");
 const Attendance = require("./Attendance");
 const Message = require("./Message.js");
 const Profile = require("./Profile");
+const Notice = require("./Notice");
 
 module.exports = {
   Student,
@@ -34,5 +35,6 @@ module.exports = {
   Attendance,
   Session,
   Message,
-  Profile
+  Profile,
+  Notice
 };

@@ -230,10 +230,10 @@ router.get("/single/:id", async (req, res) => {
     .populate({ path: "className" })
     .populate("profile", "-password")
     .populate({
-      path: "messages.sent"
+      path: "sent"
     })
     .populate({
-      path: "messages.recieved"
+      path: "recieved"
     })
     .then(data => res.send(data))
     .catch(err => res.send(err));

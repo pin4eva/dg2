@@ -15,12 +15,9 @@ const ProfileSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   username: { type: String, unique: true },
   password: String,
-  messages: [
-    {
-      sent: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
-      recieved: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }]
-    }
-  ]
+  sent: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
+  recieved: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
+  notice: [{ type: mongoose.Schema.Types.ObjectId, ref: "Notice" }]
 });
 
 const Profile = mongoose.model("Profile", ProfileSchema);

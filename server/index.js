@@ -57,7 +57,8 @@ const {
   result,
   teacher,
   profile,
-  message
+  message,
+  notice
 } = require("./routes/");
 
 app.use("/api/student", student);
@@ -69,6 +70,7 @@ app.use("/api/result", result);
 app.use("/api/attendance", attendance);
 app.use("/api/profile", profile);
 app.use("/api/message", message);
+app.use("/api/notice", notice);
 
 async function start() {
   const port = process.env.PORT || 3001;

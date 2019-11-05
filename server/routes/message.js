@@ -20,16 +20,14 @@ router.post("/new", async (req, res) => {
     }).catch(err => err);
     await Profile.findOneAndUpdate(
       { username: from },
-      { $push: { messages: { sent: newMessage._id } } },
-      { new: true }
+      { $push: { sent: newMessage._id } }
     ).catch(err => res.json(err));
     await Profile.findOneAndUpdate(
-      { username: from },
-      { $push: { messages: { recieved: newMessage._id } } },
-      { new: true }
-    ).catch(err => res.json(err));
+      { username: to },
+      { $push: { recieved: newMessage._id } }
+    ).catch(err => res.json({ success: false, err }));
 
-    res.json(newMessage);
+    res.json({ success: true, message: newMessage });
   } else {
     res.json("Please verify the username again");
   }

@@ -47,11 +47,11 @@
                 <div class="row">
                   <div class="col-12 form-group">
                     <label>Title</label>
-                    <input type="text" placeholder class="form-control" />
+                    <input type="text" placeholder class="form-control" v-model="newMessage.title" />
                   </div>
                   <div class="col-12 form-group">
                     <label>Recipient</label>
-                    <input type="text" placeholder class="form-control" />
+                    <input type="text" placeholder class="form-control" v-model="newMessage.to" />
                   </div>
                   <div class="col-12 form-group">
                     <label>Message</label>
@@ -61,14 +61,20 @@
                       id="form-message"
                       cols="10"
                       rows="9"
+                      v-model="newMessage.body"
                     ></textarea>
                   </div>
                   <div class="col-12 form-group mg-t-8">
                     <button
                       type="submit"
                       class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark"
+                      @click.prevent.once="sendMessage"
                     >Save</button>
-                    <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                    <button
+                      @click="newMessage={}"
+                      type="reset"
+                      class="btn-fill-lg bg-blue-dark btn-hover-yellow"
+                    >Reset</button>
                   </div>
                 </div>
               </form>
@@ -81,9 +87,36 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   name: "Message",
-  layout: "admin"
+  layout: "admin",
+  data() {
+    return {
+      newMessage: {}
+    };
+  },
+  methods: {
+    async sendMessage() {
+      const message = await Axios.post(
+        `${process.env.baseUrl}/api/message/new`,
+        {
+          title: this.newMessage.title,
+          body: this.newMessage.body,
+          to: this.newMessage.to,
+          from: "TAA/2019/3"
+        }
+      ).catch(err => err);
+      if (message.data.success) {
+        alert("SUCCESS !");
+        console.log(message);
+        this.newMessage = {};
+      } else {
+        alert(`${message.data}`);
+        console.log(message);
+      }
+    }
+  }
 };
 </script>
 

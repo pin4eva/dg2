@@ -7,6 +7,7 @@ const result = require("./result");
 const attendance = require("./attendance");
 const profile = require("./profile");
 const message = require("./message");
+const notice = require("./notice");
 
 module.exports = {
   teacher,
@@ -17,5 +18,6 @@ module.exports = {
   result,
   attendance,
   profile,
-  message
+  message,
+  notice
 };
