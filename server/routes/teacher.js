@@ -239,6 +239,17 @@ router.get("/single/:id", async (req, res) => {
         path: "sent"
       }
     })
+    .populate({
+      path: "profile",
+      populate: {
+        path: "notice",
+        populate: {
+          path: "from",
+          models: "Profile",
+          select: ["firstName", "lastName", "username"]
+        }
+      }
+    })
     .then(data => data)
     .catch(err => err);
   res.json(teacher);

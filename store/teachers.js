@@ -9,7 +9,8 @@ export const state = () => ({
   profile: {},
   status: null,
   applicationID: "",
-  loggedIn: false
+  loggedIn: false,
+  myClass: {}
 });
 
 export const mutations = {
@@ -39,6 +40,9 @@ export const mutations = {
   },
   setLoggedIn(state, payload) {
     state.loggedIn = payload;
+  },
+  setClass(state, payload) {
+    state.myClass = payload;
   }
 };
 
@@ -124,6 +128,13 @@ export const actions = {
     // this.$router.push("/dashboard/admin");
 
     // commit("setLoggedIn", false);
+  },
+  async myClass({ commit }, payload) {
+    const myClass = await axios
+      .get(`${process.env.baseUrl}/api/class/single/${payload}`)
+      .catch(err => err)
+      .then(({ data }) => data);
+    commit("setClass", myClass);
   }
 };
 
@@ -134,5 +145,6 @@ export const getters = {
   loading: state => state.loading,
   status: state => state.status,
   profile: state => state.profile,
-  applicationID: state => state.applicationID
+  applicationID: state => state.applicationID,
+  myClass: state => state.myClass
 };

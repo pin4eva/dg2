@@ -119,131 +119,15 @@
                   </div>
                 </div>
               </form>
-              <div class="notice-board-wrap">
-                <div class="notice-list">
-                  <div class="post-date bg-skyblue">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
+              <div class="notice-board-wrap" v-if="teacher.profile.notice">
+                <div class="notice-list" v-for="notice in teacher.profile.notice" :key="notice._id">
+                  <div
+                    class="post-date bg-skyblue"
+                  >{{ $moment(notice.createdAt).format("MMM Do YY") }}</div>
+                  <h6 class="notice-title">{{notice.content}}</h6>
                   <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-yellow">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-pink">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-skyblue">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-yellow">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-pink">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-skyblue">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-yellow">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
-                  </div>
-                </div>
-                <div class="notice-list">
-                  <div class="post-date bg-pink">16 June, 2019</div>
-                  <h6 class="notice-title">
-                    <a href="#">
-                      Great School Great School manag mene esom
-                      text of the printing Great School manag mene esom text of the printing manag
-                      mene esom text of the printing.
-                    </a>
-                  </h6>
-                  <div class="entry-meta">
-                    Jennyfar Lopez /
-                    <span>5 min ago</span>
+                    {{notice.from.firstName}} /
+                    <span>{{ $moment(notice.createdAt).startOf().fromNow() }}</span>
                   </div>
                 </div>
               </div>
@@ -257,9 +141,15 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "notice",
-  layout: "admin"
+  layout: "admin",
+  computed: {
+    ...mapGetters({
+      teacher: "teachers/teacher"
+    })
+  }
 };
 </script>
 

@@ -4,7 +4,7 @@
       <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-          <h3>Admin Dashboard</h3>
+          <h3>Teachers Dashboard</h3>
           <ul>
             <li>
               <nuxt-link to="/dashboard/admin">Home</nuxt-link>
@@ -148,7 +148,7 @@
                           <td v-if="c.teacher">
                             <nuxt-link
                               :to="'/dashboard/admin/teacher/'+c.teacher._id"
-                            >{{c.teacher.firstName}} {{c.teacher.lastName}}</nuxt-link>
+                            >{{c.teacher.profile.firstName}} {{c.teacher.profile.lastName}}</nuxt-link>
                           </td>
                         </tr>
                       </tbody>
@@ -202,7 +202,7 @@
               <div class="card-body pd-b-14">
                 <div class="heading-layout1">
                   <div class="item-title">
-                    <h3>Website Traffic</h3>
+                    <h3>Inbox</h3>
                   </div>
                   <div class="dropdown">
                     <a
@@ -226,44 +226,22 @@
                     </div>
                   </div>
                 </div>
-                <h6 class="traffic-title">Unique Visitors</h6>
-                <div class="traffic-number">2,590</div>
-                <div class="traffic-bar">
-                  <div class="direct" data-toggle="tooltip" data-placement="top" title="Direct"></div>
-                  <div class="search" data-toggle="tooltip" data-placement="top" title="Search"></div>
+                <div class="notice-board-wrap" v-if="teacher.profile.recieved">
                   <div
-                    class="referrals"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Referrals"
-                  ></div>
-                  <div class="social" data-toggle="tooltip" data-placement="top" title="Social"></div>
-                </div>
-                <div class="traffic-table table-responsive">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td class="t-title pseudo-bg-Aquamarine">Direct</td>
-                        <td>12,890</td>
-                        <td>50%</td>
-                      </tr>
-                      <tr>
-                        <td class="t-title pseudo-bg-blue">Search</td>
-                        <td>7,245</td>
-                        <td>27%</td>
-                      </tr>
-                      <tr>
-                        <td class="t-title pseudo-bg-yellow">Referrals</td>
-                        <td>4,256</td>
-                        <td>8%</td>
-                      </tr>
-                      <tr>
-                        <td class="t-title pseudo-bg-red">Social</td>
-                        <td>500</td>
-                        <td>7%</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    class="notice-list"
+                    v-for="message in teacher.profile.recieved.slice(0,3) "
+                    :key="message._id"
+                  >
+                    <div
+                      class="post-date bg-danger"
+                    >{{ $moment(message.createdAt).format("MMM Do YY") }}</div>
+                    <h6 class="notice-title" @click="toggleBody(message._id)">{{message.title}}</h6>
+                    <p :class="`m${message._id} d-none`">{{message.body}}</p>
+                    <div class="entry-meta">
+                      {{message.from.firstName}} /
+                      <span>{{ $moment(message.createdAt).startOf().fromNow() }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -298,70 +276,18 @@
                   </div>
                 </div>
                 <div class="notice-box-wrap">
-                  <div class="notice-list">
-                    <div class="post-date bg-skyblue">16 June, 2019</div>
-                    <h6 class="notice-title">
-                      <a href="#">
-                        Great School manag mene esom text of the
-                        printing.
-                      </a>
-                    </h6>
+                  <div
+                    class="notice-list"
+                    v-for="notice in teacher.profile.notice "
+                    :key="notice._id"
+                  >
+                    <div
+                      class="post-date bg-skyblue"
+                    >{{ $moment(notice.createdAt).format("MMM Do YY") }}</div>
+                    <h6 class="notice-title">{{notice.content}}</h6>
                     <div class="entry-meta">
-                      Jennyfar Lopez /
-                      <span>5 min ago</span>
-                    </div>
-                  </div>
-                  <div class="notice-list">
-                    <div class="post-date bg-yellow">16 June, 2019</div>
-                    <h6 class="notice-title">
-                      <a href="#">Great School manag printing.</a>
-                    </h6>
-                    <div class="entry-meta">
-                      Jennyfar Lopez /
-                      <span>5 min ago</span>
-                    </div>
-                  </div>
-                  <div class="notice-list">
-                    <div class="post-date bg-pink">16 June, 2019</div>
-                    <h6 class="notice-title">
-                      <a href="#">Great School manag meneesom.</a>
-                    </h6>
-                    <div class="entry-meta">
-                      Jennyfar Lopez /
-                      <span>5 min ago</span>
-                    </div>
-                  </div>
-                  <div class="notice-list">
-                    <div class="post-date bg-skyblue">16 June, 2019</div>
-                    <h6 class="notice-title">
-                      <a href="#">
-                        Great School manag mene esom text of the
-                        printing.
-                      </a>
-                    </h6>
-                    <div class="entry-meta">
-                      Jennyfar Lopez /
-                      <span>5 min ago</span>
-                    </div>
-                  </div>
-                  <div class="notice-list">
-                    <div class="post-date bg-yellow">16 June, 2019</div>
-                    <h6 class="notice-title">
-                      <a href="#">Great School manag printing.</a>
-                    </h6>
-                    <div class="entry-meta">
-                      Jennyfar Lopez /
-                      <span>5 min ago</span>
-                    </div>
-                  </div>
-                  <div class="notice-list">
-                    <div class="post-date bg-pink">16 June, 2019</div>
-                    <h6 class="notice-title">
-                      <a href="#">Great School manag meneesom.</a>
-                    </h6>
-                    <div class="entry-meta">
-                      Jennyfar Lopez /
-                      <span>5 min ago</span>
+                      {{notice.from.firstName}} /
+                      <span>{{ $moment(notice.createdAt).startOf().fromNow() }}</span>
                     </div>
                   </div>
                 </div>
@@ -456,7 +382,8 @@ export default {
   computed: {
     ...mapGetters({
       sessions: "class/sessions",
-      classes: "class/classes"
+      classes: "class/classes",
+      teacher: "teachers/teacher"
     })
   },
   watch: {
@@ -479,6 +406,11 @@ export default {
     deSelected(id) {
       this.ids.pop(id);
       console.log("DESELECTED", id);
+    },
+    toggleBody(id) {
+      // console.log(id);
+      let classes = document.querySelector(".m" + id);
+      classes.classList.toggle("d-block");
     }
   }
 };

@@ -143,7 +143,14 @@ router.get("/", async (req, res) => {
         select: ["_id", "name"]
       }
     })
-    .populate({ path: "teacher" })
+    .populate({
+      path: "teacher",
+      populate: {
+        path: "profile",
+        model: "Profile",
+        select: ["firstName", "lastName", "username", "id"]
+      }
+    })
     .populate({
       path: "session"
     })

@@ -131,7 +131,7 @@
               v-for="teacher in teachers"
               :key="teacher._id"
               :value="teacher._id"
-            >{{teacher.firstName}} {{teacher.lastName}}</option>
+            >{{teacher.profile.firstName}} {{teacher.profile.lastName}}</option>
           </b-form-select>
         </form>
       </b-modal>

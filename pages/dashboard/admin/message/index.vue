@@ -148,7 +148,7 @@
                     </div>
                   </div>
                 </form>
-                <div class="notice-board-wrap">
+                <div class="notice-board-wrap" v-if="teacher.profile.recieved">
                   <div
                     class="notice-list"
                     v-for="message in teacher.profile.recieved"
