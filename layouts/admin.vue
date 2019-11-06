@@ -27,6 +27,7 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: { Navbar, Sidebar },
+  middleware: "loggedIn",
   data() {
     return {
       // pageHome:"/dashboard"

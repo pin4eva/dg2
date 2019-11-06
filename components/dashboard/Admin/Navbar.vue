@@ -235,22 +235,16 @@
                 </div>
               </div>
             </li>
-            <li class="navbar-item dropdown header-language">
+            <li class="navbar-item">
               <a
-                class="navbar-nav-link dropdown-toggle"
+                class="navbar-nav-link"
                 href="#"
                 role="button"
-                data-toggle="dropdown"
                 aria-expanded="false"
+                @click.prevent="logout"
               >
-                <i class="fas fa-globe-americas"></i>EN
+                <i class="flaticon-turn-off text-danger pr-2"></i> Logout
               </a>
-              <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">English</a>
-                <a class="dropdown-item" href="#">Spanish</a>
-                <a class="dropdown-item" href="#">Franchis</a>
-                <a class="dropdown-item" href="#">Chiness</a>
-              </div>
             </li>
           </ul>
         </div>
@@ -265,6 +259,11 @@ export default {
   props: {
     profile: Object,
     pageHome: String
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("teachers/logout");
+    }
   }
 };
 </script>

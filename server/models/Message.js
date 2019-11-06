@@ -5,7 +5,7 @@ const MessageSchema = new mongoose.Schema({
   body: String,
   from: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
   to: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
-
+  isRead: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
 });
 

@@ -38,4 +38,10 @@ router.get("/", async (req, res) => {
   res.json(message);
 });
 
+router.get("/single/:id", async (req, res) => {
+  const message = await Message.findOne({ _id: req.params.id }).catch(
+    err => err
+  );
+  res.json(message);
+});
 module.exports = router;

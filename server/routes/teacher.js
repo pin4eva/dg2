@@ -217,18 +217,31 @@ router.get("/applicants", async (req, res) => {
     .catch(err => res.send(err));
 });
 router.get("/single/:id", async (req, res) => {
-  await Teacher.findOne({ _id: req.params.id })
+  const teacher = await Teacher.findOne({ _id: req.params.id })
     .lean()
+
     .populate({ path: "className" })
     .populate("profile", "-password")
     .populate({
-      path: "sent"
+      path: "profile",
+      populate: {
+        path: "recieved",
+        populate: {
+          path: "from",
+          model: "Profile",
+          select: ["firstName", "lastName", "username"]
+        }
+      }
     })
     .populate({
-      path: "recieved"
+      path: "profile",
+      populate: {
+        path: "sent"
+      }
     })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
+    .then(data => data)
+    .catch(err => err);
+  res.json(teacher);
 });
 
 router.get("/count", async (req, res) => {

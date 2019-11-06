@@ -153,20 +153,21 @@ export default {
     async loginParent() {},
     async loginAdmin() {},
     async loginTeacher() {
-      const profile = await Axios.post(
-        `${process.env.baseUrl}/api/teacher/login`,
-        this.teacher
-      )
-        .then(({ data }) => data)
-        .catch(err => err);
-      if (profile.success) {
-        alert("SUCCESS !");
-        if (profile.teacher.type == "Teacher") {
-          this.$store.dispatch("teachers/getTeacher", profile.teacher.userID);
-        }
-      } else {
-        alert(`${profile.msg}`);
-      }
+      this.$store.dispatch("teachers/login", this.teacher);
+      // const profile = await Axios.post(
+      //   `${process.env.baseUrl}/api/teacher/login`,
+      //   this.teacher
+      // )
+      //   .then(({ data }) => data)
+      //   .catch(err => err);
+      // if (profile.success) {
+      //   alert("SUCCESS !");
+      //   if (profile.teacher.type == "Teacher") {
+      //     this.$store.dispatch("teachers/getTeacher", profile.teacher.userID);
+      //   }
+      // } else {
+      //   alert(`${profile.msg}`);
+      // }
     }
   }
 };
