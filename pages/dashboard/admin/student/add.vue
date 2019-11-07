@@ -105,7 +105,7 @@
               </div>
               <div class="col-xl-3 col-lg-6 col-12 form-group">
                 <label>Admission Year</label>
-                <input placeholder="2018" v-model="newStudent.admittedOn" class="form-control" />
+                <input placeholder="2018" v-model="newStudent.admittedON" class="form-control" />
               </div>
               <div class="col-xl-3 col-lg-6 col-12 form-group">
                 <label>Registration NO</label>
@@ -193,22 +193,28 @@ export default {
             return data;
           })
           .catch(err => new Error(err));
-        let result = await axios
-          .put(
-            `${process.env.baseUrl}/api/student/upload/${student.student._id}`,
-            formData,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data"
+
+        if (student) {
+          console.log(student);
+          let result = await axios
+            .put(
+              `${process.env.baseUrl}/api/student/upload/${student.student.profile}`,
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data"
+                }
               }
-            }
-          )
-          .then(({ data }) => {
-            return data;
-          });
-        alert("SUCCESS");
-        this.$store.commit("students/addStudent", result);
-        this.newStudent = {};
+            )
+            .then(({ data }) => {
+              return data;
+            });
+          alert("SUCCESS");
+          // this.$store.commit("students/addStudent", student);
+          this.newStudent = {};
+        } else {
+          alert(student.err);
+        }
       } else {
         alert("Please add image");
       }

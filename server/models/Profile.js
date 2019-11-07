@@ -12,10 +12,9 @@ const ProfileSchema = new mongoose.Schema({
   bloodGroup: String,
   gender: { type: String },
   image: String,
-  email: { type: String, unique: true },
   userID: String,
+
   username: { type: String, unique: true },
-  password: String,
   sent: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
   recieved: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
   notice: [{ type: mongoose.Schema.Types.ObjectId, ref: "Notice" }]

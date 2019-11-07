@@ -8,6 +8,8 @@ const StudentSchema = new mongoose.Schema({
   profile: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
   level: { type: Number, default: 1 },
   regNO: String,
+  firstName: String,
+  lastName: String,
   admittedON: String,
   parents: [
     {

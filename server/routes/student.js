@@ -7,36 +7,40 @@ const path = require("path");
 router.post("/new", async (req, res) => {
   // console.log(req.body);
   const payload = { ...req.body };
-  const profile = await Profile.create({ ...payload, type: "Student" })
-    .then(data => data)
-    .catch(err => err);
-  const count = await Profile.countDocuments({ type: "Teacher" })
-    .then(data => data)
-    .catch(err => err);
-  let firstName = Profile.firstName;
-  let lastName = Profile.lastName;
-  let count1 = (count + 1).toString();
-
-  const sid = `T${firstName.charAt(0)}${lastName.charAt(0)}/${new Date(
-    payload.admittedON
-  ).getFullYear()}/${count1.padStart(4, "000")}`;
-
-  // firstName.charAt(0)
-  const student = await Student.create({
-    profile: profile,
-    regNO: sid,
-    currentClass: payload.currentClass
-  })
-    .then(data => data)
-
-    .catch(err => res.send(err));
-
-  await ClassName.findOneAndUpdate(
-    { _id: student.currentClass },
-    { $push: { students: student._id } }
-  ).catch(err => res.send(err));
-
-  res.send({ student, success: true });
+  let student = await Student.findOne({
+    $and: [{ firstName: payload.firstName, lastName: payload.lastName }]
+  }).catch(err => res.json(err));
+  if (student) {
+    return res.send("Student already exist");
+  } else {
+    let count = await Profile.countDocuments({ type: "Student" })
+      .then(data => data)
+      .catch(err => res.json(err));
+    count = (count + 1).toString();
+    // let randgen = Math.ceil(Math.random() * 100) + count;
+    let sid = `S${payload.firstName.charAt(0)}${payload.lastName.charAt(0)}/${
+      payload.admittedON
+    }/${count.padStart(4, "000")}`;
+    let profile = await Profile.create({
+      ...payload,
+      type: "Student",
+      username: sid
+    }).catch(err => res.send({ Error1: err }));
+    if (profile) {
+      if (profile.errmsg) {
+        return res.json({ Error2: profile.errmsg });
+      } else {
+        student = await Student.create({
+          ...payload,
+          regNO: sid,
+          profile: profile
+        }).catch(err => res.json(err));
+        return res.json(student);
+      }
+    } else {
+      res.json("Something went wrong");
+    }
+  }
 });
 /**
  *        TODOS
@@ -57,22 +61,6 @@ router.put("/promote", async (req, res) => {
   ).catch(err => res.send(err));
 });
 
-router.get("/", async (req, res) => {
-  await Student.find()
-    .lean()
-    .populate({
-      path: "parents",
-      model: "Parent"
-    })
-    .populate({
-      path: "currentClass",
-      model: "ClassName",
-      select: "_id name"
-    })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-
 /**
  *            TODO
  * 1. Students should add subjects to their profile,
@@ -80,29 +68,13 @@ router.get("/", async (req, res) => {
  * 3. Can create a username and password
  */
 
-router.get("/single/:id", async (req, res) => {
-  await Student.findOne({ _id: req.params.id })
-    .lean()
-    .populate({
-      path: "parents",
-      // select: ["_id", "name", "role"]
-      model: "Parent"
-    })
-    .populate({
-      path: "currentClass",
-      model: "ClassName"
-    })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-
 router.put("/upload/:id", async (req, res) => {
   const { image } = req.files;
   image.mv(
     path.resolve(__dirname, "../../static/uploads/", image.name),
     async err => {
       if (err) res.send(err);
-      await Student.findOneAndUpdate(
+      await Profile.findOneAndUpdate(
         { _id: req.params.id },
         { $set: { image: `/uploads/${image.name}` } }
       )
@@ -128,6 +100,40 @@ router.delete("/deletemany", async (req, res) => {
   const { students } = req.body;
   await Student.deleteMany({ id: { $in: [students] } })
     .then(data => res.send({ success: true, data }))
+    .catch(err => res.send(err));
+});
+
+router.get("/", async (req, res) => {
+  await Student.find()
+    .lean()
+    .populate({
+      path: "parents",
+      model: "Parent"
+    })
+    .populate({
+      path: "currentClass",
+      model: "ClassName",
+      select: "_id name"
+    })
+
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+router.get("/single/:id", async (req, res) => {
+  await Student.findOne({ _id: req.params.id })
+    .lean()
+    .populate({
+      path: "parents",
+      // select: ["_id", "name", "role"]
+      model: "Parent"
+    })
+    .populate({
+      path: "currentClass",
+      model: "ClassName"
+    })
+    .populate("profile")
+    .then(data => res.send(data))
     .catch(err => res.send(err));
 });
 module.exports = router;

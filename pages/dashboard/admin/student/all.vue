@@ -70,59 +70,30 @@
             </a>
           </div>
           <div class="table-responsive">
-            <table class="table display text-nowrap">
-              <thead>
-                <tr>
-                  <th>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input checkAll" />
-                      <label class="form-check-label">ReqNO</label>
-                    </div>
-                  </th>
-
-                  <th>Name</th>
-                  <th>Gender</th>
-                  <th>Class</th>
-
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody v-if="students">
-                <tr v-for="student in students" :key="student._id">
-                  <td>
-                    <div class="form-check">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        :value="student"
-                        v-model="ids"
-                      />
-                      <label class="form-check-label">{{student.reqNO}}</label>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <img :src="student.image" alt="student" width="30" height="30" />
-                  </td>
-                  <td>
-                    <nuxt-link
-                      :to="`/dashboard/admin/student/${student._id}`"
-                    >{{student.firstName}} {{student.lastName}}</nuxt-link>
-                  </td>
-                  <td>{{student.gender}}</td>
-                  <td>
-                    <nuxt-link
-                      :to="`/dashboard/admin/class/${student.currentClass._id}`"
-                    >{{student.currentClass.name}}</nuxt-link>
-                  </td>
-
-                  <td>{{student.admittedOn | moment("YYYY-MM-DD") }}</td>
-                  <td>{{student.phone}}</td>
-                  <td>{{student.address}}</td>
-                </tr>
-              </tbody>
-            </table>
+            <b-table-simple>
+              <b-thead>
+                <b-tr>
+                  <b-th>
+                    <b-form-checkbox></b-form-checkbox>
+                  </b-th>
+                  <b-th>Reg. No</b-th>
+                  <b-th>Name</b-th>
+                  <b-th>class</b-th>
+                  <b-th>Phone #</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-for="student in students" :key="student._id">
+                  <b-td>
+                    <b-form-checkbox></b-form-checkbox>
+                  </b-td>
+                  <b-td>{{student.regNO}}</b-td>
+                  <b-td v-if="student.profile">{{student.profile.firstName}}</b-td>
+                  <b-td v-if="student.currentClass">{{student.currentClass.name}}</b-td>
+                  <b-td v-if="student.profile">{{student.profile.phone}}</b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
           </div>
         </div>
       </div>

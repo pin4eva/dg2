@@ -10,7 +10,8 @@ export const state = () => ({
   status: null,
   applicationID: "",
   loggedIn: false,
-  myClass: {}
+  myClass: {},
+  token: ""
 });
 
 export const mutations = {
@@ -43,6 +44,9 @@ export const mutations = {
   },
   setClass(state, payload) {
     state.myClass = payload;
+  },
+  setToken(state, payload) {
+    state.token = payload;
   }
 };
 
@@ -85,31 +89,53 @@ export const actions = {
   async login({ commit }, payload) {
     const profile = await axios
       .post(`${process.env.baseUrl}/api/teacher/login`, payload)
-      .then(({ data }) => data)
+
+      .then(({ data }) => {
+        return data;
+      })
       .catch(err => err);
-    if (profile.success) {
-      const teacher = await axios
-        .get(
-          `${process.env.baseUrl}/api/teacher/single/${profile.teacher.userID}`
-        )
-        .then(({ data }) => data)
-        .catch(err => err);
 
-      if (teacher) {
-        cookie.set("Teacher", teacher, { expires: 7 });
-        commit("setTeacher", teacher);
-        commit("setLoggedIn", true);
+    if (profile.token) {
+      commit("setToken", profile.token);
+      cookie.set("Token", profile.token);
+      let auth = await axios
+        .get(`${process.env.baseUrl}/api/teacher/me`, {
+          headers: {
+            Authorization: profile.token
+          }
+        })
+        .then(({ data }) => data);
 
-        alert(`Welcome ${teacher.profile.firstName}`);
-        if (teacher.isAdmin) {
-          this.$router.push("/dashboard/admin");
-        } else {
-          this.$router.push("/dashboard/teacher");
-        }
+      // console.log(profile.token);
+
+      if (auth.teacher) {
+        alert("SUCCESS !");
+        commit("setTeacher", auth.teacher);
       }
-    } else {
-      alert(`${profile.msg}`);
     }
+    // if (profile.success) {
+    //   const teacher = await axios
+    //     .get(
+    //       `${process.env.baseUrl}/api/teacher/single/${profile.teacher.userID}`
+    //     )
+    //     .then(({ data }) => data)
+    //     .catch(err => err);
+
+    //   if (teacher) {
+    //     cookie.set("Teacher", teacher, { expires: 7 });
+    //     commit("setTeacher", teacher);
+    //     commit("setLoggedIn", true);
+
+    //     alert(`Welcome ${teacher.profile.firstName}`);
+    //     if (teacher.isAdmin) {
+    //       this.$router.push("/dashboard/admin");
+    //     } else {
+    //       this.$router.push("/dashboard/teacher");
+    //     }
+    //   }
+    // } else {
+    //   alert(`${profile.msg}`);
+    // }
   },
   async register({ commit }, payload) {
     const teacher = await axios

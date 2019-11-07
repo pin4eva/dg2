@@ -45,7 +45,8 @@ export default {
   plugins: [
     { src: "@/plugins/client.js", ssr: false },
     "@/plugins/server.js",
-    "@/plugins/cookie.js"
+    "@/plugins/cookie.js",
+    "@/plugins/axios.js"
   ],
   /*
    ** Nuxt.js dev-modules

@@ -39,7 +39,7 @@
             <form>
               <div class="form-group">
                 <label>Username</label>
-                <input type="text" class="form-control" v-model="teacher.username" />
+                <input type="text" class="form-control" v-model="teacher.staffID" />
               </div>
               <div class="form-group">
                 <label>Password</label>

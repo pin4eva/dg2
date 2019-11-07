@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { Teacher, ClassName, Message, Profile } = require("../models/All");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const uniqueKeygen = require("unique-keygen");
+const secret = require("../config").SECRET;
 /*
                 TODO
     1. Create new teacher,
@@ -12,48 +14,86 @@ const uniqueKeygen = require("unique-keygen");
 */
 
 router.post("/register", async (req, res) => {
-  const { phone, email, username } = req.body;
   const payload = { ...req.body };
-  const email1 = await Profile.findOne({ email: email }).catch(err =>
-    res.send(err)
-  );
+  let teacher = await Teacher.findOne({
+    firstName: payload.firstName,
+    lastName: payload.lastName
+  }).catch(err => res.send(err));
 
-  const username1 = await Profile.findOne({ username }).catch(err =>
-    res.send(err)
-  );
-  const phone1 = await Profile.findOne({ phone }).catch(err => res.send(err));
-  if (email1) res.send({ success: false, msg: "Email already exist" });
-  else if (username1)
-    res.send({ success: false, msg: "username already exist" });
-  else if (phone1)
-    res.send({ success: false, msg: "Phone number already exist" });
-  else {
-    let firstName = payload.firstName;
-    let lastName = payload.lastName;
-    const count = await Profile.countDocuments({ type: "Teacher" })
-      .then(data => data)
-      .catch(err => err);
-    let count1 = (count + 1).toString();
-    const sid = `DGIT${firstName.charAt(0)}${lastName.charAt(
-      0
-    )}/${new Date().getFullYear()}/${count1.padStart(3, "00")}`;
-    const profile = new Profile({
-      ...req.body,
-      type: "Teacher",
-      password: bcrypt.hashSync(req.body.password, 10),
-      username: sid
-    });
-    const teacher = await Teacher.create({
-      profile: profile._id,
-      applicationNO: uniqueKeygen(6),
-      staffID: sid
-    }).catch(err => err);
-    profile.userID = teacher._id;
-    profile.save().catch(err => res.json(err));
-    res.send({ success: true, teacher, profile });
+  if (teacher) {
+    return res.json("Teacher already exist");
+  } else {
+    if (payload.email) {
+      const email = await Teacher.findOne({ email: payload.email }).catch(err =>
+        res.json(err)
+      );
+      // return res.json(email);
+      if (email) {
+        return res.json("A Teacher with same email already exist");
+      } else {
+        const count = await Profile.countDocuments({ type: "Teacher" })
+          .then(data => data)
+          .catch(err => res.send(err));
+        let count1 = (count + 1).toString();
+        const sid = `DGIT${payload.firstName.charAt(
+          0
+        )}${payload.lastName.charAt(
+          0
+        )}/${new Date().getFullYear()}/${count1.padStart(3, "00")}`;
+        const profile = Profile.create({
+          ...payload,
+          type: "Teacher",
+          username: sid
+        }).catch(err => res.send(err));
+        teacher = await Teacher.create({
+          ...payload,
+          profile: profile._id,
+          applicationID: uniqueKeygen(6),
+          staffID: sid,
+          password: bcrypt.hashSync(req.body.password, 10)
+        }).catch(err => res.send(err));
+
+        res.send({ success: true, teacher });
+      }
+    }
   }
 });
-// Create a message
+
+router.post("/login", async (req, res) => {
+  const { staffID, password } = req.body;
+  let teacher = await Teacher.findOne({ staffID }).catch(err => res.send(err));
+  if (teacher) {
+    bcrypt.compare(password, teacher.password).then(isMatch => {
+      if (isMatch) {
+        const payload = { ...teacher, password: "" };
+        jwt.sign(payload, secret, { expiresIn: "1d" }, (err, token) => {
+          if (err) {
+            return res.json({ success: false, err });
+          } else {
+            return res.json({ success: true, token: token });
+          }
+        });
+      } else {
+        return res.json({ success: false, msg: "Incorrect Password " });
+      }
+    });
+  } else {
+    return res.json({ success: false, msg: "No teacher with the email found" });
+  }
+});
+
+router.get("/me", async (req, res) => {
+  const token = req.headers["authorization"];
+  if (!token) return res.json("Auth failed, no token provided");
+
+  jwt.verify(token, secret, (err, data) => {
+    if (err) {
+      return res.json({ success: false, err });
+    } else {
+      return res.json({ success: true, teacher: data._doc });
+    }
+  });
+});
 
 router.post("/message", async (req, res) => {
   // const { title, body, to, from, toType, fromType } = req.body;
@@ -96,21 +136,7 @@ router.post("/accept", async (req, res) => {
     .then(data => res.send({ success: true, teacher: data._id }))
     .catch(err => res.send(err));
 });
-router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-  let teacher = await Profile.findOne({ username }).catch(err => res.send(err));
-  if (teacher) {
-    bcrypt.compare(password, teacher.password).then(isMatch => {
-      if (isMatch) {
-        return res.json({ success: true, teacher: teacher });
-      } else {
-        return res.json({ success: false, msg: "Incorrect Password " });
-      }
-    });
-  } else {
-    return res.json({ success: false, msg: "No teacher with the email found" });
-  }
-});
+
 router.post("/assignclass", async (req, res) => {
   const { username, className } = req.body;
   const teacher = await Teacher.findOne({ username }).catch(err =>

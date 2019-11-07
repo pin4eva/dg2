@@ -20,9 +20,7 @@ export default {
   },
   methods: {
     generate() {
-      let str = 5;
-      let str1 = str.toString();
-      let result = str1.padStart(3, "00");
+      let result = Math.ceil(Math.random() * 100);
       console.log(result);
     }
   }

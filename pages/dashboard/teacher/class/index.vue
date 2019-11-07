@@ -3,7 +3,7 @@
     <div class="dashboard-content-one">
       <!-- Breadcubs Area Start Here -->
       <div class="breadcrumbs-area">
-        <h3>All Class</h3>
+        <h3>My Class</h3>
         <ul>
           <li>
             <nuxt-link to="/dashboard/admin">Home</nuxt-link>
@@ -105,8 +105,27 @@
                   </div>
                 </div>
               </form>
-              <div class="table-responsive">
-                <b-table striped hover :items="classes"></b-table>
+              <div>
+                <b-table-simple striped hover>
+                  <b-thead>
+                    <b-tr>
+                      <b-th>
+                        <b-form-checkbox></b-form-checkbox>
+                      </b-th>
+                      <b-th>Name</b-th>
+                      <b-th>Teacher</b-th>
+                    </b-tr>
+                  </b-thead>
+                  <b-tbody>
+                    <b-tr v-for="c in classes" :key="c._id">
+                      <b-td>
+                        <b-form-checkbox></b-form-checkbox>
+                      </b-td>
+                      <b-td>{{c.name}}</b-td>
+                      <b-td>{{c.teacher.profile.firstName}}</b-td>
+                    </b-tr>
+                  </b-tbody>
+                </b-table-simple>
               </div>
             </div>
           </div>
@@ -135,19 +154,36 @@ export default {
       loading: "class/loading",
       sessions: "class/sessions",
       teachers: "teachers/teachers"
-    })
-    // classTable() {
-    //   let classes = this.classes;
-    //   return {
-    //     feilds: ["class_name", "Teacher"],
-    //     data: classes.forEach(c => {
-    //       class_name: c.name;
-    //       teacher: c.teacher.profile.firstName +
-    //         "" +
-    //         c.teacher.profile.firstName;
-    //     })
-    //   };
-    // }
+    }),
+    classTable() {
+      let classes = this.classes;
+      const fields = [
+        {
+          key: "name",
+          sortable: true
+        },
+        {
+          key: "teacher",
+          sortable: false
+        },
+        {
+          key: "session",
+          sortable: false
+        }
+      ];
+      const data = classes.map(c => {
+        return {
+          name: c.name,
+          teacher: c.teacher.profile.firstName,
+          session: c.session.session,
+          _id: c._id
+        };
+      });
+      return {
+        data,
+        fields
+      };
+    }
   },
   methods: {
     async addClass() {
@@ -163,6 +199,9 @@ export default {
         // alert("Success !");
         this.newSession = {};
       }
+    },
+    clicked(d) {
+      console.log(d);
     }
   }
 };

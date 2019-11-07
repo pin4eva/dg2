@@ -148,7 +148,7 @@ router.get("/", async (req, res) => {
       populate: {
         path: "profile",
         model: "Profile",
-        select: ["firstName", "lastName", "username", "id"]
+        select: ["firstName", "lastName", "username", "userID"]
       }
     })
     .populate({
