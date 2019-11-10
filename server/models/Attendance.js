@@ -4,8 +4,12 @@ const mongoose = require("mongoose");
 const AttendanceSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now() },
   day: String,
-  students: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
-  attended: { type: Boolean, default: false }
+  students: [
+    {
+      student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+      attended: { type: Boolean, default: false }
+    }
+  ]
 });
 
 const Attendance = mongoose.model("Attendance", AttendanceSchema);

@@ -6,7 +6,7 @@
         <h3>Students</h3>
         <ul>
           <li>
-            <nuxt-link to="/dashboard/admin/student/all">All Students</nuxt-link>
+            <nuxt-link to="/dashboard/teacher/class">All Students</nuxt-link>
           </li>
           <li>Student Details</li>
         </ul>
@@ -122,7 +122,7 @@
                       <td>Date Of Birth:</td>
                       <td
                         class="font-medium text-dark-medium"
-                      >{{$moment(student.dob).format("DD/MM/YYYY")}}</td>
+                      >{{$moment(student.profile.dob).format("DD/MM/YYYY")}}</td>
                     </tr>
                     <tr>
                       <td>Religion:</td>
@@ -172,7 +172,7 @@ import Axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   name: "Single-Student",
-  layout: "admin",
+  layout: "teacher",
   data() {
     return {
       editMode: false

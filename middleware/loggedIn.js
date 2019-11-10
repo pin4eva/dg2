@@ -1,4 +1,4 @@
-import { state } from "~/store/students";
+// import { state } from "~/store/students";
 
 export default function({ store, redirect }) {
   if (!store.getters.loggedIn) {

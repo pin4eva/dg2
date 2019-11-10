@@ -11,10 +11,10 @@
           <div class="text-center">
             <h6>Successful</h6>
             <p>You have Successfully registered as a staff in Dinnygreen International School.</p>
-            <p>Please keep your APPLICATION ID safe</p>
+            <p>Please keep your Staff ID/username safe</p>
             <p>
-              <b>ApplicationID:</b>
-              <span class="applicationID">{{applicationID}}</span>
+              <b>staffID/username:</b>
+              <span class="applicationID">{{staffID}}</span>
             </p>
           </div>
         </div>
@@ -69,7 +69,7 @@
                     v-model="teacher.email"
                   />
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Username</label>
                   <input
                     type="text"
@@ -77,7 +77,7 @@
                     placeholder="Example: bobby"
                     v-model="teacher.username"
                   />
-                </div>
+                </div>-->
                 <div class="form-group">
                   <label>Password</label>
                   <input
@@ -247,8 +247,8 @@ export default {
       admin: {},
       page: 1,
       success: false,
-      applicationID: "",
-      loading: false
+      loading: false,
+      staffID: ""
     };
   },
   computed: {
@@ -277,7 +277,7 @@ export default {
           .then(({ data }) => {
             console.log(data);
             if (data.success == true) {
-              this.applicationID = data.teacher.applicationNO;
+              this.staffID = data.teacher.staffID;
               this.success = true;
               this.loading = false;
               commit("teachers/addTeacher", data.teacher);

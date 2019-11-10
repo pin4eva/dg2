@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
   }).catch(err => res.send(err));
 
   if (teacher) {
-    return res.json("Teacher already exist");
+    return res.json("Teacher already exist with the same name");
   } else {
     if (payload.email) {
       const email = await Teacher.findOne({ email: payload.email }).catch(err =>
@@ -40,11 +40,13 @@ router.post("/register", async (req, res) => {
         )}${payload.lastName.charAt(
           0
         )}/${new Date().getFullYear()}/${count1.padStart(3, "00")}`;
-        const profile = Profile.create({
+        const profile = await Profile.create({
           ...payload,
           type: "Teacher",
           username: sid
-        }).catch(err => res.send(err));
+        })
+          .then(data => data)
+          .catch(err => res.send(err));
         teacher = await Teacher.create({
           ...payload,
           profile: profile._id,
@@ -65,7 +67,18 @@ router.post("/login", async (req, res) => {
   if (teacher) {
     bcrypt.compare(password, teacher.password).then(isMatch => {
       if (isMatch) {
-        const payload = { ...teacher, password: "" };
+        // const payload = { ...teacher, password: "" };
+        const payload = {
+          _id: teacher._id
+          // profile: teacher.profile,
+          // firstName: teacher.firstName,
+          // lastName: teacher.lastName,
+          // staffID: teacher.staffID,
+          // isAdmin: teacher.isAdmin,
+          // subject: teacher.subject,
+          // headTeacher: teacher.headTeacher,
+          // className: teacher.className
+        };
         jwt.sign(payload, secret, { expiresIn: "1d" }, (err, token) => {
           if (err) {
             return res.json({ success: false, err });
@@ -86,11 +99,16 @@ router.get("/me", async (req, res) => {
   const token = req.headers["authorization"];
   if (!token) return res.json("Auth failed, no token provided");
 
-  jwt.verify(token, secret, (err, data) => {
+  jwt.verify(token, secret, async (err, data) => {
     if (err) {
       return res.json({ success: false, err });
     } else {
-      return res.json({ success: true, teacher: data._doc });
+      const teacher = await Teacher.findOne({ _id: data._id }, { password: 0 })
+        .lean()
+        .populate("profile")
+        .then(data => data)
+        .catch(err => res.send(err));
+      return res.json({ success: true, teacher: teacher });
     }
   });
 });
@@ -220,15 +238,15 @@ router.delete("/delete/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   await Teacher.find()
     .lean()
-    .populate({
-      path: "profile",
-      select: ["-password"],
-      populate: {
-        path: "messages.sent",
-        path: "messages.recieved"
-      }
-    })
-
+    // .populate({
+    //   path: "profile",
+    //   select: ["-password"],
+    //   populate: {
+    //     path: "messages.sent",
+    //     path: "messages.recieved"
+    //   }
+    // })
+    .populate("profile")
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });

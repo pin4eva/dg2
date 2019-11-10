@@ -133,7 +133,7 @@
                             <b-form-checkbox></b-form-checkbox>
                           </b-td>
                           <b-td>{{c.name}}</b-td>
-                          <b-td>{{c.teacher.profile.firstName}}</b-td>
+                          <b-td v-if="c.teacher">{{c.teacher.profile.firstName}}</b-td>
                         </b-tr>
                       </b-tbody>
                     </b-table-simple>

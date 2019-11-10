@@ -35,7 +35,17 @@ router.post("/new", async (req, res) => {
           regNO: sid,
           profile: profile
         }).catch(err => res.json(err));
-        return res.json(student);
+        const newSt = await Student.findOne({ _id: student._id })
+
+          .populate("profile")
+          .populate("currentClass")
+          .catch(err => res.json(err));
+        await ClassName.findOneAndUpdate(
+          { _id: newSt.currentClass },
+          { $addToSet: { students: newSt._id } },
+          { new: true }
+        ).catch(err => res.json(err));
+        return res.json(newSt);
       }
     } else {
       res.json("Something went wrong");
@@ -98,9 +108,14 @@ router.delete("/delete/:id", async (req, res) => {
 });
 router.delete("/deletemany", async (req, res) => {
   const { students } = req.body;
-  await Student.deleteMany({ id: { $in: [students] } })
-    .then(data => res.send({ success: true, data }))
-    .catch(err => res.send(err));
+  const studentArray = await Student.find({ _id: { $in: students } })
+    .then(data => data)
+    .catch(err => res.json(err));
+  const deleted = studentArray.map(std => std.delete({ _id: std._id }));
+  res.json({ success: true, deleted });
+  // await Student.deleteMany({ _id: { $in: students } })
+  //   .then(data => res.json(data))
+  //   .catch(err => res.json(err));
 });
 
 router.get("/", async (req, res) => {

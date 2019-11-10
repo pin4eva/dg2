@@ -5,7 +5,7 @@
       <div class="mobile-sidebar-header d-md-none">
         <div class="header-logo">
           <nuxt-link to="/dashboard/teacher">
-            <img src="img/logo1.png" alt="logo" />
+            <img src="/main.png" alt="logo" />
           </nuxt-link>
         </div>
       </div>
@@ -18,7 +18,7 @@
             </nuxt-link>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item d-none" :class="{'d-block':myClass.students}">
             <nuxt-link class="nav-link" to="/dashboard/teacher/class">
               <i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i>
               <span>My Class</span>
@@ -70,8 +70,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  name: "Sidebar"
+  name: "Teachers-Sidebar",
+  computed: {
+    ...mapGetters({
+      myClass: "teachers/myClass"
+    })
+  }
 };
 </script>
 

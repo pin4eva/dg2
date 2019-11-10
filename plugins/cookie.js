@@ -13,9 +13,43 @@ import Cookies from "js-cookie";
 //   }
 // };
 
-export default ({ store }) => {
-  const token = Cookies.get("Token");
+export default async ({ store }) => {
+  let token = Cookies.get("Token");
+  let teacher = Cookies.get("Teacher");
+  axios.defaults.headers.common["Authorization"] = token;
+
   if (token) {
     store.commit("teachers/setToken", token);
+    if (teacher) {
+      store.commit("teachers/setTeacher", teacher);
+    }
+    const t = await axios
+      .get(`${process.env.baseUrl}/api/teacher/me`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(({ data }) => {
+        store.commit("teachers/setTeacher", data.teacher);
+        store.commit("teachers/setLoggedIn", true);
+        return data;
+      })
+      .catch(err => err);
+    // let className = await axios
+    //   .post(`${process.env.baseUrl}/api/class/single/${t.className}`)
+    //   .then(({ data }) => data)
+    //   .catch(err => new Error(err));
+    // console.log(t.teacher.className);
+    if (t.teacher.className) {
+      let className = await axios
+        .get(`${process.env.baseUrl}/api/class/single/${t.teacher.className}`)
+        .then(({ data }) => data)
+        .catch(err => new Error(err));
+      store.commit("teachers/setClass", className);
+    } else {
+      store.commit("teachers/setClass", {});
+    }
+  } else {
+    store.commit("teachers/setLoggedIn", false);
   }
 };

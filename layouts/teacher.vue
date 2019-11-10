@@ -2,10 +2,16 @@
   <div>
     <div id="dashboard">
       <div id="page1">
-        <Navbar :profile="teacher.profile" pageHome="/dashboard/admin" />
+        <Navbar :profile="teacher.profile" pageHome="/dashboard/teacher" />
         <div class="d-flex">
           <Sidebar id="sidebar" />
-          <nuxt class="bg-ash w-100" />
+          <div class="dashboard-content-one">
+            <!-- <div class="breadcrumbs-area">
+              <b-breadcrumb :items="items"></b-breadcrumb>
+            </div>-->
+
+            <nuxt class="bg-ash w-100" />
+          </div>
         </div>
         <footer class="footer-wrap-layout1">
           <div class="copyright">
@@ -27,9 +33,20 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: { Navbar, Sidebar },
+  name: "Teachers-Layout",
   data() {
     return {
-      // pageHome:"/dashboard"
+      // pageHome:"/dashboard/teacher"
+      items: [
+        {
+          text: "Home",
+          to: "/dashboard/teacher"
+        },
+        {
+          text: "My Class",
+          to: "/dasboard/teacher/class"
+        }
+      ]
     };
   },
   computed: {
@@ -49,6 +66,7 @@ export default {
       sessions: "class/getSessions",
       classes: "class/getClasses",
       subjects: "subjects/getSubjects"
+      // myClass:
     })
   },
   created() {

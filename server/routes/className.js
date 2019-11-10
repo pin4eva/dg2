@@ -24,6 +24,7 @@ router.post("/new", async (req, res) => {
     { $set: { className: newClass._id } },
     { new: true }
   ).catch(err => res.send(err));
+
   res.send(newClass);
 });
 
@@ -126,8 +127,8 @@ router.post("/addstudent", async (req, res) => {
 router.get("/", async (req, res) => {
   await ClassName.find()
     .populate({
-      path: "students",
-      select: ["_id", "name"]
+      path: "students"
+      // select: ["_id", "name"]
     })
     .populate({
       path: "results",

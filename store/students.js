@@ -1,5 +1,5 @@
 // import { getStudents } from "@/apollo/queries";
-// import { start } from "repl";
+const _ = process.client ? require("lodash") : undefined;
 import axios from "axios";
 
 export const state = () => ({
@@ -21,6 +21,10 @@ export const mutations = {
   },
   addStudent: (state, payload) => {
     state.students.push(payload);
+  },
+  removeStudent(state, payload) {
+    const students = state.students;
+    students._remove(students, student => student._id === payload);
   }
 };
 
@@ -36,13 +40,20 @@ export const actions = {
         console.log(err);
       });
   },
-  async addStudent({ commit }) {
-    await axios
+  async addStudent({ commit }, payload, image) {
+    const student = await axios
       .post(`${process.env.baseUrl}/api/student/new`, payload)
-      .then(data => {
-        console.log(data);
-      })
+      .then(data => data)
       .catch(err => new Error(err));
+    await axios.put(
+      `${process.env.baseUrl}/api/teacher/upload/${student.profile._id}`,
+      image,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }
+    );
   },
   async getStudent({ commit }, id) {
     await axios

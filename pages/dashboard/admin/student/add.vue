@@ -140,7 +140,7 @@
               </div>
               <div class="col-12 form-group mg-t-8">
                 <button
-                  type="submit"
+                  type="button"
                   class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark"
                   @click.prevent.once="addStudent"
                 >Save</button>
@@ -170,7 +170,8 @@ export default {
     return {
       newStudent: {},
       image: "",
-      imagePreview: ""
+      imagePreview: "",
+      editing: false
     };
   },
   computed: {
@@ -184,6 +185,9 @@ export default {
       let image = this.image;
       let formData = new FormData();
       formData.append("image", image);
+      if (!newStudent.currentClass) {
+        return alert("You must select a class");
+      }
       if (image) {
         let student = await axios
           .post(`${process.env.baseUrl}/api/student/new`, {
@@ -198,7 +202,7 @@ export default {
           console.log(student);
           let result = await axios
             .put(
-              `${process.env.baseUrl}/api/student/upload/${student.student.profile}`,
+              `${process.env.baseUrl}/api/student/upload/${student.profile._id}`,
               formData,
               {
                 headers: {
@@ -210,7 +214,7 @@ export default {
               return data;
             });
           alert("SUCCESS");
-          // this.$store.commit("students/addStudent", student);
+          this.$store.commit("students/addStudent", student);
           this.newStudent = {};
         } else {
           alert(student.err);
@@ -236,7 +240,12 @@ export default {
       }
     }
   },
-  mounted() {}
+  beforeMount() {
+    window.addEventListener("beforeunload", event => {
+      if (!this.editing) return;
+      event.returnValue = "";
+    });
+  }
 };
 </script>
 

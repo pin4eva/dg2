@@ -73,24 +73,39 @@
             <b-table-simple>
               <b-thead>
                 <b-tr>
+                  <b-th></b-th>
                   <b-th>
                     <b-form-checkbox></b-form-checkbox>
                   </b-th>
                   <b-th>Reg. No</b-th>
                   <b-th>Name</b-th>
                   <b-th>class</b-th>
+
                   <b-th>Phone #</b-th>
                 </b-tr>
               </b-thead>
               <b-tbody>
-                <b-tr v-for="student in students" :key="student._id">
+                <b-tr v-for="(student,i) in students" :key="student._id" @mouseenter="index=i">
                   <b-td>
-                    <b-form-checkbox></b-form-checkbox>
+                    <span v-if="index==i">
+                      <span class="d-flex justify-content-between">
+                        <a
+                          href="#"
+                          class="text-danger font-bold"
+                          @click.once.prevent="removeStudent(student)"
+                        >x</a>
+                      </span>
+                    </span>
+                  </b-td>
+                  <b-td>
+                    <b-form-checkbox :value="{_id:student._id}" v-model="ids"></b-form-checkbox>
                   </b-td>
                   <b-td>{{student.regNO}}</b-td>
-                  <b-td v-if="student.profile">{{student.profile.firstName}}</b-td>
+                  <b-td v-if="student.profile">
+                    <nuxt-link :to="`/dashboard/admin/student/${student._id}`">{{student.firstName}}</nuxt-link>
+                  </b-td>
                   <b-td v-if="student.currentClass">{{student.currentClass.name}}</b-td>
-                  <b-td v-if="student.profile">{{student.profile.phone}}</b-td>
+                  <b-td v-if="student.phone">{{student.phone}}</b-td>
                 </b-tr>
               </b-tbody>
             </b-table-simple>
@@ -112,8 +127,8 @@ export default {
   data() {
     return {
       ids: [],
-      hover: false
-      // students: []
+      hover: false,
+      index: null
     };
   },
   computed: {
@@ -122,37 +137,34 @@ export default {
     })
   },
   methods: {
-    getStudents() {
-      this.$store.dispatch("students/getStudents");
+    async removeStudent(student) {
+      let result = confirm(`Do you want to delete ${student.firstName}`);
+      if (result) {
+        const deleted = await Axios.delete(
+          `${process.env.baseUrl}/api/student/delete/${student._id}`
+        ).then(({ data }) => {
+          alert(`Successfully deleted ${data.firstName}`);
+          return data;
+        });
+        // this.$store.commit("students/removeStudent", deleted._id);
+      } else {
+        console.log("no");
+      }
     },
+
     async deleteStudents() {
       let students = this.ids;
-      await Axios.delete(`${process.env.baseUrl}/api/student/deletemany`, {
-        students: students
-      })
+      await Axios.delete(
+        `${process.env.baseUrl}/api/student/deletemany`,
+        students
+      )
         .then(({ data }) => {
           console.log(data);
         })
         .catch(err => console.log(err));
-    },
-    selected(student) {
-      async function remove() {
-        await Axios.delete(
-          `${process.env.baseUrl}/api/student/delete/${student._id}`
-        )
-          .then(data => {})
-          .catch(err => {
-            if (err) {
-              // alert("NOT SUCCESSFUL");
-              console.log(err);
-            }
-          });
-      }
     }
   },
-  // async asyncData({store}){
-  //   store.dispatch("students/getStudents")
-  // },
+
   mounted() {}
 };
 </script>

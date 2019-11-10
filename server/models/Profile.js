@@ -13,7 +13,6 @@ const ProfileSchema = new mongoose.Schema({
   gender: { type: String },
   image: String,
   userID: String,
-
   username: { type: String, unique: true },
   sent: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
   recieved: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],

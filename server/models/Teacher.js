@@ -28,5 +28,13 @@ const TeacherSchema = new mongoose.Schema({
   }
 });
 
+TeacherSchema.virtual("userProfile", {
+  ref: "Profile",
+  localField: "profile",
+  foreignField: "username"
+});
+TeacherSchema.set("toObject", { virtuals: true });
+TeacherSchema.set("toJSON", { virtuals: true });
+
 const Teacher = mongoose.model("Teacher", TeacherSchema);
 module.exports = Teacher;
