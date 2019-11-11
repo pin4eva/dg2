@@ -35,15 +35,16 @@
         </div>
         <div class="header-main-menu collapse navbar-collapse" id="mobile-navbar">
           <ul class="navbar-nav">
-            <li class="navbar-item header-search-bar">
-              <div class="input-group stylish-input-group">
-                <span class="input-group-addon">
-                  <button type="submit">
-                    <span class="flaticon-search" aria-hidden="true"></span>
-                  </button>
-                </span>
-                <input type="text" class="form-control" placeholder="Find Something . . ." />
-              </div>
+            <li class="navbar-item">
+              <span>
+                <span>{{date}}</span>
+              </span>
+            </li>
+            <li class="navbar-item">
+              <span>
+                <b class="text-danger">Current Week:</b>
+                {{weekNumber}}
+              </span>
             </li>
           </ul>
           <ul class="navbar-nav">
@@ -255,10 +256,24 @@
 </template>
 
 <script>
+import moment from "moment";
+import { mapGetters } from "vuex";
 export default {
   props: {
     profile: Object,
     pageHome: String
+  },
+  data() {
+    return {
+      day: moment().format("dddd"),
+      month: moment().format("MMMM"),
+      date: moment().format("dddd, MMMM Do YYYY")
+    };
+  },
+  computed: {
+    ...mapGetters({
+      weekNumber: "weekNumber"
+    })
   },
   methods: {
     logout() {

@@ -12,8 +12,65 @@
           <li>Class Page</li>
         </ul>
       </div>
-      <!-- Breadcubs Area End Here -->
-      <!-- Class Routine Area Start Here -->
+      <div class="row gutters-20">
+        <div class="col-xl-4 col-sm-6 col-12">
+          <div class="dashboard-summery-one mg-b-20">
+            <div class="row align-items-center">
+              <div class="col-6">
+                <div class="item-icon bg-light-green">
+                  <i class="flaticon-classmates text-green"></i>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="item-content">
+                  <div class="item-title">Students</div>
+                  <div class="item-number">
+                    <span>1,50,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12">
+          <div class="dashboard-summery-one mg-b-20">
+            <div class="row align-items-center">
+              <div class="col-6">
+                <div class="item-icon bg-light-blue">
+                  <i class="flaticon-multiple-users-silhouette text-blue"></i>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="item-content">
+                  <div class="item-title">Teachers</div>
+                  <div class="item-number">
+                    <span>2,250</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12">
+          <div class="dashboard-summery-one mg-b-20">
+            <div class="row align-items-center">
+              <div class="col-6">
+                <div class="item-icon bg-light-yellow">
+                  <i class="flaticon-couple text-orange"></i>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="item-content">
+                  <div class="item-title">Parents</div>
+                  <div class="item-number">
+                    <span>5,690</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="container">
         <div class="card height-auto">
@@ -62,9 +119,14 @@
             </form>
             <div>
               <div class="d-flex justify-content-between mb-3 gutters-20">
-                <button class="btn btn-primary" @click.prevent.once="attendance">Mark As Present</button>
-                <button class="btn btn-success">Mark Present</button>
-                <button class="btn btn-warning">Send Notice</button>
+                <nuxt-link
+                  tag="button"
+                  to="class/attendance"
+                  class="btn btn-primary"
+                >Take Attendance</nuxt-link>
+                <button class="btn btn-success">View Register</button>
+                <button class="btn btn-warning">Set Class Time table</button>
+                <button class="btn btn-warning">Set Exam Time table</button>
               </div>
               <b-table-simple striped hover>
                 <b-thead>
@@ -74,6 +136,7 @@
                     </b-th>
                     <b-th>Reg. NO</b-th>
                     <b-th>Name</b-th>
+                    <b-th>Gender</b-th>
                     <b-th>Phone No</b-th>
                   </b-tr>
                 </b-thead>
@@ -82,6 +145,7 @@
                     <b-td>
                       <b-form-checkbox
                         :value="{student:student._id,attended:true}"
+                        :unchecked-value="records"
                         v-model="students"
                       ></b-form-checkbox>
                     </b-td>
@@ -91,6 +155,7 @@
                         :to="`student/${student._id}`"
                       >{{student.firstName}} {{student.lastName}}</nuxt-link>
                     </b-td>
+                    <b-td>{{student.profile.gender}}</b-td>
                     <b-td>{{student.phone}}</b-td>
                   </b-tr>
                 </b-tbody>
@@ -117,6 +182,7 @@ export default {
       selected: []
     };
   },
+
   computed: {
     ...mapGetters({
       loading: "class/loading",
@@ -139,38 +205,24 @@ export default {
         this.students = selected;
       }
     },
-    record: {
-      get: function() {
-        return false;
-      },
-      set(v) {
-        let students = this.myClass.students;
-        console.log(v);
-        const data = students.forEach(s => {
-          student: s._id;
-          attended: true;
-        });
-        // const newdata = data.map(d => {
-        //   let student = v.student;
-        //   let attended = v.attended;
-        //   return {
-        //     student,
-        //     attended
-        //   };
-        // });
-        const result = _.map(data, s => _.asign({}, s, { attended: false }));
-        this.all = result;
-      }
+    records() {
+      let myclass = this.myClass.students;
+      let options = myclass.map(o => {
+        return {
+          student: o._id,
+          attended: false
+        };
+      });
+      return options;
     }
   },
   watch: {
-    all(v) {
-      console.log(v);
-      let students = this.myClass.students;
-      let data = students.map(s => {
-        let student = s._id || v.student;
-        let attended = v.attended || true;
-      });
+    students(a, b) {
+      // if (a.length > 0) {
+      //   console.log("a:", a);
+      // } else {
+      //   console.log("b:", b);
+      // }
     }
   },
   methods: {
@@ -188,10 +240,6 @@ export default {
         .then(({ data }) => data);
       console.log(attendance);
     }
-  },
-
-  mounted() {
-    this.all = this.record;
   }
 };
 </script>

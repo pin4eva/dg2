@@ -3,19 +3,9 @@ const router = express.Router();
 const { Attendance, ClassName } = require("../models/All");
 
 router.post("/new", async (req, res) => {
-  const { students, className, attended, day } = req.body;
   const attendance = await Attendance.create({
-    date: Date.now(),
-    students: students,
-    day: day
+    ...req.body
   })
-    .then(data => data)
-    .catch(err => res.send(err));
-  await ClassName.findOneAndUpdate(
-    { _id: className },
-    { $push: { attendance: attendance._id } },
-    { new: true }
-  )
     .then(data => data)
     .catch(err => res.send(err));
 
@@ -23,9 +13,27 @@ router.post("/new", async (req, res) => {
 });
 router.get("/", async (req, res) => {
   await Attendance.find()
-    .populate({ path: "className" })
+    .populate({
+      path: "className",
+      select: ["name", "_id"]
+    })
     .populate({ path: "student" })
     .then(data => res.send(data))
     .catch(err => res.send(err));
+});
+router.get("/getby", async (req, res) => {
+  const { className, month, week, term } = req.query;
+  const attendance = await Attendance.find({
+    className: className,
+    month: month,
+    week: week,
+    term: term
+  })
+    .populate({
+      path: "students.student",
+      select: ["firstName", "lastName", "regNO", "_id"]
+    })
+    .catch(err => res.json(err));
+  res.json(attendance);
 });
 module.exports = router;

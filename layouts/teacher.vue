@@ -32,6 +32,7 @@ import { mapActions, mapGetters } from "vuex";
 // import dt from "datatables";
 
 export default {
+  middleware: "loggedIn",
   components: { Navbar, Sidebar },
   name: "Teachers-Layout",
   data() {

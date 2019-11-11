@@ -94,6 +94,9 @@ export const actions = {
         return data;
       })
       .catch(err => err);
+    if (!profile.success) {
+      return alert(profile.msg);
+    }
 
     if (profile.token) {
       commit("setToken", profile.token);

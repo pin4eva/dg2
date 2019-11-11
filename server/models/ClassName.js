@@ -40,12 +40,6 @@ const ClassNameSchema = new mongoose.Schema({
     }
   ],
 
-  attendance: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Attendance"
-    }
-  ],
   subjects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subject" }]
 });
 

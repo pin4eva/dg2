@@ -28,6 +28,8 @@ router.post("/new", async (req, res) => {
   res.send(newClass);
 });
 
+// Attendance
+
 router.post("/session/new", async (req, res) => {
   await Session.create({ ...req.body })
     .then(data => res.send(data))

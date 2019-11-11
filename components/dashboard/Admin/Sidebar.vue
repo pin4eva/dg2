@@ -139,10 +139,10 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <nuxt-link to="admin/settings" class="nav-link">
               <i class="flaticon-settings"></i>
-              <span>Account</span>
-            </a>
+              <span>Settings</span>
+            </nuxt-link>
           </li>
         </ul>
       </div>

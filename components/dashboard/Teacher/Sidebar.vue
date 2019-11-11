@@ -32,10 +32,10 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <nuxt-link to="/dashboard/teacher/attendance" class="nav-link">
               <i class="flaticon-checklist"></i>
               <span>Attendence</span>
-            </a>
+            </nuxt-link>
           </li>
           <li class="nav-item">
             <nuxt-link class="nav-link" to="/dashboard/teacher/exam">
