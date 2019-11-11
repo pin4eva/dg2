@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
+
 router.get("/getby", async (req, res) => {
   const { className, month, week, term } = req.query;
   const attendance = await Attendance.find({

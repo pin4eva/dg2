@@ -113,10 +113,10 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <nuxt-link to="/dashboard/admin/attendance" class="nav-link">
               <i class="flaticon-checklist"></i>
               <span>Attendence</span>
-            </a>
+            </nuxt-link>
           </li>
           <li class="nav-item">
             <nuxt-link class="nav-link" to="/dashboard/admin/exam">
@@ -139,7 +139,7 @@
           </li>
 
           <li class="nav-item">
-            <nuxt-link to="admin/settings" class="nav-link">
+            <nuxt-link to="/dashboard/admin/settings" class="nav-link">
               <i class="flaticon-settings"></i>
               <span>Settings</span>
             </nuxt-link>

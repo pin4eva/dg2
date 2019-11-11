@@ -30,8 +30,11 @@ export const actions = {
     if (att.length == 0) {
       return alert("No result found");
     }
-    commit("setAtt", att);
-    Cookies.set("att", att);
+    if (att) {
+      alert("Success !");
+      commit("setAtt", att);
+      Cookies.set("att", att);
+    }
   }
 };
 
