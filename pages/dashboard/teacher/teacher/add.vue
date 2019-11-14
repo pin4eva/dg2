@@ -134,7 +134,7 @@
 import Axios from "axios";
 export default {
   name: "Add-Teacher",
-  layout: "admin",
+  layout: "teacher",
   data() {
     return {
       teacher: {},

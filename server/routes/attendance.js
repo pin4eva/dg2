@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Attendance, ClassName } = require("../models/All");
+const { Attendance, Settings } = require("../models/All");
 
 router.post("/new", async (req, res) => {
   const attendance = await Attendance.create({
@@ -36,5 +36,37 @@ router.get("/getby", async (req, res) => {
     })
     .catch(err => res.json(err));
   res.json(attendance);
+});
+
+/**
+ *          Settings
+ */
+
+router.post("/settings", async (req, res) => {
+  await Settings.create({
+    ...req.body
+  })
+    .then(data => res.json(data))
+    .catch(err => res.json(err));
+});
+
+router.put("/settings/new", async (req, res) => {
+  await Settings.findOneAndUpdate(
+    { _id: req.body.settings },
+    { $set: { ...req.body } }
+  )
+    .then(data => res.json(data))
+    .catch(err => res.json(err));
+});
+
+router.post("/settings/setweek", async (req, res) => {
+  await Settings.findOneAndUpdate(
+    { _id: req.body.settings },
+    {
+      $inc: { week: 1 }
+    }
+  )
+    .then(data => data)
+    .catch(err => res.json(err));
 });
 module.exports = router;

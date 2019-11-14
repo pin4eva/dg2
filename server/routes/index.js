@@ -8,6 +8,7 @@ const attendance = require("./attendance");
 const profile = require("./profile");
 const message = require("./message");
 const notice = require("./notice");
+const settings = require("./settings");
 
 module.exports = {
   teacher,
@@ -19,5 +20,6 @@ module.exports = {
   attendance,
   profile,
   message,
-  notice
+  notice,
+  settings
 };

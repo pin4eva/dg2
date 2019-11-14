@@ -180,7 +180,7 @@ import { mapGetters } from "vuex";
 import Axios from "axios";
 export default {
   name: "Message",
-  layout: "admin",
+  layout: "teacher",
   data() {
     return {
       newMessage: {},

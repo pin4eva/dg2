@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const SessionSchema = new mongoose.Schema({
   session: { type: String, required: true, unique: true },
+
   year: { type: Number, required: true, unique: true },
   isCurrent: { type: Boolean, default: false },
   classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "ClassName" }]

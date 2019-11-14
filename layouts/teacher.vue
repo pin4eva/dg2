@@ -2,16 +2,10 @@
   <div>
     <div id="dashboard">
       <div id="page1">
-        <Navbar :profile="teacher.profile" pageHome="/dashboard/teacher" />
+        <Navbar :profile="teacher.profile" pageHome="/dashboard/admin" />
         <div class="d-flex">
           <Sidebar id="sidebar" />
-          <div class="dashboard-content-one">
-            <!-- <div class="breadcrumbs-area">
-              <b-breadcrumb :items="items"></b-breadcrumb>
-            </div>-->
-
-            <nuxt class="bg-ash w-100" />
-          </div>
+          <nuxt class="bg-ash w-100" />
         </div>
         <footer class="footer-wrap-layout1">
           <div class="copyright">
@@ -26,38 +20,26 @@
 </template>
 
 <script>
+import moment from "moment";
+
 import Navbar from "@/components/dashboard/Admin/Navbar";
-import Sidebar from "@/components/dashboard/Teacher/Sidebar";
+import Sidebar from "@/components/dashboard/Admin/Sidebar";
 import { mapActions, mapGetters } from "vuex";
 // import dt from "datatables";
 
 export default {
-  middleware: "loggedIn",
   components: { Navbar, Sidebar },
-  name: "Teachers-Layout",
+  middleware: "loggedIn",
   data() {
     return {
-      // pageHome:"/dashboard/teacher"
-      items: [
-        {
-          text: "Home",
-          to: "/dashboard/teacher"
-        },
-        {
-          text: "My Class",
-          to: "/dasboard/teacher/class"
-        }
-      ]
+      // pageHome:"/dashboard"
     };
   },
   computed: {
     ...mapGetters({
       teacher: "teachers/teacher",
-      admin: ""
-    }),
-    user() {
-      return {};
-    }
+      profile: "teachers/profile"
+    })
   },
   methods: {
     ...mapActions({
@@ -66,8 +48,8 @@ export default {
       Parents: "parents/getParents",
       sessions: "class/getSessions",
       classes: "class/getClasses",
-      subjects: "subjects/getSubjects"
-      // myClass:
+      subjects: "subjects/getSubjects",
+      settings: "settings/getSettings"
     })
   },
   created() {
@@ -77,6 +59,7 @@ export default {
     this.sessions();
     this.classes();
     this.subjects();
+    this.settings();
   },
   head() {
     return {
@@ -102,10 +85,6 @@ export default {
 
 .btn {
   border-radius: 0;
-}
-
-#dashboard {
-  height: 100vh;
 }
 </style>
 

@@ -3,23 +3,23 @@
     <div class="dashboard-content-one">
       <!-- Breadcubs Area Start Here -->
       <div class="breadcrumbs-area">
-        <h3>Parents</h3>
+        <h3>Teacher</h3>
         <ul>
-          <li>
-            <nuxt-link to="/dashboard/admin">Home</nuxt-link>
-          </li>
-          <li>Parent Details</li>
+          <nuxt-link to="/dashboard/teacher">Home</nuxt-link>
+          <li>Teacher Details</li>
         </ul>
       </div>
       <!-- Breadcubs Area End Here -->
-      <!-- Student Details Area Start Here -->
+      <!-- Student Table Area Start Here -->
       <div class="card height-auto">
         <div class="card-body">
           <div class="heading-layout1">
             <div class="item-title">
               <h3>
                 About
-                <span class="font-italic">{{parent.name}}</span>
+                <span
+                  class="font-italic"
+                >{{teacher.profile.firstName}} {{teacher.profile.lastName}}</span>
               </h3>
             </div>
             <div class="dropdown">
@@ -46,12 +46,12 @@
           </div>
           <div class="single-info-details">
             <div class="item-img">
-              <img :src="parent.image" alt="dp" v-if="parent.image" width="280" height="330" />
-              <img src="/dashboard/img/figure/student1.jpg" alt="Parent" v-else />
+              <img :src="student.image" alt="dp" v-if="teacher.image" width="280" height="330" />
+              <img src="/dashboard/img/figure/teacher.jpg" alt="teacher" v-else />
             </div>
             <div class="item-content">
               <div class="header-inline item-header">
-                <h3 class="text-dark-medium font-medium">{{parent.name}}</h3>
+                <h3 class="text-dark-medium font-medium">{{teacher.firstName}} {{teacher.lastName}}</h3>
                 <div class="header-elements">
                   <ul>
                     <li>
@@ -79,32 +79,46 @@
               </p>
               <div class="info-table table-responsive">
                 <table class="table text-nowrap">
-                  <tbody>
+                  <tbody v-if="teacher">
                     <tr>
                       <td>Name:</td>
-                      <td class="font-medium text-dark-medium">{{parent.name}}</td>
+                      <td
+                        class="font-medium text-dark-medium"
+                      >{{teacher.profile.firstName}} {{teacher.profile.lastName}}</td>
                     </tr>
                     <tr>
                       <td>Gender:</td>
-                      <td class="font-medium text-dark-medium">{{parent.role}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.gender}}</td>
                     </tr>
 
-                    <tr>
-                      <td>Occupation:</td>
-                      <td class="font-medium text-dark-medium">{{parent.occupation}}</td>
-                    </tr>
                     <tr>
                       <td>E-mail:</td>
-                      <td class="font-medium text-dark-medium">{{parent.email}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.email}}</td>
+                    </tr>
+                    <tr>
+                      <td>Subjects:</td>
+                      <td class="font-medium text-dark-medium">
+                        <tr v-for="subject in teacher.subjects" :key="subject._id">
+                          <td>{{subject.subject}}</td>
+                        </tr>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Class:</td>
+                      <td class="font-medium text-dark-medium">{{teacher.class}}</td>
                     </tr>
 
                     <tr>
+                      <td>staffID:</td>
+                      <td class="font-medium text-dark-medium">{{teacher.staffID}}</td>
+                    </tr>
+                    <tr>
                       <td>Address:</td>
-                      <td class="font-medium text-dark-medium">{{parent.address}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.address}}</td>
                     </tr>
                     <tr>
                       <td>Phone:</td>
-                      <td class="font-medium text-dark-medium">{{parent.phone}}</td>
+                      <td class="font-medium text-dark-medium">{{teacher.profile.phone}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -113,28 +127,29 @@
           </div>
         </div>
       </div>
-      <!-- Student Details Area End Here -->
+      <!-- Student Table Area End Here -->
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import Axios from "axios";
+import { mapGetters } from "vuex";
 export default {
-  name: "Single-Parent",
-  layout: "admin",
+  name: "Single-Teacher",
+  layout: "teacher",
   computed: {
     ...mapGetters({
-      parent: "parents/parent"
+      teacher: "teachers/teacher"
     })
   },
   async fetch({ params, store }) {
     return await Axios.get(
-      `${process.env.baseUrl}/api/parent/single/${params.id}`
+      `${process.env.baseUrl}/api/teacher/single/${params.id}`
     )
       .then(({ data }) => {
-        store.commit("parents/setParent", data);
+        store.commit("teachers/setTeacher", data);
+        // console.log(data);
       })
       .catch(err => new Error(err));
   }

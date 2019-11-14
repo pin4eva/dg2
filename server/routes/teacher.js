@@ -70,14 +70,6 @@ router.post("/login", async (req, res) => {
         // const payload = { ...teacher, password: "" };
         const payload = {
           _id: teacher._id
-          // profile: teacher.profile,
-          // firstName: teacher.firstName,
-          // lastName: teacher.lastName,
-          // staffID: teacher.staffID,
-          // isAdmin: teacher.isAdmin,
-          // subject: teacher.subject,
-          // headTeacher: teacher.headTeacher,
-          // className: teacher.className
         };
         jwt.sign(payload, secret, { expiresIn: "1d" }, (err, token) => {
           if (err) {
@@ -106,6 +98,7 @@ router.get("/me", async (req, res) => {
       const teacher = await Teacher.findOne({ _id: data._id }, { password: 0 })
         .lean()
         .populate("profile")
+        .populate("subjects")
         .then(data => data)
         .catch(err => res.send(err));
       return res.json({ success: true, teacher: teacher });
@@ -156,8 +149,8 @@ router.post("/accept", async (req, res) => {
 });
 
 router.post("/assignclass", async (req, res) => {
-  const { username, className } = req.body;
-  const teacher = await Teacher.findOne({ username }).catch(err =>
+  const { staffID, className } = req.body;
+  const teacher = await Teacher.findOne({ staffID }).catch(err =>
     res.send(err)
   );
   const c = await ClassName.findOne({ _id: className }).catch(err =>
@@ -166,7 +159,7 @@ router.post("/assignclass", async (req, res) => {
 
   if (teacher && c) {
     const newTeacher = await Teacher.findOneAndUpdate(
-      { username: username },
+      { staffID: staffID },
       {
         $set: {
           className: className,
@@ -196,31 +189,7 @@ router.post("/assignclass", async (req, res) => {
     res.send({ success: false, msg: "Incorrect username" });
   }
 });
-router.post("/new", async (req, res) => {
-  // const {firstName,lastName,phone,address} = req.body
-  const userProfile = await Profile.create({
-    ...req.body
-  }).catch(err => err);
-  const teacher = await Teacher.create({
-    profile: userProfile._id
-  });
-  res.send({ teacher, profile: userProfile });
-});
-router.put("/upload/:id", async (req, res) => {
-  const { image } = req.files;
-  image.mv(
-    path.resolve(__dirname, "../../static/uploads/", image.name),
-    async err => {
-      if (err) res.send(err);
-      await Teacher.findOneAndUpdate(
-        { _id: req.params.id },
-        { $set: { image: `/uploads/${image.name}` } }
-      )
-        .then(data => res.send(data))
-        .catch(err => res.send(err));
-    }
-  );
-});
+
 router.put("/update", async (req, res) => {
   await Teacher.findOneAndUpdate(
     { _id: req.body._id },

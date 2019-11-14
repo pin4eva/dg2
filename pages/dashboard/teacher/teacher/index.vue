@@ -7,7 +7,7 @@
         <h3>Teacher</h3>
         <ul>
           <li>
-            <nuxt-link to="/dashboard/admin">Home</nuxt-link>
+            <nuxt-link to="/dashboard/teacher">Home</nuxt-link>
           </li>
           <li>Teachers page</li>
         </ul>
@@ -72,7 +72,6 @@
 
                     <th>Name</th>
                     <th>Gender</th>
-
                     <th>Phone</th>
                     <th>E-mail</th>
                     <th></th>
@@ -89,7 +88,7 @@
 
                     <td>
                       <nuxt-link
-                        :to="'/dashboard/admin/teacher/'+teacher._id"
+                        :to="'/dashboard/teacher/teacher/'+teacher._id"
                       >{{teacher.profile.firstName}} {{teacher.profile.lastName}}</nuxt-link>
                     </td>
                     <td>{{teacher.profile.gender}}</td>
@@ -115,10 +114,18 @@
                             href="#"
                             @click.prevent="approveTeacher(teacher)"
                           >
-                            <i class="fas fa-cogs text-dark-pastel-green pr-3"></i> Approve Application
+                            <i class="fas fa-check text-dark-pastel-green pr-3"></i> Approve Application
                           </a>
-                          <a class="dropdown-item" href="#" @click.prevent="assignClass(teacher)">
+                          <a
+                            class="dropdown-item"
+                            v-b-modal.my-modal
+                            href="#"
+                            @click.prevent="assignClass(teacher)"
+                          >
                             <i class="fas fa-redo-alt text-orange-peel pr-3"></i> Assign Class
+                          </a>
+                          <a class="dropdown-item" href="#" @click.prevent="assignSubject(teacher)">
+                            <i class="fas fa-cog text-orange-peel pr-3"></i> Assign Subject
                           </a>
                         </div>
                       </div>
@@ -131,7 +138,16 @@
         </div>
       </div>
 
-      <!-- Student Table Area End Here -->
+      <!-- Modal -->
+      <div>
+        <b-modal id="my-modal">
+          <p>Assign Class to</p>
+          <template v-slot:modal-footer>
+            <b-button variant="success" @click="assignClass">Good</b-button>
+            <b-button variant="danger">Cancel</b-button>
+          </template>
+        </b-modal>
+      </div>
     </div>
   </div>
 </template>
@@ -142,7 +158,7 @@ import Axios from "axios";
 
 export default {
   name: "All-Teacher",
-  layout: "admin",
+  layout: "teacher",
   data() {
     return {
       teacher: {},
@@ -230,6 +246,23 @@ export default {
 
     async assignClass(teacher) {
       console.log(teacher);
+    },
+    async assignSubject(teacher) {
+      // console.log(teacher._id);
+      let code = prompt("Teacher");
+      if (!code) return;
+      let sub = await Axios.post(
+        `${process.env.baseUrl}/api/subject/assignteacher`,
+        {
+          code: code,
+          teacher: teacher._id
+        }
+      )
+        .then(({ data }) => data)
+        .catch(err => err);
+      // .then(({ data }) => data);
+      alert(sub.msg);
+      console.log(sub.msg);
     },
     async addTeacher() {
       const result = this.$store.dispatch("teachers/addTeacher", this.teacher);

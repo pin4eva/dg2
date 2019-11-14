@@ -3,7 +3,7 @@
     <div class="dashboard-content-one">
       <!-- Breadcubs Area Start Here -->
       <div class="breadcrumbs-area">
-        <h3>Admin Dashboard</h3>
+        <h3>teacher Dashboard</h3>
         <ul>
           <li>
             <a href="index.html">Home</a>
@@ -321,7 +321,7 @@
 
 <script>
 export default {
-  layout: "admin"
+  layout: "teacher"
 };
 </script>
 

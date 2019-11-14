@@ -3,23 +3,23 @@
     <div class="dashboard-content-one">
       <!-- Breadcubs Area Start Here -->
       <div class="breadcrumbs-area">
-        <h3>Notice Board</h3>
+        <h3>Class Routine</h3>
         <ul>
           <li>
             <a href="index.html">Home</a>
           </li>
-          <li>Notice</li>
+          <li>Routine</li>
         </ul>
       </div>
       <!-- Breadcubs Area End Here -->
+      <!-- Class Routine Area Start Here -->
       <div class="row">
-        <!-- Add Notice Area Start Here -->
         <div class="col-4-xxxl col-12">
           <div class="card height-auto">
             <div class="card-body">
               <div class="heading-layout1">
                 <div class="item-title">
-                  <h3>Create A Notice</h3>
+                  <h3>Add Class Routine</h3>
                 </div>
                 <div class="dropdown">
                   <a
@@ -46,22 +46,41 @@
               <form class="new-added-form">
                 <div class="row">
                   <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                    <label>Title</label>
+                    <label>Subject Name *</label>
                     <input type="text" placeholder class="form-control" />
                   </div>
                   <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                    <label>Details</label>
-                    <input type="text" placeholder class="form-control" />
+                    <label>Subject Type *</label>
+                    <select class="form-control">
+                      <option value>Please Select</option>
+                      <option value="1">Bangla</option>
+                      <option value="2">English</option>
+                      <option value="3">Mathematics</option>
+                      <option value="3">Economics</option>
+                      <option value="3">Chemistry</option>
+                    </select>
                   </div>
                   <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                    <label>Posted By</label>
-                    <input type="text" placeholder class="form-control" />
-                    <i class="fas fa-user"></i>
+                    <label>Select Class *</label>
+                    <select class="form-control">
+                      <option value="0">Please Select</option>
+                      <option value="1">Play</option>
+                      <option value="2">Nursery</option>
+                      <option value="3">One</option>
+                      <option value="3">Two</option>
+                      <option value="3">Three</option>
+                    </select>
                   </div>
                   <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                    <label>Date</label>
-                    <input type="text" placeholder class="form-control air-datepicker" />
-                    <i class="far fa-calendar-alt"></i>
+                    <label>Select Code</label>
+                    <select class="form-control">
+                      <option value="0">Please Select</option>
+                      <option value="1">00524</option>
+                      <option value="2">00525</option>
+                      <option value="3">00526</option>
+                      <option value="3">00527</option>
+                      <option value="3">00528</option>
+                    </select>
                   </div>
                   <div class="col-12 form-group mg-t-8">
                     <button
@@ -75,14 +94,12 @@
             </div>
           </div>
         </div>
-        <!-- Add Notice Area End Here -->
-        <!-- All Notice Area Start Here -->
         <div class="col-8-xxxl col-12">
           <div class="card height-auto">
             <div class="card-body">
               <div class="heading-layout1">
                 <div class="item-title">
-                  <h3>Notice Board</h3>
+                  <h3>Class Routine</h3>
                 </div>
                 <div class="dropdown">
                   <a
@@ -108,48 +125,70 @@
               </div>
               <form class="mg-b-20">
                 <div class="row gutters-8">
-                  <div class="col-lg-5 col-12 form-group">
-                    <input type="text" placeholder="Search by Date ..." class="form-control" />
+                  <div class="col-lg-4 col-12 form-group">
+                    <input type="text" placeholder="Search by Day ..." class="form-control" />
                   </div>
-                  <div class="col-lg-5 col-12 form-group">
-                    <input type="text" placeholder="Search by Title ..." class="form-control" />
+                  <div class="col-lg-3 col-12 form-group">
+                    <input type="text" placeholder="Search by Class ..." class="form-control" />
+                  </div>
+                  <div class="col-lg-3 col-12 form-group">
+                    <input type="text" placeholder="Search by Section ..." class="form-control" />
                   </div>
                   <div class="col-lg-2 col-12 form-group">
                     <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
                   </div>
                 </div>
               </form>
-              <div class="notice-board-wrap" v-if="teacher.profile.notice">
-                <div class="notice-list" v-for="notice in teacher.profile.notice" :key="notice._id">
-                  <div
-                    class="post-date bg-skyblue"
-                  >{{ $moment(notice.createdAt).format("MMM Do YY") }}</div>
-                  <h6 class="notice-title">{{notice.content}}</h6>
-                  <div class="entry-meta">
-                    {{notice.from.firstName}} /
-                    <span>{{ $moment(notice.createdAt).startOf().fromNow() }}</span>
-                  </div>
-                </div>
+              <div class="table-responsive">
+                <table class="table display text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input checkAll" />
+                          <label class="form-check-label">Day</label>
+                        </div>
+                      </th>
+                      <th>Class</th>
+                      <th>Subject</th>
+                      <th>Section</th>
+                      <th>Teacher</th>
+                      <th>Time</th>
+                      <th>Date</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" />
+                          <label class="form-check-label">Sunday</label>
+                        </div>
+                      </td>
+                      <td>4</td>
+                      <td>Accounting</td>
+                      <td>A</td>
+                      <td>Mike John</td>
+                      <td>10.00 am-11.00 am</td>
+                      <td>20/06/2019</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
-        <!-- All Notice Area End Here -->
       </div>
+      <!-- Class Routine Area End Here -->
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
-  name: "notice",
-  layout: "admin",
-  computed: {
-    ...mapGetters({
-      teacher: "teachers/teacher"
-    })
-  }
+  name: "Class-Routine",
+  layout: "teacher"
 };
 </script>
 

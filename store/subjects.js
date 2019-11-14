@@ -54,17 +54,19 @@ export const actions = {
   },
   async addSubject({ commit }, payload) {
     commit("setLoading", true);
-    commit("setStatus", false);
-    await axios
+
+    let newSubject = await axios
       .post(`${process.env.baseUrl}/api/subject/new`, payload)
-      .then(data => {
-        console.log(data);
-        if (data.status == 200) {
-          commit("setStatus", true);
-          commit("addSubject", data.data);
-          commit("setLoading", false);
-        }
+      .then(({ data }) => {
+        alert("SUCCESS !");
+        return data;
       });
+    if (!newSubject._id) {
+      return alert("Failed to create new subject");
+    } else {
+      commit("addSubject", newSubject);
+      commit("setLoading", false);
+    }
   }
 };
 

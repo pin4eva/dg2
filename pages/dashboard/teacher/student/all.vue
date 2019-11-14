@@ -6,7 +6,7 @@
         <h3>Students</h3>
         <ul>
           <li>
-            <nuxt-link to="/dashboard/admin">Home</nuxt-link>
+            <nuxt-link to="/dashboard/teacher">Home</nuxt-link>
           </li>
           <li>All Students</li>
         </ul>
@@ -102,7 +102,9 @@
                   </b-td>
                   <b-td>{{student.regNO}}</b-td>
                   <b-td v-if="student.profile">
-                    <nuxt-link :to="`/dashboard/admin/student/${student._id}`">{{student.firstName}}</nuxt-link>
+                    <nuxt-link
+                      :to="`/dashboard/teacher/student/${student._id}`"
+                    >{{student.firstName}}</nuxt-link>
                   </b-td>
                   <b-td v-if="student.currentClass">{{student.currentClass.name}}</b-td>
                   <b-td v-if="student.phone">{{student.phone}}</b-td>
@@ -123,7 +125,7 @@ import Axios from "axios";
 
 export default {
   name: "All-Student",
-  layout: "admin",
+  layout: "teacher",
   data() {
     return {
       ids: [],

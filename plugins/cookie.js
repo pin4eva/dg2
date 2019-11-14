@@ -40,6 +40,7 @@ export default async ({ store }) => {
         return data;
       })
       .catch(err => err);
+    if (!t.teacher) return store.commit("teachers/setLoggedIn", false);
 
     if (t.teacher.className) {
       let className = await axios
@@ -51,6 +52,6 @@ export default async ({ store }) => {
       store.commit("teachers/setClass", {});
     }
   } else {
-    store.commit("teachers/setLoggedIn", false);
+    return store.commit("teachers/setLoggedIn", false);
   }
 };

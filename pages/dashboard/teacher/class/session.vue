@@ -6,7 +6,7 @@
         <h3>Sessions</h3>
         <ul>
           <li>
-            <nuxt-link to="/dashboard/admin">Home</nuxt-link>
+            <nuxt-link to="/dashboard/teacher">Home</nuxt-link>
           </li>
           <li>Sessions</li>
         </ul>
@@ -142,7 +142,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Session-Index",
-  layout: "admin",
+  layout: "teacher",
   data() {
     return {
       newClass: {},

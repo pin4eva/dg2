@@ -4,7 +4,7 @@
     <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
       <div class="mobile-sidebar-header d-md-none">
         <div class="header-logo">
-          <nuxt-link to="/dashboard/admin">
+          <nuxt-link to="/dashboard/teacher">
             <img src="/main.png" alt="logo" />
           </nuxt-link>
         </div>
@@ -13,7 +13,7 @@
       <div class="sidebar-menu-content">
         <ul class="nav nav-sidebar-menu sidebar-toggle-view">
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/admin">
+            <nuxt-link class="nav-link" to="/dashboard/teacher">
               <i class="flaticon-dashboard"></i>
               <span>Dashboard</span>
             </nuxt-link>
@@ -26,13 +26,13 @@
             <b-collapse id="collapseStudent" accordion="collapseStudent">
               <ul class="nav sub-group-menu">
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/admin/student/all">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/student/all">
                     <i class="fas fa-angle-right"></i>
                     <span>All Student</span>
                   </nuxt-link>
                 </li>
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/admin/student/add">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/student/add">
                     <i class="fas fa-angle-right"></i>
                     <span>Add Student</span>
                   </nuxt-link>
@@ -48,13 +48,13 @@
             <b-collapse id="collapseTeacher" accordion="collapseTeacher">
               <ul class="nav sub-group-menu">
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/admin/teacher">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/teacher">
                     <i class="fas fa-angle-right"></i>All
                     Teachers
                   </nuxt-link>
                 </li>
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/admin/teacher/add">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/teacher/add">
                     <i class="fas fa-angle-right"></i>Add
                     Teacher
                   </nuxt-link>
@@ -70,7 +70,7 @@
             <b-collapse id="collapseParent" accordion="collapseParent">
               <ul class="nav sub-group-menu">
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/admin/parent/">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/parent/">
                     <i class="fas fa-angle-right"></i>All
                     Parent
                   </nuxt-link>
@@ -87,14 +87,20 @@
             <b-collapse id="collapseClass" accordion="collapseClass">
               <ul class="nav sub-group-menu">
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/admin/class/">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/class/">
                     <i class="fas fa-angle-right"></i>All
                     Classes
                   </nuxt-link>
                 </li>
+                <li class="nav-item">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/class/myclass">
+                    <i class="fas fa-angle-right"></i>
+                    My Class
+                  </nuxt-link>
+                </li>
 
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/admin/class/routine">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/class/routine">
                     <i class="flaticon-calendar"></i>
                     <span>
                       Class
@@ -105,41 +111,60 @@
               </ul>
             </b-collapse>
           </li>
+          <!-- Attendance -->
+          <li class="nav-item sidebar-nav-item">
+            <a href="#" v-b-toggle.collapseAttendance class="nav-link" data-toggle="collapse">
+              <i class="flaticon-checklist"></i>
+              <span>Attendance</span>
+            </a>
+            <b-collapse id="collapseAttendance" accordion="collapseAttendance">
+              <ul class="nav sub-group-menu">
+                <li class="nav-item">
+                  <nuxt-link class="nav-link" to="/dashboard/teacher/attendance/take">
+                    <i class="fas fa-angle-right"></i>
+                    Take Attendance
+                  </nuxt-link>
+                </li>
+
+                <li class="nav-item">
+                  <nuxt-link to="/dashboard/teacher/attendance" class="nav-link">
+                    <i class="fas fa-angle-right"></i>
+
+                    <span>View Attendence</span>
+                  </nuxt-link>
+                </li>
+              </ul>
+            </b-collapse>
+          </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/admin/subject">
+            <nuxt-link class="nav-link" to="/dashboard/teacher/subject">
               <i class="flaticon-open-book"></i>
               <span>Subject</span>
             </nuxt-link>
           </li>
 
           <li class="nav-item">
-            <nuxt-link to="/dashboard/admin/attendance" class="nav-link">
-              <i class="flaticon-checklist"></i>
-              <span>Attendence</span>
-            </nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/admin/exam">
+            <nuxt-link class="nav-link" to="/dashboard/teacher/exam">
               <i class="flaticon-shopping-list"></i>
               <span>Exam</span>
             </nuxt-link>
           </li>
 
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/admin/notice">
+            <nuxt-link class="nav-link" to="/dashboard/teacher/notice">
               <i class="flaticon-script"></i>
               <span>Notice</span>
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/admin/message">
+            <nuxt-link class="nav-link" to="/dashboard/teacher/message">
               <i class="flaticon-chat"></i>
               <span>Messeage</span>
             </nuxt-link>
           </li>
 
           <li class="nav-item">
-            <nuxt-link to="/dashboard/admin/settings" class="nav-link">
+            <nuxt-link to="/dashboard/teacher/settings" class="nav-link">
               <i class="flaticon-settings"></i>
               <span>Settings</span>
             </nuxt-link>
@@ -151,10 +176,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Sidebar",
   props: {
     link: Object
+  },
+  computed: {
+    ...mapGetters({
+      teacher: "teachers/teacher"
+    })
   }
 };
 </script>

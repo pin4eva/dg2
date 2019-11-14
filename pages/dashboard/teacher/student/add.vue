@@ -165,7 +165,7 @@ import axios from "axios";
 
 export default {
   name: "Add-Student",
-  layout: "admin",
+  layout: "teacher",
   data() {
     return {
       newStudent: {},

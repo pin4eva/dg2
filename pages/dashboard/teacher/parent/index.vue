@@ -6,7 +6,7 @@
         <h3>Parents</h3>
         <ul>
           <li>
-            <nuxt-link to="/dashboard/admin">Home</nuxt-link>
+            <nuxt-link to="/dashboard/teacher">Home</nuxt-link>
           </li>
           <li>All Parents</li>
         </ul>
@@ -86,7 +86,7 @@
                     <img src="/dashboard/img/figure/student2.png" alt="parent" />
                   </td>
                   <td>
-                    <nuxt-link :to="'/dashboard/admin/parent/'+parent._id">{{parent.name}}</nuxt-link>
+                    <nuxt-link :to="'/dashboard/teacher/parent/'+parent._id">{{parent.name}}</nuxt-link>
                   </td>
                   <td>{{parent.role}}</td>
                   <td>{{parent.phone}}</td>
@@ -106,7 +106,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "All-Parent",
-  layout: "admin",
+  layout: "teacher",
   computed: {
     ...mapGetters({
       parents: "parents/parents"

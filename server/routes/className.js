@@ -1,6 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { ClassName, Student, Session, Teacher } = require("../models/All");
+const {
+  ClassName,
+  Student,
+  Session,
+  Teacher,
+  Subject
+} = require("../models/All");
 
 /**
  *            TODO
@@ -28,14 +34,6 @@ router.post("/new", async (req, res) => {
   res.send(newClass);
 });
 
-// Attendance
-
-router.post("/session/new", async (req, res) => {
-  await Session.create({ ...req.body })
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
-});
-
 router.post("/assignTeacher", async (req, res) => {
   const { className, teacher } = req.body;
   const newClass = await ClassName.findOneAndUpdate(
@@ -45,11 +43,7 @@ router.post("/assignTeacher", async (req, res) => {
         teacher: teacher
       }
     }
-  )
-    .then(() => {
-      return { suceess: true };
-    })
-    .catch(err => res.send(err));
+  ).catch(err => res.send(err));
   const newTeacher = await Teacher.findOneAndUpdate(
     { _id: teacher },
     {
@@ -58,16 +52,20 @@ router.post("/assignTeacher", async (req, res) => {
         headTeacher: true
       }
     }
-  )
-    .then(() => {
-      return { suceess: true };
-    })
-    .catch(err => res.send(err));
+  ).catch(err => res.send(err));
   res.send({
     classStatus: newClass,
     teacherStatus: newTeacher
   });
 });
+// Update class Info
+
+router.put("/update/:id", async (req, res) => {
+  await ClassName.findOneAndUpdate({ _id: req.params.id }, { ...req.body })
+    .then(data => res.json(data))
+    .catch(err => res.json(err));
+});
+
 /**
  *            delete routes
  */
@@ -172,6 +170,16 @@ router.get("/single/:id", async (req, res) => {
     .populate({ path: "results" })
     .populate({ path: "attendance" })
 
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});
+
+/**
+ *      Sessions
+ */
+
+router.post("/session/new", async (req, res) => {
+  await Session.create({ ...req.body })
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });

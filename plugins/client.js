@@ -9,3 +9,8 @@ Vue.use(VueMomentLib, { moment: moment });
 Vue.use(_);
 
 AOS.init();
+Vue.filter("lower", function(value) {
+  if (!value) return "";
+  value = value.toString();
+  return value.charAt(0).toLowerCase() + value.slice(1);
+});

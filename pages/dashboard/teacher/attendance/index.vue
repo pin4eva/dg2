@@ -7,7 +7,7 @@
 
         <ul>
           <li>
-            <nuxt-link to="/dashboard/admin">Home</nuxt-link>
+            <nuxt-link to="/dashboard/teacher">Home</nuxt-link>
           </li>
           <li>Class Page</li>
         </ul>
@@ -15,9 +15,6 @@
       <!-- Breadcubs Area End Here -->
       <!-- Class Routine Area Start Here -->
 
-      <div class="container">
-        <nuxt-link tag="button" class="btn-success mb-3" to="attendance/view">View Register</nuxt-link>
-      </div>
       <div class="container">
         <div class="card height-auto">
           <div class="card-body">
@@ -50,53 +47,52 @@
             <form class="mg-b-20">
               <div class="row">
                 <div class="col-lg-4 col-12 form-group">
+                  <select class="form-control" v-model="newClass">
+                    <option value="null">Please select a class</option>
+                    <option :value="c._id" v-for="c in classes" :key="c._id">{{c.name}}</option>
+                  </select>
+                </div>
+                <div class="col-lg-4 col-12 form-group">
                   <b-form-select :options="termOptions" v-model="term"></b-form-select>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
-                  <input
-                    type="number"
-                    placeholder="Week Number"
-                    class="form-control"
-                    v-model.number="week"
-                  />
+                  <b-form-select v-model="month" :options="monthOption"></b-form-select>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
-                  <input type="text" :placeholder="day" class="form-control" disabled />
+                  <b-form-input v-model.number="week" type="number" placeholder="Week Number"></b-form-input>
                 </div>
                 <div class="col-lg-2 col-12 form-group">
-                  <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                  <button @click.prevent="getRegister" type="submit" class="btn btn-warning">SEARCH</button>
                 </div>
               </div>
             </form>
-            <div>
-              <b-table-simple>
+            <div v-if="attendance.length > 0">
+              <b-table-simple responsive bordered>
                 <b-thead>
                   <b-tr>
-                    <b-th>
-                      <b-form-checkbox disabled></b-form-checkbox>
-                    </b-th>
-                    <b-th>Reg. NO</b-th>
-                    <b-th>Name</b-th>
-                    <b-th>Status</b-th>
+                    <b-th>Students</b-th>
+                    <b-th v-for="(a,i) in attendance" :key="i">{{a.day}}</b-th>
                   </b-tr>
                 </b-thead>
                 <b-tbody>
-                  <b-tr v-for="student in students" :key="student.student">
-                    <b-td>
-                      <b-form-checkbox v-model="student.attended"></b-form-checkbox>
+                  <b-tr>
+                    <b-td variant="primary">
+                      <b-tr
+                        v-for="student in myClass.students"
+                        :key="student._id"
+                      >{{student.firstName}}</b-tr>
                     </b-td>
-                    <b-td>{{student.regNO}}</b-td>
-                    <b-td>{{student.name}}</b-td>
-                    <b-td>{{student.attended ? "Present" : "Absence"}}</b-td>
+
+                    <b-td v-for="att in attendance" :key="att._id">
+                      <b-tr v-for="a in att.students" :key="a._id">
+                        <i
+                          :class="a.attended ?'fas fa-check text-success':'fas fa-times text-danger'"
+                        ></i>
+                      </b-tr>
+                    </b-td>
                   </b-tr>
                 </b-tbody>
               </b-table-simple>
-              <button
-                type="button"
-                role="button"
-                class="btn btn-warning"
-                @click.prevent="attendance"
-              >Take Attendance</button>
             </div>
           </div>
         </div>
@@ -111,11 +107,10 @@ import Axios from "axios";
 import moment from "moment";
 const _ = process.client ? require("lodash") : undefined;
 export default {
-  name: "AttendancePage",
+  name: "ViewRegister",
   layout: "teacher",
   data() {
     return {
-      students: [],
       term: null,
       termOptions: [
         { value: null, text: "Please select a term", disabled: true },
@@ -123,56 +118,58 @@ export default {
         { text: "Second Term" },
         { text: "Third Term" }
       ],
+      monthOption: [
+        { value: null, text: "Select Month", disabled: true },
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
       week: null,
-      day: moment().format("dddd"),
-      month: moment().format("MMMM")
+      days: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      month: null,
+      loading: false,
+      isPresent: false,
+      newClass: null
     };
   },
 
   computed: {
     ...mapGetters({
-      loading: "class/loading",
-      myClass: "teachers/myClass"
+      myClass: "teachers/myClass",
+      attendance: "att/att",
+      classes: "class/classes"
     })
   },
   methods: {
-    async attendance() {
-      const students = this.students;
-      if (!this.term && !this.week) {
-        return alert("Please select a term and fill the week number");
+    async getRegister() {
+      if (this.month && this.week && this.term && this.newClass) {
+        this.$store.dispatch("att/getAtt", {
+          className: this.newClass,
+          month: this.month,
+          week: this.week,
+          term: this.term
+        });
       } else {
-        // console.log(this.myClass._id);
-        const attendance = await Axios.post(
-          `${process.env.baseUrl}/api/attendance/new`,
-          {
-            className: this.myClass._id,
-            day: this.day,
-            month: this.month,
-            students: students,
-            week: this.week,
-            term: this.term
-          }
-        )
-          .catch(err => new Error(err))
-          .then(({ data }) => {
-            if (data) {
-              alert("SUCCESS !");
-            }
-          });
+        alert("Please select a term, a month and week number");
       }
     }
-  },
-  mounted() {
-    let myclass = this.myClass.students;
-    let students = myclass.map(s => {
-      return {
-        student: s._id,
-        name: `${s.firstName} ${s.lastName}`,
-        attended: true,
-        regNO: s.regNO
-      };
-    });
-    this.students = students;
   }
 };
 </script>

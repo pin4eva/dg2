@@ -3,6 +3,7 @@ const cron = require("node-schedule");
 const moment = require("moment");
 const mongoose = require("mongoose");
 const cors = require("cors");
+// const axios = require("axios")
 
 const path = require("path");
 
@@ -59,7 +60,8 @@ const {
   teacher,
   profile,
   message,
-  notice
+  notice,
+  settings
 } = require("./routes/");
 
 app.use("/api/student", student);
@@ -72,6 +74,7 @@ app.use("/api/attendance", attendance);
 app.use("/api/profile", profile);
 app.use("/api/message", message);
 app.use("/api/notice", notice);
+app.use("/api/settings", settings);
 
 async function start() {
   const port = process.env.PORT || 3001;
@@ -80,54 +83,3 @@ async function start() {
   });
 }
 start();
-
-// async function start() {
-//   const nuxt = new Nuxt(config);
-//   const { host, port } = nuxt.options.server;
-//   if (config.dev) {
-//     const builder = new Builder(nuxt);
-//     await builder.build();
-//   } else {
-//     await nuxt.ready();
-//   }
-//   const server = new ApolloServer({
-//     typeDefs,
-//     resolvers
-//   });
-
-//   // server.use((req, res, next) => {
-//   //   if (req.path.startsWith(opts.endpoint)) return next();
-//   //   handle(req, res, next);
-//   // });
-//   app.use(nuxt.render);
-//   // server.express.use(nuxt.render);
-//   // server.use(app);
-
-//   server.applyMiddleware({ app, });
-//   const opts = {
-//     playground: "/playground",
-//     // port: `${port}`,
-//     endpoint: "/graphql",
-//     getEndpoint: true
-//   };
-
-//   // server.start(opts, ({ port }) =>
-//   //   consola.ready({
-//   //     message: `Graphql server running on http://${host}:${port}`,
-//   //     badge: true
-//   //   })
-//   // );
-//   app.listen(port, host);
-//   consola.ready({
-//     message: `Express Started on http://${host}:${port}`,
-//     badge: true
-//   });
-// }
-// start();
-
-// Routes
-// const student = require("./routes/student");
-// const Parent = require("./routes/parent");
-// const Subject = require("./routes/subject");
-// const Teacher = require("./routes/teacher");
-// const className = require("./routes/className");

@@ -4,12 +4,12 @@
       <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-          <h3>Teachers Dashboard</h3>
+          <h3>teacher Dashboard</h3>
           <ul>
             <li>
-              <nuxt-link to="/dashboard/admin">Home</nuxt-link>
+              <nuxt-link to="/dashboard/teacher">Home</nuxt-link>
             </li>
-            <li>Admin</li>
+            <li>teacher</li>
           </ul>
         </div>
         <!-- Breadcubs Area End Here -->
@@ -116,43 +116,27 @@
                 </div>
                 <div>
                   <!-- Put Class list with students here -->
-                  <div class="table-responsive">
-                    <table class="table display text-nowrap">
-                      <thead>
-                        <tr>
-                          <th>
-                            <div class="form-check">
-                              <input type="checkbox" />
-                              <label class="form-check-label">ID</label>
-                            </div>
-                          </th>
-                          <th>Class</th>
-                          <th>Section</th>
-                          <th>Session</th>
-                          <th>Teacher</th>
-                        </tr>
-                      </thead>
-                      <tbody v-if="classes">
-                        <tr v-for="c in classes" :key="c._id">
-                          <td>
-                            <div class="form-check">
-                              <input type="checkbox" @change="selected(c._id)" />
-                              <label class="form-check-label">{{c.serialNO}}</label>
-                            </div>
-                          </td>
-                          <td>
-                            <nuxt-link :to="`/dashboard/admin/class/${c._id}`">{{c.name}}</nuxt-link>
-                          </td>
-                          <td>{{c.section}}</td>
-                          <td>{{c.session.session}}</td>
-                          <td v-if="c.teacher">
-                            <nuxt-link
-                              :to="'/dashboard/admin/teacher/'+c.teacher._id"
-                            >{{c.teacher.profile.firstName}} {{c.teacher.profile.lastName}}</nuxt-link>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div>
+                    <b-table-simple striped hover>
+                      <b-thead>
+                        <b-tr>
+                          <b-th>
+                            <b-form-checkbox></b-form-checkbox>
+                          </b-th>
+                          <b-th>Name</b-th>
+                          <b-th>Teacher</b-th>
+                        </b-tr>
+                      </b-thead>
+                      <b-tbody>
+                        <b-tr v-for="c in classes" :key="c._id">
+                          <b-td>
+                            <b-form-checkbox></b-form-checkbox>
+                          </b-td>
+                          <b-td>{{c.name}}</b-td>
+                          <b-td v-if="c.teacher">{{c.teacher.profile.firstName}}</b-td>
+                        </b-tr>
+                      </b-tbody>
+                    </b-table-simple>
                   </div>
                 </div>
               </div>
@@ -370,7 +354,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "Teachers-HomePage",
+  name: "teacher-HomePage",
   layout: "teacher",
   data() {
     return {

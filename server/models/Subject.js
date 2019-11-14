@@ -1,16 +1,12 @@
 const mongoose = require("mongoose");
 
 const SubjectSchema = new mongoose.Schema({
-  subject: String,
-  code: String,
+  name: String,
+  code: { type: String, trim: true },
   type: String,
   teacher: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Teacher"
-  },
-  className: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ClassName"
   }
 });
 

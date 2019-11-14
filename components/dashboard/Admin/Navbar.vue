@@ -267,12 +267,13 @@ export default {
     return {
       day: moment().format("dddd"),
       month: moment().format("MMMM"),
-      date: moment().format("dddd, MMMM Do YYYY")
+      date: moment().format("ddd, MMM Do YYYY")
     };
   },
   computed: {
     ...mapGetters({
-      weekNumber: "weekNumber"
+      settings: "settings/settings",
+      weekNumber: "settings/week"
     })
   },
   methods: {
