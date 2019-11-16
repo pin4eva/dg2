@@ -78,8 +78,12 @@ app.use("/api/settings", settings);
 
 async function start() {
   const port = process.env.PORT || 3001;
-  await app.listen(port, () => {
+  const server = await app.listen(port, () => {
     console.log(`server is running on port:${port}`);
+  });
+  const io = require("./socket").init(server);
+  await io.on("connection", data => {
+    console.log("Socket connected", data.id);
   });
 }
 start();

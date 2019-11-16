@@ -1,6 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 const cookie = require("js-cookie");
+// import store from "./index";
 
 export const state = () => ({
   loading: false,
@@ -68,7 +69,7 @@ export const actions = {
       .get(`${process.env.baseUrl}/api/teacher/single/${payload}`)
       .then(({ data }) => {
         commit("setTeacher", data);
-        cookie.set("Teacher", data);
+        // cookie.set("Teacher", data);
         if (data.isAdmin) {
           this.$router.push("/dashboard/admin");
         } else {
@@ -112,15 +113,12 @@ export const actions = {
       // console.log(profile.token);
 
       if (auth.teacher) {
+        if (auth.teacher.isAdmin) cookie.set("Profile", "Admin");
+        else cookie.set("Profile", "Teacher");
         alert(`Welcome ${auth.teacher.firstName}`);
         commit("setTeacher", auth.teacher);
         commit("setLoggedIn", true);
-        console.log(auth.teacher);
-        if (auth.teacher.isAdmin) {
-          this.$router.push("/dashboard/admin");
-        } else {
-          this.$router.push("/dashboard/teacher");
-        }
+        this.$router.push("/dashboard/teacher");
       }
     }
   },

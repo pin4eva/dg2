@@ -2,7 +2,7 @@
   <div>
     <div id="dashboard">
       <div id="page1">
-        <Navbar :profile="teacher.profile" pageHome="/dashboard/admin" />
+        <Navbar :profile="teacher.profile" pageHome="/dashboard/teacher" />
         <div class="d-flex">
           <Sidebar id="sidebar" />
           <nuxt class="bg-ash w-100" />
@@ -60,22 +60,22 @@ export default {
     this.classes();
     this.subjects();
     this.settings();
-  },
-  head() {
-    return {
-      script: [
-        { src: "https://code.jquery.com/jquery-3.3.1.slim.min.js" },
-        {
-          src:
-            "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        },
-        {
-          src:
-            "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        }
-      ]
-    };
   }
+  // head() {
+  //   return {
+  //     script: [
+  //       { src: "https://code.jquery.com/jquery-3.3.1.slim.min.js" },
+  //       {
+  //         src:
+  //           "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  //       },
+  //       {
+  //         src:
+  //           "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  //       }
+  //     ]
+  //   };
+  // }
 };
 </script>
 <style lang="stylus" >

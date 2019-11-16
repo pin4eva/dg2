@@ -93,7 +93,7 @@
                       <input
                         type="text"
                         placeholder="dd/mm/yyyy"
-                        class="form-control air-datepicker"
+                        class="form-control"
                       />
                       <i class="far fa-calendar-alt"></i>
                     </div>

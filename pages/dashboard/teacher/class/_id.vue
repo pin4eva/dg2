@@ -75,47 +75,43 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="table display text-nowrap">
-              <thead>
-                <tr>
-                  <th>
-                    <div>
-                      <input type="checkbox" class="form-check-input checkAll" />
-                      <label class="form-check-label">ReqNO</label>
-                    </div>
-                  </th>
-                  <th>Photo</th>
-                  <th>First Name</th>
-                  <th>Middle Name</th>
-                  <th>Last Name</th>
-                  <th>Date Of Birth</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody v-if="single">
-                <tr v-for="student in single.students" :key="student._id">
-                  <td>
-                    <div class>
-                      <input type="checkbox" class="form-check-input" v-model="ids" />
-                      <label class="form-check-label pl-3">{{student.reqNO}}</label>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <img :src="student.image" alt="student" width="30" height="30" />
-                  </td>
-                  <td>
+            <b-table-simple class="table display text-nowrap">
+              <b-thead>
+                <b-tr>
+                  <b-th>
+                    <b-form-checkbox></b-form-checkbox>
+                  </b-th>
+                  <b-th>Reg.NO.</b-th>
+                  <b-th>First Name</b-th>
+                  <b-th>Last Name</b-th>
+                  <b-th>Date Of Birth</b-th>
+                  <b-th>Phone</b-th>
+                  <b-th></b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody v-if="single">
+                <b-tr v-for="student in single.students" :key="student._id">
+                  <b-td>
+                    <b-form-checkbox></b-form-checkbox>
+                  </b-td>
+                  <b-td>{{student.regNO}}</b-td>
+                  <b-td>
                     <nuxt-link
                       :to="`/dashboard/teacher/student/${student._id}`"
                     >{{student.firstName}}</nuxt-link>
-                  </td>
-                  <td>{{student.middleName}}</td>
-                  <td>{{student.lastName}}</td>
+                  </b-td>
+                  <!-- <b-td>{{student.middleName}}</b-td> -->
+                  <b-td>
+                    <nuxt-link
+                      :to="`/dashboard/teacher/student/${student._id}`"
+                    >{{student.lastName}}</nuxt-link>
+                  </b-td>
 
-                  <td>{{moment(student.dob).format("DD-MM-YYYY")}}</td>
-                  <td>{{student.phone}}</td>
-                </tr>
-              </tbody>
-            </table>
+                  <b-td>{{$moment(student.dob).format("DD-MM-YYYY")}}</b-td>
+                  <b-td>{{student.phone}}</b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
           </div>
         </div>
       </div>

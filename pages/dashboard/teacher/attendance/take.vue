@@ -141,7 +141,7 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
     let myclass = this.myClass.students;
     let students = myclass.map(s => {
       return {

@@ -32,7 +32,7 @@
               <nuxt-link class="nav-link" to="/login">Login</nuxt-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/dashboard/admin">Dashboard</a>
+              <a class="nav-link" href="/dashboard/teacher">Dashboard</a>
             </li>
           </ul>
         </div>

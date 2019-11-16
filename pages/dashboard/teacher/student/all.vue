@@ -61,16 +61,21 @@
               </div>
             </div>
           </form>
-          <div class="d-flex justify-content-around mb-3">
-            <a href="#">
-              <i class="fa fa-trash text-danger" @click.prevent="deleteStudents"></i>
-            </a>
-            <a href="#">
-              <i class="fa fa-edit text-primary"></i>
-            </a>
-          </div>
+
           <div class="table-responsive">
             <b-table-simple>
+              <b-thead>
+                <b-tr>
+                  <b-th></b-th>
+                  <b-th>
+                    <i class="fa fa-envelope text-primary" @click.prevent="sendMessage"></i>
+                  </b-th>
+                  <b-th></b-th>
+                  <b-th></b-th>
+                  <b-th></b-th>
+                  <b-th></b-th>
+                </b-tr>
+              </b-thead>
               <b-thead>
                 <b-tr>
                   <b-th></b-th>
@@ -93,7 +98,12 @@
                           href="#"
                           class="text-danger font-bold"
                           @click.once.prevent="removeStudent(student)"
-                        >x</a>
+                        >
+                          <i class="fas fa-times"></i>
+                        </a>
+                        <a href="#" class="text-primary">
+                          <i class="fas fa-envelope"></i>
+                        </a>
                       </span>
                     </span>
                   </b-td>

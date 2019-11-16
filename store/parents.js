@@ -1,9 +1,12 @@
 import axios from "axios";
+const cookie = require("js-cookie");
+// import auth from "./auth";
 
 export const state = () => ({
   loading: false,
   parents: [],
-  parent: {}
+  parent: {},
+  loggedIn: false
 });
 
 export const mutations = {
@@ -23,19 +26,6 @@ export const mutations = {
 };
 
 export const actions = {
-  // Actions
-  nuxtServerinit({ commit }) {
-    axios
-      .get(`${process.env.baseUrl}/api/parent`)
-      .then(({ data }) => {
-        console.log("dispatched from nuxtServerInit:", data);
-
-        commit("setparents", data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  },
   async getParents({ commit }) {
     await axios
       .get(`${process.env.baseUrl}/api/parent`)
@@ -53,6 +43,30 @@ export const actions = {
         console.log(data);
       })
       .catch(err => new Error(err));
+  },
+  async login({ commit }, payload) {
+    let parent = await axios
+      .post(`${process.env.baseUrl}/api/parent/login`, {
+        ...payload
+      })
+      .then(({ data }) => data)
+      .catch(err => err);
+    if (!parent.success) return alert(parent.msg);
+    let token = parent.token;
+    cookie.set("Token", token);
+    cookie.set("Profile", "Parent");
+    parent = await axios
+      .get(`${process.env.baseUrl}/api/parent/me`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(({ data }) => data)
+      .catch(err => err);
+    if (!parent.success) return alert(parent.msg);
+    commit("setParent", parent.parent);
+    alert(`Welcome ${parent.parent.firstName}`);
+    this.$router.push("/dashboard/parent");
   }
 };
 
