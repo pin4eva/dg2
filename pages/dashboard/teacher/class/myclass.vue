@@ -171,7 +171,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Axios from "axios";
-const _ = process.client ? require("lodash") : undefined;
+// // const _ = process.client ? require("lodash") : undefined;
 export default {
   name: "MyClass",
   layout: "teacher",
@@ -216,15 +216,7 @@ export default {
       return options;
     }
   },
-  watch: {
-    students(a, b) {
-      // if (a.length > 0) {
-      //   console.log("a:", a);
-      // } else {
-      //   console.log("b:", b);
-      // }
-    }
-  },
+
   methods: {
     async attendance() {
       const students = this.students;

@@ -97,8 +97,36 @@ router.get("/me", async (req, res) => {
     } else {
       const teacher = await Teacher.findOne({ _id: data._id }, { password: 0 })
         .lean()
-        .populate("profile")
+
         .populate("subjects")
+        .populate({
+          path: "profile",
+          populate: {
+            path: "sent"
+          }
+        })
+        .populate({
+          path: "profile",
+          populate: {
+            path: "recieved",
+            populate: {
+              path: "from",
+              model: "Profile",
+              select: ["firstName", "lastName", "username"]
+            }
+          }
+        })
+        .populate({
+          path: "profile",
+          populate: {
+            path: "notice",
+            populate: {
+              path: "from",
+              models: "Profile",
+              select: ["firstName", "lastName", "username"]
+            }
+          }
+        })
         .then(data => data)
         .catch(err => res.send(err));
       return res.json({ success: true, teacher: teacher });

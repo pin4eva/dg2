@@ -126,6 +126,7 @@
 </template>
 
 <script>
+import cookie from "js-cookie"
 import { mapGetters, mapActions } from "vuex";
 import Axios from "axios";
 export default {
@@ -157,6 +158,10 @@ export default {
     async loginTeacher() {
       this.$store.dispatch("teachers/login", this.teacher);
     }
+  },
+  mounted(){
+    cookie.remove("Profile")
+    cookie.remove("Token")
   }
 };
 </script>

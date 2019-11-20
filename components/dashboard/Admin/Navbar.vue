@@ -42,7 +42,7 @@
             </li>
             <li class="navbar-item">
               <span>
-                <b class="text-danger">Current Week:</b>
+                <b class="text-danger">Week:</b>
                 {{weekNumber}}
               </span>
             </li>
@@ -280,6 +280,9 @@ export default {
     logout() {
       this.$store.dispatch("teachers/logout");
     }
+  },
+  created() {
+    this.$store.dispatch("settings/getSettings");
   }
 };
 </script>

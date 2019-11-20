@@ -30,7 +30,7 @@ const ClassNameSchema = new mongoose.Schema({
   results: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Result"
+      ref: "Assessment"
     }
   ],
 

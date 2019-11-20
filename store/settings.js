@@ -26,6 +26,7 @@ export const mutations = {
 
 export const actions = {
   // Actions
+
   async getSettings({ commit }) {
     await Axios.get(
       `${process.env.baseUrl}/api/settings/single/5dcbef730c16b641d3c82472`

@@ -1,19 +1,3 @@
-// const mongoose = require("mongoose");
-// const autoIncrement = require("mongoose-auto-increment");
-// const connection = mongoose.createConnection("mongodb://localhost/schooldb", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false,
-//   useCreateIndex: true,
-//   useUnifiedTopology: true
-// });
-// autoIncrement.initialize(connection);
-
-/**
- *      Todo
- * 1. Create an assessment Model for assigments
- */
-
 const Student = require("./Student");
 const Teacher = require("./Teacher");
 const Parent = require("./Parent");
@@ -25,6 +9,7 @@ const Message = require("./Message.js");
 const Profile = require("./Profile");
 const Notice = require("./Notice");
 const Settings = require("./Settings");
+const Assessment = require("./Assessment");
 
 module.exports = {
   Student,
@@ -38,5 +23,6 @@ module.exports = {
   Message,
   Profile,
   Notice,
-  Settings
+  Settings,
+  Assessment
 };

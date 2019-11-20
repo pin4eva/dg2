@@ -279,8 +279,7 @@
             </div>
           </div>
         </div>
-        <!-- Dashboard Content End Here -->
-        <!-- Social Media Start Here -->
+
         <div class="row gutters-20">
           <div class="col-lg-3 col-sm-6 col-12">
             <div class="card dashboard-card-seven">
@@ -343,8 +342,6 @@
             </div>
           </div>
         </div>
-        <!-- Social Media End Here -->
-        <!-- Footer Area Start Here -->
       </div>
     </div>
   </div>
@@ -367,7 +364,8 @@ export default {
     ...mapGetters({
       sessions: "class/sessions",
       classes: "class/classes",
-      teacher: "teachers/teacher"
+      teacher: "teachers/teacher",
+      profile: "teachers/teachers_profile"
     })
   },
   watch: {

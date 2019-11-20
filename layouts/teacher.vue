@@ -4,7 +4,7 @@
       <div id="page1">
         <Navbar :profile="teacher.profile" pageHome="/dashboard/teacher" />
         <div class="d-flex">
-          <Sidebar id="sidebar" />
+          <Sidebar id="sidebar" root="/dashboard/teacher" />
           <nuxt class="bg-ash w-100" />
         </div>
         <footer class="footer-wrap-layout1">
@@ -37,8 +37,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      teacher: "teachers/teacher",
-      profile: "teachers/profile"
+      teacher: "teachers/teacher"
     })
   },
   methods: {
@@ -48,8 +47,8 @@ export default {
       Parents: "parents/getParents",
       sessions: "class/getSessions",
       classes: "class/getClasses",
-      subjects: "subjects/getSubjects",
-      settings: "settings/getSettings"
+      subjects: "subjects/getSubjects"
+      // settings: "settings/getSettings"
     })
   },
   created() {
@@ -59,7 +58,7 @@ export default {
     this.sessions();
     this.classes();
     this.subjects();
-    this.settings();
+    // this.settings();
   }
   // head() {
   //   return {

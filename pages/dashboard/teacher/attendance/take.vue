@@ -143,7 +143,8 @@ export default {
   },
   created() {
     let myclass = this.myClass.students;
-    let students = myclass.map(s => {
+    if(myclass){
+      let students = myclass.map(s => {
       return {
         student: s._id,
         name: `${s.firstName} ${s.lastName}`,
@@ -152,6 +153,7 @@ export default {
       };
     });
     this.students = students;
+    }
   }
 };
 </script>

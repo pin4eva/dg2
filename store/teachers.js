@@ -7,7 +7,7 @@ export const state = () => ({
   loading: false,
   teachers: [],
   teacher: {},
-  profile: {},
+  user: null,
   status: null,
   applicationID: "",
   loggedIn: false,
@@ -48,6 +48,10 @@ export const mutations = {
   },
   setToken(state, payload) {
     state.token = payload;
+  },
+  setProfile(state, payload) {
+    state.user, payload;
+    cookie.set("Profile", payload);
   }
 };
 
@@ -113,11 +117,17 @@ export const actions = {
       // console.log(profile.token);
 
       if (auth.teacher) {
-        if (auth.teacher.isAdmin) cookie.set("Profile", "Admin");
-        else cookie.set("Profile", "Teacher");
+        if (auth.teacher.isAdmin) {
+          // localStorage.setItem("Profile", "Admin");
+          commit("setProfile", "Admin");
+        } else {
+          // localStorage.setItem("Profile", "Teacher");
+          commit("setProfile", "Teacher");
+          // cookie.set("Profile", "Teacher");
+        }
         alert(`Welcome ${auth.teacher.firstName}`);
-        commit("setTeacher", auth.teacher);
         commit("setLoggedIn", true);
+        commit("setTeacher", auth.teacher);
         this.$router.push("/dashboard/teacher");
       }
     }
@@ -154,5 +164,6 @@ export const getters = {
   status: state => state.status,
   profile: state => state.profile,
   applicationID: state => state.applicationID,
-  myClass: state => state.myClass
+  myClass: state => state.myClass,
+  user: state => state.user
 };

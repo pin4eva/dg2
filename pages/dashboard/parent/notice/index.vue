@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Notices :user="teacher" />
+    <Notices :user="parent" />
   </div>
 </template>
 
@@ -8,11 +8,11 @@
 import Notices from "@/components/dashboard/shared/Notice";
 import { mapGetters } from "vuex";
 export default {
-  name: "notice",
-  layout: "teacher",
+  name: "NoticePage",
+  layout: "parent",
   computed: {
     ...mapGetters({
-      teacher: "teachers/teacher"
+      parent: "parents/parent"
     })
   },
   components: { Notices }

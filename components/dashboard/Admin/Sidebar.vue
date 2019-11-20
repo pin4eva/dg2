@@ -4,7 +4,7 @@
     <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
       <div class="mobile-sidebar-header d-md-none">
         <div class="header-logo">
-          <nuxt-link to="/dashboard/teacher">
+          <nuxt-link :to="root">
             <img src="/main.png" alt="logo" />
           </nuxt-link>
         </div>
@@ -13,12 +13,13 @@
       <div class="sidebar-menu-content">
         <ul class="nav nav-sidebar-menu sidebar-toggle-view">
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/teacher">
+            <nuxt-link class="nav-link" :to="root">
               <i class="flaticon-dashboard"></i>
               <span>Dashboard</span>
             </nuxt-link>
           </li>
-          <li class="nav-item sidebar-nav-item">
+
+          <li v-if="profile=='Admin'" class="nav-item sidebar-nav-item">
             <a href="#" v-b-toggle.collapseStudent class="nav-link" data-toggle="collapse">
               <i class="flaticon-classmates"></i>
               <span>Students</span>
@@ -26,7 +27,7 @@
             <b-collapse id="collapseStudent" accordion="collapseStudent">
               <ul class="nav sub-group-menu">
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/teacher/student/all">
+                  <nuxt-link class="nav-link" :to="root+'/student/all'">
                     <i class="fas fa-angle-right"></i>
                     <span>All Student</span>
                   </nuxt-link>
@@ -40,7 +41,7 @@
               </ul>
             </b-collapse>
           </li>
-          <li class="nav-item sidebar-nav-item">
+          <li v-if="profile=='Admin'" class="nav-item sidebar-nav-item">
             <a href="#" class="nav-link" v-b-toggle.collapseTeacher data-toggle="collapse">
               <i class="flaticon-multiple-users-silhouette"></i>
               <span>Teachers</span>
@@ -62,7 +63,7 @@
               </ul>
             </b-collapse>
           </li>
-          <li class="nav-item sidebar-nav-item">
+          <li v-if="profile=='Admin'" class="nav-item sidebar-nav-item">
             <a href="#" v-b-toggle.collapseParent class="nav-link" data-toggle="collapse">
               <i class="flaticon-couple"></i>
               <span>Parents</span>
@@ -79,28 +80,28 @@
             </b-collapse>
           </li>
 
-          <li class="nav-item sidebar-nav-item">
+          <li class="nav-item sidebar-nav-item" v-if="profile=='Teacher' || profile=='Admin'">
             <a href="#" v-b-toggle.collapseClass class="nav-link" data-toggle="collapse">
               <i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i>
               <span>Class</span>
             </a>
             <b-collapse id="collapseClass" accordion="collapseClass">
               <ul class="nav sub-group-menu">
-                <li class="nav-item">
+                <li class="nav-item" v-if="profile=='Admin'">
                   <nuxt-link class="nav-link" to="/dashboard/teacher/class/">
                     <i class="fas fa-angle-right"></i>All
                     Classes
                   </nuxt-link>
                 </li>
-                <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/teacher/class/myclass">
+                <li class="nav-item" v-if="profile=='Teacher'">
+                  <nuxt-link class="nav-link" :to="root+'/class/myclass'">
                     <i class="fas fa-angle-right"></i>
                     My Class
                   </nuxt-link>
                 </li>
 
                 <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/teacher/class/routine">
+                  <nuxt-link class="nav-link" :to="root+'/class/routine'">
                     <i class="flaticon-calendar"></i>
                     <span>
                       Class
@@ -112,15 +113,15 @@
             </b-collapse>
           </li>
           <!-- Attendance -->
-          <li class="nav-item sidebar-nav-item">
+          <li class="nav-item sidebar-nav-item" v-if="profile=='Teacher' || profile=='Admin'">
             <a href="#" v-b-toggle.collapseAttendance class="nav-link" data-toggle="collapse">
               <i class="flaticon-checklist"></i>
               <span>Attendance</span>
             </a>
             <b-collapse id="collapseAttendance" accordion="collapseAttendance">
               <ul class="nav sub-group-menu">
-                <li class="nav-item">
-                  <nuxt-link class="nav-link" to="/dashboard/teacher/attendance/take">
+                <li class="nav-item" v-if="profile=='Teacher'">
+                  <nuxt-link class="nav-link" :to="root+'/attendance/take'">
                     <i class="fas fa-angle-right"></i>
                     Take Attendance
                   </nuxt-link>
@@ -136,37 +137,54 @@
               </ul>
             </b-collapse>
           </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/teacher/subject">
+          <li class="nav-item" v-if="profile=='Teacher' || profile=='Admin'">
+            <nuxt-link class="nav-link" :to="root+'/assessment'">
+              <i class="flaticon-shopping-list"></i>
+              <span>Assessment</span>
+            </nuxt-link>
+          </li>
+          <li class="nav-item" v-if="profile=='Parent' ">
+            <nuxt-link class="nav-link" :to="root+'/attendance'">
+              <i class="flaticon-checklist"></i>
+              <span>Attendance</span>
+            </nuxt-link>
+          </li>
+          <li class="nav-item" v-if="profile=='Teacher' || profile=='Admin'">
+            <nuxt-link class="nav-link" :to="root+'/subject'">
               <i class="flaticon-open-book"></i>
               <span>Subject</span>
             </nuxt-link>
           </li>
-
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/teacher/exam">
-              <i class="flaticon-shopping-list"></i>
-              <span>Exam</span>
+          <li class="nav-item" v-if="profile=='Parent'">
+            <nuxt-link class="nav-link" :to="root+'/children'">
+              <i class="flaticon-user"></i>
+              <span>My Children</span>
             </nuxt-link>
           </li>
 
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/teacher/notice">
+            <nuxt-link class="nav-link" :to="root+'/notice'">
               <i class="flaticon-script"></i>
               <span>Notice</span>
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/dashboard/teacher/message">
+            <nuxt-link class="nav-link" :to="root+'/message'">
               <i class="flaticon-chat"></i>
               <span>Messeage</span>
             </nuxt-link>
           </li>
 
-          <li class="nav-item">
-            <nuxt-link to="/dashboard/teacher/settings" class="nav-link">
+          <li class="nav-item" v-if="profile=='Admin'">
+            <nuxt-link :to="root+'/settings'" class="nav-link">
               <i class="flaticon-settings"></i>
               <span>Settings</span>
+            </nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link :to="root+'/account'" class="nav-link">
+              <i class="flaticon-settings"></i>
+              <span>Account</span>
             </nuxt-link>
           </li>
         </ul>
@@ -176,17 +194,22 @@
 </template>
 
 <script>
+import cookie from "js-cookie"
 import { mapGetters } from "vuex";
 export default {
   name: "Sidebar",
-  props: {
-    link: Object
-  },
-  computed: {
-    ...mapGetters({
-      teacher: "teachers/teacher"
-    })
+  props: ["root"],
+  data(){
+    return{
+      profile:cookie.get("Profile") || null
+    }
   }
+
+  // computed: {
+  //   ...mapGetters({
+  //     profile: "profile"
+  //   })
+  // }
 };
 </script>
 

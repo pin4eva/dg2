@@ -61,7 +61,8 @@ const {
   profile,
   message,
   notice,
-  settings
+  settings,
+  assessment
 } = require("./routes/");
 
 app.use("/api/student", student);
@@ -75,6 +76,7 @@ app.use("/api/profile", profile);
 app.use("/api/message", message);
 app.use("/api/notice", notice);
 app.use("/api/settings", settings);
+app.use("/api/assessment", assessment);
 
 async function start() {
   const port = process.env.PORT || 3001;
@@ -82,8 +84,8 @@ async function start() {
     console.log(`server is running on port:${port}`);
   });
   const io = require("./socket").init(server);
-  await io.on("connection", data => {
-    console.log("Socket connected", data.id);
-  });
+  // await io.on("connection", data => {
+  //   console.log("Socket connected", data.id);
+  // });
 }
 start();

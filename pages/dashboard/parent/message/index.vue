@@ -1,32 +1,30 @@
 <template>
   <div>
-    <Messages @onSubmit="sendMessage" :user="teacher" />
+    <div>
+      <!-- <h1 class="text-center">Message page</h1> -->
+      <Messages @onSubmit="sendMessage" :user="parent" />
+    </div>
   </div>
 </template>
 
 <script>
 import Messages from "@/components/dashboard/shared/Message";
 import { mapGetters } from "vuex";
-import Axios from "axios";
 export default {
-  name: "Message",
-  layout: "teacher",
+  layout: "parent",
+  name: "MessagePage",
   components: { Messages },
   data() {
     return {
-      newMessage: {},
-      body: false
+      //
     };
   },
   computed: {
     ...mapGetters({
-      teacher: "teachers/teacher"
+      parent: "parents/parent"
     })
   },
   methods: {
-    // submit(v) {
-    //   console.log(v);
-    // },
     async sendMessage(v) {
       const message = await Axios.post(
         `${process.env.baseUrl}/api/message/new`,
@@ -34,7 +32,7 @@ export default {
           title: v.title,
           body: v.body,
           to: v.to,
-          from: this.teacher.staffID
+          from: this.parent.username
         }
       ).catch(err => err);
       if (message.data.success) {
@@ -46,19 +44,9 @@ export default {
         console.log(message);
       }
     }
-    // toggleBody(id) {
-    //   // console.log(id);
-    //   let classes = document.querySelector(".m" + id);
-    //   classes.classList.toggle("d-block");
-    // }
   }
 };
 </script>
 
-<style lang="stylus">
-.notice-title {
-  &:hover {
-    cursor: pointer;
-  }
-}
+<style>
 </style>

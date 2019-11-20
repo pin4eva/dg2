@@ -6,11 +6,12 @@ let day = moment().format("dddd");
 export default async ({ store }) => {
   let token = Cookies.get("Token");
   let profile = Cookies.get("Profile");
+
   axios.defaults.headers.common["Authorization"] = token;
 
   if (token) {
     if (profile == "Parent") {
-      //
+      store.commit("setProfile", profile);
       let parent = await axios
         .get(`${process.env.baseUrl}/api/parent/me`, {
           headers: {
@@ -21,8 +22,8 @@ export default async ({ store }) => {
         .catch(err => err);
       store.commit("parents/setParent", parent.parent);
       return store.commit("setLoggedIn", true);
-    }
-    if (profile == "Teacher") {
+    } else if (profile == "Teacher" || "Admin") {
+      store.commit("setProfile", profile);
       const t = await axios
         .get(`${process.env.baseUrl}/api/teacher/me`, {
           headers: {
@@ -46,8 +47,6 @@ export default async ({ store }) => {
       } else {
         store.commit("teachers/setClass", {});
       }
-    } else {
-      return store.commit("setLoggedIn", false);
     }
   }
 };

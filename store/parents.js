@@ -6,13 +6,17 @@ export const state = () => ({
   loading: false,
   parents: [],
   parent: {},
-  loggedIn: false
+  loggedIn: false,
+  user: null
 });
 
 export const mutations = {
   // mutation
   setLoading(state, payload) {
     state.loading = payload;
+  },
+  setLoggedIn(state, payload) {
+    state.loggedIn = payload;
   },
   setParents(state, payload) {
     state.parents = payload;
@@ -22,6 +26,10 @@ export const mutations = {
   },
   addParents: (state, payload) => {
     state.parents.push(payload);
+  },
+  setProfile(state, payload) {
+    state.user = payload;
+    cookie.set("Profile", payload);
   }
 };
 
@@ -54,7 +62,8 @@ export const actions = {
     if (!parent.success) return alert(parent.msg);
     let token = parent.token;
     cookie.set("Token", token);
-    cookie.set("Profile", "Parent");
+    // cookie.set("Profile", "Parent");
+    commit("setProfile", "Parent");
     parent = await axios
       .get(`${process.env.baseUrl}/api/parent/me`, {
         headers: {
@@ -65,6 +74,7 @@ export const actions = {
       .catch(err => err);
     if (!parent.success) return alert(parent.msg);
     commit("setParent", parent.parent);
+    commit("setLoggedIn", true);
     alert(`Welcome ${parent.parent.firstName}`);
     this.$router.push("/dashboard/parent");
   }

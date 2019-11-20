@@ -8,10 +8,9 @@
 
 <script>
 import AttendanceComp from "@/components/dashboard/shared/Attendance";
-
 export default {
-  name: "ViewRegister",
-  layout: "teacher",
+  layout: "parent",
+  name: "AttendancePage",
   components: { AttendanceComp }
 };
 </script>
