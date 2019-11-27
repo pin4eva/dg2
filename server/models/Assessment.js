@@ -5,16 +5,25 @@ const AssessmentSchema = new mongoose.Schema({
   type: String,
   date: Date,
   totalScore: Number,
-  subject: { type: mongoose.Schema.Types.ObjectId, ref: "Subject" },
-  records: [
+  term: String,
+  records: [{ type: mongoose.Schema.Types.ObjectId, ref: "StudentResult" }]
+});
+
+const StudentResultSchema = new mongoose.Schema({
+  student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+  className: { type: mongoose.Schema.Types.ObjectId, ref: "ClassName" },
+  type: String,
+  term: String,
+  data: [
     {
-      student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+      subject: String, //{ type: mongoose.Schema.Types.ObjectId, ref: "Subject" },
       score: Number,
-      remark: String,
-      grade: String
+      grade: String,
+      remark: String
     }
   ]
 });
 
+const StudentResult = mongoose.model("StudentResult", StudentResultSchema);
 const Assessment = mongoose.model("Assessment", AssessmentSchema);
-module.exports = Assessment;
+module.exports = { Assessment, StudentResult };

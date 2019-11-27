@@ -46,7 +46,7 @@
             </div>
             <form class="mg-b-20">
               <div class="row">
-                <div class="col-lg-4 col-12 form-group">
+                <div class="col-lg-4 col-12 form-group" v-if="profile != 'Teacher'">
                   <select class="form-control" v-model="newClass">
                     <option value="null">Please select a class</option>
                     <option :value="c._id" v-for="c in classes" :key="c._id">{{c.name}}</option>
@@ -105,12 +105,14 @@
 import { mapGetters } from "vuex";
 import Axios from "axios";
 import moment from "moment";
+import cookie from "js-cookie";
 // const _ = process.client ? require("lodash") : undefined;
 export default {
   name: "AttendanceComp",
 
   data() {
     return {
+      profile: cookie.get("Profile"),
       term: null,
       termOptions: [
         { value: null, text: "Please select a term", disabled: true },
@@ -134,15 +136,15 @@ export default {
         "December"
       ],
       week: null,
-      days: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
+      // days: [
+      //   "Sunday",
+      //   "Monday",
+      //   "Tuesday",
+      //   "Wednesday",
+      //   "Thursday",
+      //   "Friday",
+      //   "Saturday"
+      // ],
       month: null,
       loading: false,
       isPresent: false,
@@ -159,9 +161,9 @@ export default {
   },
   methods: {
     async getRegister() {
-      if (this.month && this.week && this.term && this.newClass) {
+      if (this.month && this.week && this.term) {
         this.$store.dispatch("att/getAtt", {
-          className: this.newClass,
+          className: this.newClass ? this.newClass : this.myClass._id,
           month: this.month,
           week: this.week,
           term: this.term

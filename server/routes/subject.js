@@ -4,7 +4,7 @@ const { Subject, ClassName, Teacher } = require("../models/All");
 
 router.post("/new", async (req, res) => {
   let { code, name, teacher, type } = req.body;
-  const subject = await Subject.create({
+  let subject = await Subject.create({
     code: code.toLowerCase(),
     name: name,
     teacher,
@@ -17,6 +17,12 @@ router.post("/new", async (req, res) => {
     { _id: subject.teacher },
     { $push: { subjects: subject._id } }
   ).catch(err => res.send(err));
+  subject = await Subject.findOne({ _id: subject._id })
+    .lean()
+    .populate({
+      path: "teacher",
+      select: ["firstName", "lastName", "staffID"]
+    });
   res.send(subject);
 });
 

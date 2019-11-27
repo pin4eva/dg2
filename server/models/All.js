@@ -9,7 +9,8 @@ const Message = require("./Message.js");
 const Profile = require("./Profile");
 const Notice = require("./Notice");
 const Settings = require("./Settings");
-const Assessment = require("./Assessment");
+const { Assessment, StudentResult } = require("./Assessment");
+// const  = require("./Assessment");
 
 module.exports = {
   Student,
@@ -24,5 +25,6 @@ module.exports = {
   Profile,
   Notice,
   Settings,
-  Assessment
+  Assessment,
+  StudentResult
 };

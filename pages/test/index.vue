@@ -1,14 +1,27 @@
 <template>
   <div>
     <div class="text-center">
-      <div>Result: {{week}}</div>
-      <button class="btn btn-danger" @click.prevent="generate">Generate</button>
+      <button class="btn btn-danger mt-4" @click.prevent>Generate</button>
+    </div>
+    <div class="container">
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Subjects</th>
+              <th>Subjects</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import Axios from "axios";
+
 const moment = require("moment");
 
 export default {
@@ -16,22 +29,18 @@ export default {
   layout: "dashboard",
   data() {
     return {
-      numGen: ""
+      numGen: "",
+      ass: []
     };
   },
   computed: {
     ...mapGetters({
-      week: "weekNumber"
+      assessments: "assessments/assessments"
     })
   },
-  methods: {
-    generate() {
-      let d = moment();
-
-      this.$store.commit("setWeek", 0);
-
-      // console.log(d.format("MMMM"));
-    }
+  methods: {},
+  created() {
+    this.$store.dispatch("assessments/getAssessments");
   }
 };
 </script>
