@@ -4,12 +4,12 @@
       <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-          <h3>Examination</h3>
+          <h3>Take Assessment</h3>
           <ul>
             <li>
-              <a href="index.html">Home</a>
+              <nuxt-link :to="{name:'dashboard-teacher'}">Home</nuxt-link>
             </li>
-            <li>Exam Schedule</li>
+            <li>Assessment</li>
           </ul>
         </div>
         <!-- Breadcubs Area End Here -->
@@ -48,8 +48,8 @@
                   </div>
                 </div>
                 <div class="text-right">
-                  <a href="#" @click.prevent="nextRow=!nextRow">
-                    <i class="fas fa-arrow-right fa-2x"></i>
+                  <a href="#" @click.prevent="next">
+                    <i class="fas fa-arrow-right fa-2x text-warning"></i>
                   </a>
                 </div>
               </div>
@@ -206,8 +206,11 @@ export default {
     })
   },
   methods: {
-    removeRow(i) {
-      console.log(i);
+    next() {
+      if (!this.student.info || !this.term || !this.type) {
+        return alert("Please fill all input");
+      }
+      this.nextRow = !this.nextRow;
     },
     addSubject() {
       let subject = this.newSub;

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Student, ClassName, Profile } = require("../models/All");
+const { Student, ClassName, Profile } = require("../models");
 const path = require("path");
 // const Student = require("../models/Student");
 
@@ -134,7 +134,14 @@ router.get("/", async (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
-
+router.get("/reg", async (req, res) => {
+  let { student } = req.query;
+  student = await Student.findOne({ regNO: student }).catch(err =>
+    res.json(err)
+  );
+  if (!student) return res.json({ status: false, student });
+  res.json({ status: true, student });
+});
 router.get("/single/:id", async (req, res) => {
   await Student.findOne({ _id: req.params.id })
     .lean()

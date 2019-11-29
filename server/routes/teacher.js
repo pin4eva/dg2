@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Teacher, ClassName, Message, Profile } = require("../models/All");
+const { Teacher, ClassName, Message, Profile } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const uniqueKeygen = require("unique-keygen");

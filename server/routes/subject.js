@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Subject, ClassName, Teacher } = require("../models/All");
+const { Subject, ClassName, Teacher } = require("../models");
 
 router.post("/new", async (req, res) => {
   let { code, name, teacher, type } = req.body;

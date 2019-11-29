@@ -1,12 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {
-  ClassName,
-  Student,
-  Session,
-  Teacher,
-  Subject
-} = require("../models/All");
+const { ClassName, Student, Session, Teacher, Subject } = require("../models");
 
 /**
  *            TODO
@@ -175,7 +169,7 @@ router.get("/single/:id", async (req, res) => {
 });
 
 /**
- *      Sessions
+ *          SESSIONS
  */
 
 router.post("/session/new", async (req, res) => {

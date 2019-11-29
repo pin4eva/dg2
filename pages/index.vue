@@ -11,21 +11,26 @@
         <div class="carousel-item active">
           <img src="/images/banner_1.jpg" alt="education" class="img-fluid" />
           <div class="carousel-caption animated fadeInLeft delay-0.5s">
-            <h1 class="font-weight-bold">An investment in knowledge pays the best interest.</h1>
+            <h1 class="font-weight-bold">
+              An investment in knowledge pays the best interest.
+            </h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
+            <a href="javascript:" class="theme-green btn mt-3 apply-now"
+              >Apply Now</a
+            >
           </div>
         </div>
         <div class="carousel-item">
           <img src="/images/banner_2.jpg" alt="education" class="img-fluid" />
           <div class="carousel-caption animated fadeInUp delay-0.5s">
             <h1 class="font-weight-bold">
-              Education is what remains after one has forgotten what one has learned
-              in
-              school.
+              Education is what remains after one has forgotten what one has
+              learned in school.
             </h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
+            <a href="javascript:" class="theme-green btn mt-3 apply-now"
+              >Apply Now</a
+            >
           </div>
         </div>
         <div class="carousel-item">
@@ -36,17 +41,21 @@
               fire.
             </h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
+            <a href="javascript:" class="theme-green btn mt-3 apply-now"
+              >Apply Now</a
+            >
           </div>
         </div>
         <div class="carousel-item">
           <img src="/images/banner_4.jpg" alt="education" class="img-fluid" />
           <div class="carousel-caption animated zoomIn delay-0.5s">
-            <h1
-              class="font-weight-bold"
-            >Education is not preparation for life; education is life itself.</h1>
+            <h1 class="font-weight-bold">
+              Education is not preparation for life; education is life itself.
+            </h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
+            <a href="javascript:" class="theme-green btn mt-3 apply-now"
+              >Apply Now</a
+            >
           </div>
         </div>
       </div>
@@ -56,14 +65,20 @@
         <div class="about-box pb-3">
           <i class="fa fa-mortar-board"></i>
         </div>
-        <h5 data-aos="fade-up" data-aos-duration="1050">Key to unlock the golden door of freedom.</h5>
-        <h2 class="font-weight-bold pb-3 px-5 mb-0" data-aos="fade-up" data-aos-duration="1050">
-          Education develop a
-          passion for learning.If you do, you will never cease to grow.
+        <h5 data-aos="fade-up" data-aos-duration="1050">
+          Key to unlock the golden door of freedom.
+        </h5>
+        <h2
+          class="font-weight-bold pb-3 px-5 mb-0"
+          data-aos="fade-up"
+          data-aos-duration="1050"
+        >
+          Education develop a passion for learning.If you do, you will never
+          cease to grow.
         </h2>
         <p class="bottom-line">
-          Ensuring quality higher education is one of the most important things we can do for
-          future generations.
+          Ensuring quality higher education is one of the most important things
+          we can do for future generations.
         </p>
 
         <h5 class="pt-3">Apaimi Favour Chi-Dinneya</h5>
@@ -94,8 +109,8 @@
               <i class="fa fa-users fa-3x color-ash mb-3 target-icon"></i>
               <h4 class="font-weight-bold">Skilled Lecturers</h4>
               <p>
-                Aliquip exea conse quat nul duis crib irure dolor in reprehenderit voluptate velit ese cillum
-                dolore fugiat.
+                Aliquip exea conse quat nul duis crib irure dolor in
+                reprehenderit voluptate velit ese cillum dolore fugiat.
               </p>
               <a href="javascript:" class="btn text-white pl-0">
                 Read More
@@ -111,11 +126,13 @@
               data-aos-duration="550"
             >
               <div class="border-line"></div>
-              <i class="fa fa-mortar-board fa-3x color-ash mb-3 target-icon"></i>
+              <i
+                class="fa fa-mortar-board fa-3x color-ash mb-3 target-icon"
+              ></i>
               <h4 class="font-weight-bold">Scholarship Facility</h4>
               <p>
-                Aliquip exea conse quat nul duis crib irure dolor in reprehenderit voluptate velit ese cillum
-                dolore fugiat.
+                Aliquip exea conse quat nul duis crib irure dolor in
+                reprehenderit voluptate velit ese cillum dolore fugiat.
               </p>
               <a href="javascript:" class="btn text-white pl-0">
                 Read More
@@ -125,13 +142,17 @@
           </div>
 
           <div class="col-md-4">
-            <div class="target-block text-white p-5" data-aos="fade-up" data-aos-duration="550">
+            <div
+              class="target-block text-white p-5"
+              data-aos="fade-up"
+              data-aos-duration="550"
+            >
               <div class="border-line"></div>
               <i class="fa fa-book fa-3x color-ash mb-3 target-icon"></i>
               <h4 class="font-weight-bold">Book Library & Lab</h4>
               <p>
-                Aliquip exea conse quat nul duis crib irure dolor in reprehenderit voluptate velit ese cillum
-                dolore fugiat.
+                Aliquip exea conse quat nul duis crib irure dolor in
+                reprehenderit voluptate velit ese cillum dolore fugiat.
               </p>
               <a href="javascript:" class="btn text-white pl-0">
                 Read More
@@ -142,31 +163,35 @@
         </div>
       </div>
     </section>
-    <section class="online-course">
+    <section class="online-course" id="about_us">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
             <div class="sec-title">
-              <span class="title">Online Courses</span>
-              <h2>Learn a new skills online on your time</h2>
+              <span class="title">About Us</span>
+              <h2>Why are a better than the rest</h2>
               <div class="divider">
                 <span class="fa fa-mortar-board"></span>
               </div>
             </div>
             <p class="p-17">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-              Ipsum
-              has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-              galley of type and scrambled it to make a type specimen book.
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
             </p>
             <p class="p-17">
-              It has survived not only five centuries, but also the leap into electronic
-              typesetting,
-              remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-              sheets
+              It has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
               containing Lorem Ipsum passages.
             </p>
-            <button type="button" class="btn theme-green theme-btn my-2 join-us">Join Us</button>
+            <button
+              type="button"
+              class="btn theme-green theme-btn my-2 join-us"
+            >
+              Join Us
+            </button>
           </div>
           <div class="col-lg-6">
             <div
@@ -174,10 +199,17 @@
               data-aos="fade-up"
               data-aos-duration="550"
             >
-              <img src="/images/icons/promotion.png" class="img-fluid m-auto" alt="Key Of Success" />
+              <img
+                src="/images/icons/promotion.png"
+                class="img-fluid m-auto"
+                alt="Key Of Success"
+              />
               <div class="course-text pl-5">
                 <h4>Key Of Success</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
               </div>
             </div>
             <div
@@ -192,7 +224,10 @@
               />
               <div class="course-text pl-5">
                 <h4>Our Philosophy</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
               </div>
             </div>
             <div
@@ -200,10 +235,17 @@
               data-aos="fade-up"
               data-aos-duration="550"
             >
-              <img src="/images/icons/feminism.png" class="img-fluid m-auto" alt="Our Principle" />
+              <img
+                src="/images/icons/feminism.png"
+                class="img-fluid m-auto"
+                alt="Our Principle"
+              />
               <div class="course-text pl-5">
                 <h4>Our Principle</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
               </div>
             </div>
           </div>
@@ -232,11 +274,17 @@
               <div class="divider">
                 <span class="fa fa-mortar-board"></span>
               </div>
-              <div class="event-block d-flex my-3" data-aos="fade-up" data-aos-duration="550">
+              <div
+                class="event-block d-flex my-3"
+                data-aos="fade-up"
+                data-aos-duration="550"
+              >
                 <h2 class="font-weight-bold color-orange mr-3">1.</h2>
                 <div class="event-info">
                   <h5 class="color-blue">
-                    <a href="javascript:">International Conference on Business .....</a>
+                    <a href="javascript:"
+                      >International Conference on Business .....</a
+                    >
                   </h5>
                   <ul class="pl-0">
                     <li class="pr-3">
@@ -254,11 +302,17 @@
                   </ul>
                 </div>
               </div>
-              <div class="event-block d-flex my-3" data-aos="fade-up" data-aos-duration="550">
+              <div
+                class="event-block d-flex my-3"
+                data-aos="fade-up"
+                data-aos-duration="550"
+              >
                 <h2 class="font-weight-bold color-orange mr-3">2.</h2>
                 <div class="event-info">
                   <h5 class="color-blue">
-                    <a href="javascript:">International Conference on Business .....</a>
+                    <a href="javascript:"
+                      >International Conference on Business .....</a
+                    >
                   </h5>
                   <ul class="pl-0">
                     <li class="pr-3">
@@ -276,11 +330,17 @@
                   </ul>
                 </div>
               </div>
-              <div class="event-block d-flex mt-3" data-aos="fade-up" data-aos-duration="550">
+              <div
+                class="event-block d-flex mt-3"
+                data-aos="fade-up"
+                data-aos-duration="550"
+              >
                 <h2 class="font-weight-bold color-orange mr-3">3.</h2>
                 <div class="event-info">
                   <h5 class="color-blue">
-                    <a href="javascript:">International Conference on Business .....</a>
+                    <a href="javascript:"
+                      >International Conference on Business .....</a
+                    >
                   </h5>
                   <ul class="pl-0 mb-0">
                     <li class="pr-3">
@@ -303,139 +363,6 @@
         </div>
       </div>
     </section>
-    <footer class="theme-green">
-      <div class="container">
-        <div class="footer-top border-bottom pt-5">
-          <div class="row">
-            <div class="col-lg-3 col-md-6" data-aos="fade-in" data-aos-duration="1050">
-              <a href="index-2.html">
-                <img src="/images/logo-footer.png" class="img-fluid mb-3" alt="DinnyGreen" />
-              </a>
-              <p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-              <ul class="social-icon d-flex justify-content-between">
-                <li>
-                  <a href="javascript:">
-                    <i class="fa fa-facebook-f"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:">
-                    <i class="fa fa-google-plus"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:">
-                    <i class="fa fa-skype"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-lg-2 col-md-6" data-aos="fade-in" data-aos-duration="550">
-              <h5 class="font-weight-bold mb-3">Quick Links</h5>
-              <ul>
-                <li>
-                  <a href="index-2.html">
-                    <i class="fa fa-angle-double-right mr-2"></i>Home
-                  </a>
-                </li>
-                <li>
-                  <a href="about.html">
-                    <i class="fa fa-angle-double-right mr-2"></i>About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="student.html">
-                    <i class="fa fa-angle-double-right mr-2"></i>Student Corner
-                  </a>
-                </li>
-                <li>
-                  <a href="faculties.html">
-                    <i class="fa fa-angle-double-right mr-2"></i>Faculties
-                  </a>
-                </li>
-                <li>
-                  <a href="achievement.html">
-                    <i class="fa fa-angle-double-right mr-2"></i>Achievenment
-                  </a>
-                </li>
-                <li>
-                  <a href="career.html">
-                    <i class="fa fa-angle-double-right mr-2"></i>Career
-                  </a>
-                </li>
-                <li>
-                  <a href="contact.html">
-                    <i class="fa fa-angle-double-right mr-2"></i>Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-md-5 mb-4" data-aos="fade-in" data-aos-duration="1050">
-              <h5 class="font-weight-bold mb-3">Recent News</h5>
-              <div class="row">
-                <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                  <img src="/images/thumb_1.jpg" class="img-fluid" alt="Gallery" />
-                </div>
-                <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                  <img src="/images/thumb_2.jpg" class="img-fluid" alt="Gallery" />
-                </div>
-                <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                  <img src="/images/thumb_3.jpg" class="img-fluid" alt="Gallery" />
-                </div>
-                <div class="col-md-4 col-sm-2 col-2 pr-0">
-                  <img src="/images/thumb_4.jpg" class="img-fluid" alt="Gallery" />
-                </div>
-                <div class="col-md-4 col-sm-2 col-2 pr-0">
-                  <img src="/images/thumb_5.jpg" class="img-fluid" alt="Gallery" />
-                </div>
-                <div class="col-md-4 col-sm-2 col-2 pr-0">
-                  <img src="/images/thumb_6.jpg" class="img-fluid" alt="Gallery" />
-                </div>
-              </div>
-            </div>
-            <div
-              class="col-lg-4 col-md-6 pl-lg-5 mb-md-5"
-              data-aos="fade-in"
-              data-aos-duration="1050"
-            >
-              <h5 class="font-weight-bold mb-3">Contact Us</h5>
-              <ul class="address-icon">
-                <li class="mb-3">
-                  <i class="fa fa-map-marker mr-3 color-ash"></i> 24 Webilor, Off Power Encounter.
-                </li>
-                <li class="mb-3">
-                  <i class="fa fa-phone mr-3 color-ash"></i>+234 8099 7777 33
-                </li>
-                <li class="mb-3">
-                  <i class="fa fa-envelope color-ash mr-3"></i>support@gmail.com
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="bottom-footer py-3 d-flex justify-content-between">
-          <p class="mb-0">All Rights Reserved by Dinnygreen.</p>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <a href="javascript:">Terms of use</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="javascript:">Privacy policy</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 

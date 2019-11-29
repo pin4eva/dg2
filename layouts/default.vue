@@ -3,14 +3,24 @@
     <div id="front">
       <Navbar />
       <nuxt id="default" />
+      <Footer />
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/front/Navbar";
+import Footer from "@/components/front/Footer";
 export default {
-  components: { Navbar },
+  components: { Navbar, Footer },
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {},
+  created() {
+    this.$store.dispatch("class/getSessions");
+  },
   head() {
     return {
       link: [

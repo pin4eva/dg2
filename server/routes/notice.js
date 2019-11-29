@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Notice, Profile } = require("../models/All");
+const { Notice, Profile } = require("../models");
 
 router.post("/new", async (req, res) => {
   const { from, content, to } = req.body;

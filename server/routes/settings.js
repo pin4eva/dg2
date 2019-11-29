@@ -1,6 +1,6 @@
 const express = require("express");
 let router = express.Router();
-const { Settings } = require("../models/All");
+const { Settings } = require("../models");
 
 router.post("/", async (req, res) => {
   await Settings.create({

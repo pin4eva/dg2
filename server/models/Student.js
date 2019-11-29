@@ -9,6 +9,7 @@ const StudentSchema = new mongoose.Schema({
   level: { type: Number, default: 1 },
   regNO: String,
   firstName: String,
+  middleName: String,
   lastName: String,
   admittedON: String,
   phone: String,

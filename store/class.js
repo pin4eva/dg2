@@ -24,7 +24,7 @@ export const mutations = {
     state.sessions = payload;
   },
   setSession(state, payload) {
-    state.sessions = payload;
+    state.session = payload;
   },
   setStatus(state, payload) {
     state.status = payload;
@@ -65,6 +65,16 @@ export const actions = {
       })
       .catch(err => new Error(err));
   },
+  getSession: async ({ commit }, payload) => {
+    commit("setLoading", true);
+    await axios
+      .get(`${process.env.baseUrl}/api/class/session/single/${payload}`)
+      .then(({ data }) => {
+        commit("setSession", data);
+        commit("setLoading", false);
+      })
+      .catch(err => new Error(err));
+  },
   async addClass({ commit }, payload) {
     commit("setLoading", true);
     await axios
@@ -100,5 +110,6 @@ export const getters = {
   classes: state => state.classes,
   singleClass: state => state.singleClass,
   sessions: state => state.sessions,
+  session: state => state.session,
   loading: state => state.loading
 };
