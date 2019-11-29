@@ -1,11 +1,7 @@
 <template>
   <section class="course">
     <div class="container">
-      <div
-        class="sec-title text-center mb-3"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
+      <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
         <span class="title">Our Gallery</span>
         <h2>Life At Campus</h2>
         <div class="divider">
@@ -28,8 +24,7 @@
             role="tab"
             aria-controls="showall"
             aria-selected="true"
-            >Show All</a
-          >
+          >Show All</a>
         </li>
         <li class="nav-item">
           <a
@@ -39,8 +34,7 @@
             href="#Events"
             role="tab"
             aria-selected="false"
-            >Events</a
-          >
+          >Events</a>
         </li>
         <li class="nav-item">
           <a
@@ -50,8 +44,7 @@
             href="#Sports"
             role="tab"
             aria-selected="false"
-            >Sports</a
-          >
+          >Sports</a>
         </li>
         <li class="nav-item">
           <a
@@ -61,30 +54,25 @@
             href="#Classroom"
             role="tab"
             aria-selected="false"
-            >Classroom</a
-          >
+          >Classroom</a>
         </li>
       </ul>
 
       <div class="row">
         <div class="tab-content" id="pills-tabContent">
           <div
-            class="tab-pane  fade show active"
+            class="tab-pane fade show active"
             id="showall"
             role="tabpanel"
             aria-labelledby="showall-tab"
           >
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
-              <img
-                class="img-fluid "
-                src="/images/events_1.jpg"
-                alt="Gallery"
-              />
+              <img class="img-fluid" src="/images/events_1.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/events_1.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/events_1.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Event</h5>
               </div>
             </div>
@@ -93,9 +81,9 @@
               <img class="img-fluid" src="/images/events_2.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/events_2.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/events_2.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Event</h5>
               </div>
             </div>
@@ -104,9 +92,9 @@
               <img class="card-img" src="/images/events_3.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/events_3.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/events_3.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Event</h5>
               </div>
             </div>
@@ -115,9 +103,9 @@
               <img class="card-img" src="/images/sports_2.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/sports_2.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/sports_2.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Sports</h5>
               </div>
             </div>
@@ -126,9 +114,9 @@
               <img class="card-img" src="/images/sports_1.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/sports_1.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/sports_1.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Sports</h5>
               </div>
             </div>
@@ -137,60 +125,43 @@
               <img class="card-img" src="/images/sports_3.png" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/sports_3.png" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/sports_3.png" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Sports</h5>
               </div>
             </div>
 
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
-              <img
-                class="card-img"
-                src="/images/classroom_1.jpg"
-                alt="Gallery"
-              />
+              <img class="card-img" src="/images/classroom_1.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/classroom_1.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/classroom_1.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Classroom</h5>
               </div>
             </div>
 
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
-              <img
-                class="card-img"
-                src="/images/classroom_2.jpg"
-                alt="Gallery"
-              />
+              <img class="card-img" src="/images/classroom_2.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/classroom_2.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/classroom_2.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Classrom</h5>
               </div>
             </div>
           </div>
-          <div
-            class="tab-pane  fade"
-            id="Events"
-            role="tabpanel"
-            aria-labelledby="Events-tab"
-          >
+          <div class="tab-pane fade" id="Events" role="tabpanel" aria-labelledby="Events-tab">
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
-              <img
-                class="img-fluid "
-                src="/images/events_1.jpg"
-                alt="Gallery"
-              />
+              <img class="img-fluid" src="/images/events_1.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/events_1.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/events_1.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Event</h5>
               </div>
             </div>
@@ -199,9 +170,9 @@
               <img class="img-fluid" src="/images/events_2.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/events_2.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/events_2.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Event</h5>
               </div>
             </div>
@@ -210,26 +181,21 @@
               <img class="card-img" src="/images/events_3.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/events_3.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/events_3.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Event</h5>
               </div>
             </div>
           </div>
-          <div
-            class="tab-pane fade"
-            id="Sports"
-            role="tabpanel"
-            aria-labelledby="Sports-tab"
-          >
+          <div class="tab-pane fade" id="Sports" role="tabpanel" aria-labelledby="Sports-tab">
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
               <img class="card-img" src="/images/sports_1.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/sports_1.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/sports_1.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Sports</h5>
               </div>
             </div>
@@ -238,9 +204,9 @@
               <img class="card-img" src="/images/sports_2.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/sports_2.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/sports_2.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Sports</h5>
               </div>
             </div>
@@ -249,60 +215,43 @@
               <img class="card-img" src="/images/sports_3.png" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/sports_3.png" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/sports_3.png" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Sports</h5>
               </div>
             </div>
           </div>
-          <div
-            class="tab-pane fade"
-            id="Classroom"
-            role="tabpanel"
-            aria-labelledby="Classroom-tab"
-          >
+          <div class="tab-pane fade" id="Classroom" role="tabpanel" aria-labelledby="Classroom-tab">
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
-              <img
-                class="card-img"
-                src="/images/classroom_1.jpg"
-                alt="Gallery"
-              />
+              <img class="card-img" src="/images/classroom_1.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/classroom_1.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/classroom_1.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Classroom</h5>
               </div>
             </div>
 
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
-              <img
-                class="card-img"
-                src="/images/classroom_2.jpg"
-                alt="Gallery"
-              />
+              <img class="card-img" src="/images/classroom_2.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/classroom_2.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/classroom_2.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Classroom</h5>
               </div>
             </div>
 
             <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
-              <img
-                class="card-img"
-                src="/images/classroom_3.jpg"
-                alt="Gallery"
-              />
+              <img class="card-img" src="/images/classroom_3.jpg" alt="Gallery" />
               <div class="overlay"></div>
               <div class="overlay-text">
-                <a href="/images/classroom_3.jpg" data-fancybox="gallery"
-                  ><i class="fa fa-plus fa-2x"></i
-                ></a>
+                <a href="/images/classroom_3.jpg" data-fancybox="gallery">
+                  <i class="fa fa-plus fa-2x"></i>
+                </a>
                 <h5 class="font-weight-bold">Classroom</h5>
               </div>
             </div>
@@ -312,6 +261,7 @@
     </div>
   </section>
 </template>
+
 
 <script>
 export default {

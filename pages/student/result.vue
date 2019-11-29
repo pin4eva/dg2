@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="d-flex justify-content-center">
-      <b-spinner variant="success" style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
-      <!-- <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" type="grow"></b-spinner> -->
-    </div>
     <section class="result">
       <div class="container">
         <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
@@ -53,7 +49,11 @@
                 </div>
               </div>
               <div class="form-row justify-content-center">
-                <button class="btn theme-orange read-more mt-3" @click.prevent="next">
+                <button
+                  :class="status?'btn btn-secondary read-more mt-3' :' btn theme-orange read-more mt-3'"
+                  @click.prevent="next"
+                  :disabled="status"
+                >
                   Next
                   <i class="fas fa-long-arrow-alt-right pl-2 fa-1x"></i>
                 </button>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Type</label>
-                  <select v-model="type" class="form-control">
+                  <select v-model="type" class="form-control" @change="getBtn=!getBtn">
                     <option value="null">Choose...</option>
                     <option>First test</option>
                     <option>Second test</option>
@@ -84,8 +84,12 @@
                   </select>
                 </div>
               </div>
-              <div class="form-row justify-content-center">
-                <button @click.prevent="getResult" class="btn theme-orange read-more mt-3">
+              <div class="form-row justify-content-center" v-if="getBtn">
+                <button
+                  @click.once="getBtn=!getBtn"
+                  @click.prevent="getResult"
+                  class="btn theme-orange read-more mt-3"
+                >
                   Get Result
                   <i class="fas fa-long-arrow-alt-right pl-2 fa-1x"></i>
                 </button>
@@ -95,6 +99,14 @@
         </div>
       </div>
     </section>
+    <div class="d-flex justify-content-center">
+      <b-spinner
+        variant="success"
+        style="width: 3rem; height: 3rem;"
+        label="Large Spinner"
+        v-if="loading"
+      ></b-spinner>
+    </div>
     <section class="result-box mb-4" v-if="results">
       <div class="container">
         <h2 class="font-weight-bold text-center">Here Is Your Result</h2>
@@ -139,17 +151,24 @@ export default {
       regNO: null,
       type: null,
       term: null,
-      results: null
+      results: null,
+      loading: false,
+      getBtn: false
     };
   },
   computed: {
     ...mapGetters({
       sessions: "class/sessions",
-      loading: "class/loading",
+
       single: "class/session"
     }),
     classes() {
       return this.single.classes;
+    },
+    status() {
+      if (this.student && this.session && this.className) {
+        return false;
+      } else return true;
     }
   },
   watch: {
@@ -184,6 +203,7 @@ export default {
       console.log(data);
     },
     async getResult() {
+      this.loading = true;
       let student = this.student,
         className = this.className,
         term = this.term,
@@ -200,7 +220,10 @@ export default {
           }
         }
       ).catch(err => new Error(err));
+      this.loading = false;
+      if (!data) return alert("Your result is not ready yet");
       this.results = data;
+
       console.log(data);
     }
   }
