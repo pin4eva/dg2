@@ -1,21 +1,12 @@
 <template>
-  <footer class="theme-green">
+  <footer class="theme-green" id="front">
     <div class="container">
       <div class="footer-top border-bottom pt-5">
         <div class="row">
-          <div
-            class="col-lg-3 col-md-6"
-            data-aos="fade-in"
-            data-aos-duration="1050"
-          >
+          <div class="col-lg-3 col-md-6" data-aos="fade-in" data-aos-duration="1050">
             <div class="d-flex justify-content-center">
               <nuxt-link to="/">
-                <img
-                  src="/main.png"
-                  width="90"
-                  class="img-fluid mb-3"
-                  alt="DinnyGreen"
-                />
+                <img src="/main.png" width="90" class="img-fluid mb-3" alt="DinnyGreen" />
               </nuxt-link>
             </div>
             <p>
@@ -50,27 +41,23 @@
               </li>
             </ul>
           </div>
-          <div
-            class="col-lg-2 col-md-6"
-            data-aos="fade-in"
-            data-aos-duration="550"
-          >
+          <div class="col-lg-2 col-md-6" data-aos="fade-in" data-aos-duration="550">
             <h5 class="font-weight-bold mb-3">Quick Links</h5>
             <ul>
               <li>
-                <a href="index-2.html">
+                <nuxt-link to="/">
                   <i class="fa fa-angle-double-right mr-2"></i>Home
-                </a>
+                </nuxt-link>
               </li>
               <li>
-                <a href="about.html">
+                <nuxt-link to="/about">
                   <i class="fa fa-angle-double-right mr-2"></i>About Us
-                </a>
+                </nuxt-link>
               </li>
               <li>
-                <a href="student.html">
+                <nuxt-link to="/student">
                   <i class="fa fa-angle-double-right mr-2"></i>Student Corner
-                </a>
+                </nuxt-link>
               </li>
               <li>
                 <a href="faculties.html">
@@ -95,54 +82,26 @@
             </ul>
           </div>
 
-          <div
-            class="col-lg-3 col-md-6 mb-md-5 mb-4"
-            data-aos="fade-in"
-            data-aos-duration="1050"
-          >
+          <div class="col-lg-3 col-md-6 mb-md-5 mb-4" data-aos="fade-in" data-aos-duration="1050">
             <h5 class="font-weight-bold mb-3">Recent News</h5>
             <div class="row">
               <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                <img
-                  src="/images/thumb_1.jpg"
-                  class="img-fluid"
-                  alt="Gallery"
-                />
+                <img src="/images/thumb_1.jpg" class="img-fluid" alt="Gallery" />
               </div>
               <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                <img
-                  src="/images/thumb_2.jpg"
-                  class="img-fluid"
-                  alt="Gallery"
-                />
+                <img src="/images/thumb_2.jpg" class="img-fluid" alt="Gallery" />
               </div>
               <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                <img
-                  src="/images/thumb_3.jpg"
-                  class="img-fluid"
-                  alt="Gallery"
-                />
+                <img src="/images/thumb_3.jpg" class="img-fluid" alt="Gallery" />
               </div>
               <div class="col-md-4 col-sm-2 col-2 pr-0">
-                <img
-                  src="/images/thumb_4.jpg"
-                  class="img-fluid"
-                  alt="Gallery"
-                />
+                <img src="/images/thumb_4.jpg" class="img-fluid" alt="Gallery" />
               </div>
               <div class="col-md-4 col-sm-2 col-2 pr-0">
-                <img
-                  src="/images/thumb_5.jpg"
-                  class="img-fluid"
-                  alt="Gallery"
-                />
+                <img src="/images/thumb_5.jpg" class="img-fluid" alt="Gallery" />
               </div>
               <div class="col-md-4 col-sm-2 col-2 pr-0">
-                <img
-                  src="/images/thumb_6.jpg"
-                  class="img-fluid"
-                  alt="Gallery"
-                />
+                <img src="/images/thumb_6.jpg" class="img-fluid" alt="Gallery" />
               </div>
             </div>
           </div>
@@ -188,4 +147,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="stylus"></style>

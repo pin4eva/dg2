@@ -119,18 +119,12 @@ router.post("/addstudent", async (req, res) => {
  *  Get Request
  */
 router.get("/", async (req, res) => {
-  await ClassName.find()
+  let classes = await ClassName.find()
     .populate({
       path: "students"
       // select: ["_id", "name"]
     })
-    .populate({
-      path: "results",
-      populate: {
-        path: "records.student",
-        select: ["_id", "name"]
-      }
-    })
+
     .populate({
       path: "attendance",
       populate: {
@@ -150,22 +144,55 @@ router.get("/", async (req, res) => {
       path: "session"
     })
 
-    .then(data => res.send(data))
     .catch(err => res.send(err));
+  classes = classes.map(c => {
+    return {
+      ...c._doc,
+      teacher: `${c.teacher.firstName} ${c.teacher.lastName}`,
+      session: c.session.session,
+      students: c.students.map(st => {
+        return {
+          firstName: st.firstName,
+          lastName: st.lastName,
+          middleName: st.middleName,
+          regNO: st.regNO,
+          currentClass: c.name,
+          image: st.profile.image,
+          admittedON: st.admittedON
+        };
+      })
+    };
+  });
+
+  res.json(classes);
 });
 
 router.get("/single/:id", async (req, res) => {
-  await ClassName.findOne({ _id: req.params.id })
+  let classes = await ClassName.findOne({ _id: req.params.id })
     .populate({
       path: "students",
       populate: { path: "profile", select: ["-password"] }
     })
-    .populate("path:teacher")
+    .populate("teacher")
     .populate({ path: "results" })
     .populate({ path: "attendance" })
 
-    .then(data => res.send(data))
     .catch(err => res.send(err));
+  res.json({
+    ...classes._doc,
+    teacher: `${classes._doc.teacher.firstName} ${classes._doc.teacher.lastName}`,
+    students: classes._doc.students.map(st => {
+      return {
+        firstName: st.firstName,
+        lastName: st.lastName,
+        middleName: st.middleName,
+        regNO: st.regNO,
+        currentClass: classes._doc.name,
+        image: st.profile.image,
+        admittedON: st.admittedON
+      };
+    })
+  });
 });
 
 /**

@@ -57,9 +57,10 @@ export const actions = {
   },
   async getStudent({ commit }, id) {
     await axios
-      .get(`${process.env.baseUrl}/api/student/${id}`)
+      .get(`${process.env.baseUrl}/api/student/single/${id}`)
       .then(({ data }) => {
         commit("setStudent", data);
+        console.log(data);
       })
       .catch(err => new Error(err));
   }

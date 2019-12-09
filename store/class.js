@@ -55,6 +55,22 @@ export const actions = {
         console.log(err);
       });
   },
+  async getClass({ commit }, payload) {
+    commit("setLoading", true);
+    //  commit("setStatus", false);
+    await axios
+      .get(`${process.env.baseUrl}/api/class/single/${payload}`)
+      .then(({ data }) => {
+        if (data) {
+          commit("setClass", data);
+          commit("setStatus", true);
+          commit("setLoading", false);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   getSessions: async ({ commit }) => {
     commit("setLoading", true);
     await axios

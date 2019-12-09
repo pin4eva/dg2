@@ -235,15 +235,15 @@ router.delete("/delete/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   await Teacher.find()
     .lean()
-    // .populate({
-    //   path: "profile",
-    //   select: ["-password"],
-    //   populate: {
-    //     path: "messages.sent",
-    //     path: "messages.recieved"
-    //   }
-    // })
-    .populate("profile")
+    .populate({
+      path: "profile",
+      select: ["-password"],
+      populate: {
+        path: "messages.sent",
+        path: "messages.recieved"
+      }
+    })
+    // .populate("profile")
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });

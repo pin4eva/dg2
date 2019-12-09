@@ -106,14 +106,33 @@ router.get("/class", async (req, res) => {
     .lean()
     .populate({
       path: "student",
-      select: ["firstName", "lastName"]
+      select: ["firstName", "lastName", "profile"],
+      populate: {
+        path: "profile",
+        select: ["image"]
+      }
     })
+
     .populate({
       path: "className",
-      select: "name"
+      select: ["name", "teacher"],
+      populate: {
+        path: "teacher",
+        select: ["firstName", "lastName"]
+      }
     })
-    .catch(err => res.json(err));
-  res.json(assessment);
+    .catch(err => res.json(err.message));
+  if (!assessment) return res.json(null); //({ status: false, msg: "Cannot find result" });
+  res.json({
+    ...assessment,
+    student: {
+      firstName: assessment.student.firstName,
+      lastName: assessment.student.lastName,
+      image: assessment.student.profile.image
+    },
+    className: assessment.className.name,
+    teacher: `${assessment.className.teacher.firstName} ${assessment.className.teacher.lastName}`
+  });
 });
 
 router.get("/", async (req, res) => {

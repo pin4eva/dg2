@@ -11,13 +11,9 @@
         <div class="carousel-item active">
           <img src="/images/banner_1.jpg" alt="education" class="img-fluid" />
           <div class="carousel-caption animated fadeInLeft delay-0.5s">
-            <h1 class="font-weight-bold">
-              An investment in knowledge pays the best interest.
-            </h1>
+            <h1 class="font-weight-bold">An investment in knowledge pays the best interest.</h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now"
-              >Apply Now</a
-            >
+            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
           </div>
         </div>
         <div class="carousel-item">
@@ -28,9 +24,7 @@
               learned in school.
             </h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now"
-              >Apply Now</a
-            >
+            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
           </div>
         </div>
         <div class="carousel-item">
@@ -41,21 +35,17 @@
               fire.
             </h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now"
-              >Apply Now</a
-            >
+            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
           </div>
         </div>
         <div class="carousel-item">
           <img src="/images/banner_4.jpg" alt="education" class="img-fluid" />
           <div class="carousel-caption animated zoomIn delay-0.5s">
-            <h1 class="font-weight-bold">
-              Education is not preparation for life; education is life itself.
-            </h1>
+            <h1
+              class="font-weight-bold"
+            >Education is not preparation for life; education is life itself.</h1>
             <h6 class="banner-desc">We had such a great time in Education</h6>
-            <a href="javascript:" class="theme-green btn mt-3 apply-now"
-              >Apply Now</a
-            >
+            <a href="javascript:" class="theme-green btn mt-3 apply-now">Apply Now</a>
           </div>
         </div>
       </div>
@@ -65,14 +55,8 @@
         <div class="about-box pb-3">
           <i class="fa fa-mortar-board"></i>
         </div>
-        <h5 data-aos="fade-up" data-aos-duration="1050">
-          Key to unlock the golden door of freedom.
-        </h5>
-        <h2
-          class="font-weight-bold pb-3 px-5 mb-0"
-          data-aos="fade-up"
-          data-aos-duration="1050"
-        >
+        <h5 data-aos="fade-up" data-aos-duration="1050">Key to unlock the golden door of freedom.</h5>
+        <h2 class="font-weight-bold pb-3 px-5 mb-0" data-aos="fade-up" data-aos-duration="1050">
           Education develop a passion for learning.If you do, you will never
           cease to grow.
         </h2>
@@ -126,9 +110,7 @@
               data-aos-duration="550"
             >
               <div class="border-line"></div>
-              <i
-                class="fa fa-mortar-board fa-3x color-ash mb-3 target-icon"
-              ></i>
+              <i class="fa fa-mortar-board fa-3x color-ash mb-3 target-icon"></i>
               <h4 class="font-weight-bold">Scholarship Facility</h4>
               <p>
                 Aliquip exea conse quat nul duis crib irure dolor in
@@ -142,11 +124,7 @@
           </div>
 
           <div class="col-md-4">
-            <div
-              class="target-block text-white p-5"
-              data-aos="fade-up"
-              data-aos-duration="550"
-            >
+            <div class="target-block text-white p-5" data-aos="fade-up" data-aos-duration="550">
               <div class="border-line"></div>
               <i class="fa fa-book fa-3x color-ash mb-3 target-icon"></i>
               <h4 class="font-weight-bold">Book Library & Lab</h4>
@@ -169,7 +147,7 @@
           <div class="col-lg-6">
             <div class="sec-title">
               <span class="title">About Us</span>
-              <h2>Why are a better than the rest</h2>
+              <h2>Why choose Dinnygreen International School</h2>
               <div class="divider">
                 <span class="fa fa-mortar-board"></span>
               </div>
@@ -186,12 +164,7 @@
               popularised in the 1960s with the release of Letraset sheets
               containing Lorem Ipsum passages.
             </p>
-            <button
-              type="button"
-              class="btn theme-green theme-btn my-2 join-us"
-            >
-              Join Us
-            </button>
+            <button type="button" class="btn theme-green theme-btn my-2 join-us">Join Us</button>
           </div>
           <div class="col-lg-6">
             <div
@@ -199,11 +172,7 @@
               data-aos="fade-up"
               data-aos-duration="550"
             >
-              <img
-                src="/images/icons/promotion.png"
-                class="img-fluid m-auto"
-                alt="Key Of Success"
-              />
+              <img src="/images/icons/promotion.png" class="img-fluid m-auto" alt="Key Of Success" />
               <div class="course-text pl-5">
                 <h4>Key Of Success</h4>
                 <p>
@@ -235,11 +204,7 @@
               data-aos="fade-up"
               data-aos-duration="550"
             >
-              <img
-                src="/images/icons/feminism.png"
-                class="img-fluid m-auto"
-                alt="Our Principle"
-              />
+              <img src="/images/icons/feminism.png" class="img-fluid m-auto" alt="Our Principle" />
               <div class="course-text pl-5">
                 <h4>Our Principle</h4>
                 <p>
@@ -274,17 +239,11 @@
               <div class="divider">
                 <span class="fa fa-mortar-board"></span>
               </div>
-              <div
-                class="event-block d-flex my-3"
-                data-aos="fade-up"
-                data-aos-duration="550"
-              >
+              <div class="event-block d-flex my-3" data-aos="fade-up" data-aos-duration="550">
                 <h2 class="font-weight-bold color-orange mr-3">1.</h2>
                 <div class="event-info">
                   <h5 class="color-blue">
-                    <a href="javascript:"
-                      >International Conference on Business .....</a
-                    >
+                    <a href="javascript:">International Conference on Business .....</a>
                   </h5>
                   <ul class="pl-0">
                     <li class="pr-3">
@@ -302,17 +261,11 @@
                   </ul>
                 </div>
               </div>
-              <div
-                class="event-block d-flex my-3"
-                data-aos="fade-up"
-                data-aos-duration="550"
-              >
+              <div class="event-block d-flex my-3" data-aos="fade-up" data-aos-duration="550">
                 <h2 class="font-weight-bold color-orange mr-3">2.</h2>
                 <div class="event-info">
                   <h5 class="color-blue">
-                    <a href="javascript:"
-                      >International Conference on Business .....</a
-                    >
+                    <a href="javascript:">International Conference on Business .....</a>
                   </h5>
                   <ul class="pl-0">
                     <li class="pr-3">
@@ -330,17 +283,11 @@
                   </ul>
                 </div>
               </div>
-              <div
-                class="event-block d-flex mt-3"
-                data-aos="fade-up"
-                data-aos-duration="550"
-              >
+              <div class="event-block d-flex mt-3" data-aos="fade-up" data-aos-duration="550">
                 <h2 class="font-weight-bold color-orange mr-3">3.</h2>
                 <div class="event-info">
                   <h5 class="color-blue">
-                    <a href="javascript:"
-                      >International Conference on Business .....</a
-                    >
+                    <a href="javascript:">International Conference on Business .....</a>
                   </h5>
                   <ul class="pl-0 mb-0">
                     <li class="pr-3">

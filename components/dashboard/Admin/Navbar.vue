@@ -47,7 +47,7 @@
               </span>
             </li>
           </ul>
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" v-if="profile">
             <li class="navbar-item dropdown header-admin">
               <a
                 class="navbar-nav-link dropdown-toggle"

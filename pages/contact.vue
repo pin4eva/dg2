@@ -1,11 +1,7 @@
 <template>
   <section class="contact-section">
     <div class="container">
-      <div
-        class="sec-title text-center mb-3"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
+      <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
         <span class="title">Get In Touch</span>
         <h2>We’d Love To Here From You</h2>
         <div class="divider">
@@ -14,56 +10,35 @@
       </div>
       <div class="row">
         <div class="col-lg-8 col-md-8">
-          <div
-            class="contact-form p-5"
-            data-aos="zoom-in"
-            data-aos-duration="1000"
-          >
+          <div class="contact-form p-5" data-aos="zoom-in" data-aos-duration="1000">
             <div class="border-line"></div>
             <h3 class="font-weight-bold color-orange">Drop Message</h3>
             <form>
               <div class="form-group">
                 <label>Name</label>
-                <input
-                  class="form-control"
-                  placeholder="Enter Name"
-                  type="text"
-                />
+                <input class="form-control" placeholder="Enter Name" type="text" />
               </div>
               <div class="form-group">
                 <label>Email Address</label>
-                <input
-                  class="form-control"
-                  placeholder="Enter Email"
-                  type="email"
-                />
-                <small class="form-text text-muted" id="emailHelp"
-                  >We'll never share your email with anyone else.
-                </small>
+                <input class="form-control" placeholder="Enter Email" type="email" />
+                <small
+                  class="form-text text-muted"
+                  id="emailHelp"
+                >We'll never share your email with anyone else.</small>
               </div>
               <div class="form-group">
                 <label>Phone Number</label>
-                <input
-                  class="form-control"
-                  placeholder="Enter Number"
-                  type="email"
-                />
+                <input class="form-control" placeholder="Enter Number" type="email" />
               </div>
               <div class="form-group">
                 <label>Message</label>
-                <input
-                  class="form-control"
-                  placeholder="Message"
-                  type="email"
-                />
+                <input class="form-control" placeholder="Message" type="email" />
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" />
                 <label class="form-check-label">Check me out</label>
               </div>
-              <button class="btn theme-orange border-0 mt-4" type="submit">
-                Send Message
-              </button>
+              <button class="btn theme-orange border-0 mt-4" type="submit">Send Message</button>
             </form>
           </div>
         </div>
@@ -76,7 +51,7 @@
             <div class="media-body text-left">
               <h6 class="color-orange font-weight-bold mb-1">Address</h6>
               <p class="mb-0">
-                24 Webilor street, Power encounter estate, off Easr-West road,
+                4 Webilor street, Power encounter estate, off East-West road,
                 Port Harcourt
               </p>
             </div>

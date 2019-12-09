@@ -80,7 +80,7 @@ export default {
 <style lang="stylus" >
 @import '~/static/dashboard/fonts/flaticon.css';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/all.css';
-@import '../assets/stylus/dashboard';
+@import '../assets/stylus/front';
 
 .btn {
   border-radius: 0;

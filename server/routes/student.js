@@ -119,7 +119,7 @@ router.delete("/deletemany", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  await Student.find()
+  let students = await Student.find()
     .lean()
     .populate({
       path: "parents",
@@ -130,9 +130,71 @@ router.get("/", async (req, res) => {
       model: "ClassName",
       select: "_id name"
     })
-
-    .then(data => res.send(data))
+    .populate({
+      path: "profile",
+      select: ["image"]
+    })
     .catch(err => res.send(err));
+
+  let student = students.map(st => {
+    return {
+      ...st,
+      image: st.profile.image,
+      currentClass: st.currentClass.name,
+      parents: st.parents.map(p => {
+        return {
+          name: `${p.firstName} ${p.lastName}`,
+          occupation: p.occupation,
+          role: p.role
+        };
+      })
+    };
+  });
+
+  res.json(student);
+});
+
+router.get("/search", async (req, res) => {
+  const { searchString } = req.query;
+  let students = await Student.find({
+    $or: [
+      { firstName: searchString },
+      { lastName: searchString },
+      { middleName: searchString }
+    ]
+  })
+    .lean()
+    .populate({
+      path: "parents",
+      model: "Parent"
+    })
+    .populate({
+      path: "currentClass",
+      model: "ClassName",
+      select: "_id name"
+    })
+    .populate({
+      path: "profile",
+      select: ["image"]
+    })
+    .catch(err => res.send(err));
+
+  let student = students.map(st => {
+    return {
+      ...st,
+      image: st.profile.image,
+      currentClass: st.currentClass.name,
+      parents: st.parents.map(p => {
+        return {
+          name: `${p.firstName} ${p.lastName}`,
+          occupation: p.occupation,
+          role: p.role
+        };
+      })
+    };
+  });
+
+  res.json(student);
 });
 router.get("/reg", async (req, res) => {
   let { student } = req.query;
@@ -147,7 +209,7 @@ router.get("/single/:id", async (req, res) => {
     .lean()
     .populate({
       path: "parents",
-      // select: ["_id", "name", "role"]
+      select: ["-password", "-children"],
       model: "Parent"
     })
     .populate({

@@ -1,12 +1,9 @@
 <template>
   <section class="student">
     <div class="container">
-      <div
-        class="sec-title text-center mb-3"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
+      <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
         <span class="title">Student</span>
+
         <h2>Student List Here</h2>
         <div class="divider">
           <span class="fa fa-mortar-board"></span>
@@ -14,58 +11,49 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-12">
-          <div class="search-student border px-4 py-3">
+          <search-form @onSearch="searchStudent"></search-form>
+
+          <!-- <div class="search-student border px-4 py-3">
             <h4 class="font-weight-bold color-orange">Search Student</h4>
             <form>
               <div class="form-group">
-                <label for="exampleIDNumber">ID Number</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleIDNumber"
-                  placeholder="Enter Your ID"
-                />
-              </div>
-              <div class="form-group">
-                <label for="exampleDepartment">Department</label>
-                <select id="exampleDepartment" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>Department 1</option>
-                  <option>Department 2</option>
-                  <option>Department 3</option>
+                <label>Academic session</label>
+                <select id="exampleDepartment" class="form-control" v-model="selectedSession">
+                  <option value="null">Choose...</option>
+                  <option
+                    v-for="session in sessions"
+                    :key="session._id"
+                    :value="session._id"
+                  >{{session.session}}</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="exampleClass">Class</label>
-                <select id="exampleClass" class="form-control">
-                  <option selected>Choose...</option>
-                  <option>Class One</option>
-                  <option>Class Two</option>
-                  <option>Class Three</option>
+                <label>Class</label>
+                <select class="form-control" v-model="selectedClass">
+                  <option value="null">Choose...</option>
+                  <option v-for="c in classes" :key="c._id" :value="c._id">{{c.name}}</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="exampleStduntname">Student Name</label>
+                <label>Student Name</label>
                 <input
                   type="text"
+                  v-model="searchString"
                   class="form-control"
-                  id="exampleStduntname"
                   placeholder="Enter Student Name"
                 />
               </div>
 
-              <button type="submit" class="btn theme-orange border-0 mt-2">
-                Search Now
-              </button>
+              <button
+                @click.prevent="searchStudent"
+                type="submit"
+                class="btn theme-orange border-0 mt-2"
+              >Search Now</button>
             </form>
           </div>
 
           <div class="video my-4" data-aos="zoom-in" data-aos-duration="1000">
-            <img
-              class="img-fluid"
-              src="assets/images/event_1.jpg"
-              alt="video"
-            />
+            <img class="img-fluid" src="/images/event_1.jpg" alt="video" />
             <a
               href="https://www.youtube.com/watch?v=_sI_Ps7JSEk"
               data-fancybox="gallery"
@@ -73,117 +61,27 @@
             >
               <i class="fa fa-play-circle fa-3x"></i>
             </a>
-          </div>
+          </div>-->
         </div>
         <div class="col-lg-8 col-md-12">
-          <div class="row">
-            <div class="col-md-6 mb-4">
-              <div class="student-block">
-                <div class="student-img">
-                  <img
-                    src="assets/images/student_1.jpg"
-                    class="img-fluid d-block m-auto"
-                    alt="Student"
-                  />
-                </div>
-                <div
-                  class="student-desc"
-                  data-aos="fade-up"
-                  data-aos-duration="1000"
-                >
-                  <div class="border-line"></div>
-                  <div class="std_desc_one text-center pt-3">
-                    <h6 class="font-weight-bold color-orange">John Devis</h6>
-                    <h6><b>ID:</b> 1153</h6>
-                  </div>
-                  <div class="std_desc_two text-center">
-                    <h6><b>Class:</b>One</h6>
-                    <h6><b>Dep:</b>Business Management</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-              <div class="student-block">
-                <div class="student-img">
-                  <img
-                    src="assets/images/student_2.jpg"
-                    class="img-fluid d-block m-auto"
-                    alt="Student"
-                  />
-                </div>
-                <div
-                  class="student-desc"
-                  data-aos="fade-up"
-                  data-aos-duration="1000"
-                >
-                  <div class="border-line"></div>
-                  <div class="std_desc_one text-center pt-3">
-                    <h6 class="font-weight-bold color-orange">Lissa Devin</h6>
-                    <h6><b>ID:</b> 1253</h6>
-                  </div>
-                  <div class="std_desc_two text-center">
-                    <h6><b>Class:</b>One</h6>
-                    <h6><b>Dep:</b>UI/UX Design</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 mb-xl-0 mb-lg-0 mb-md-0 mb-sm-4 mb-4 ">
-              <div class="student-block">
-                <div class="student-img">
-                  <img
-                    src="assets/images/student_3.jpg"
-                    class="img-fluid d-block m-auto"
-                    alt="Student"
-                  />
-                </div>
-                <div
-                  class="student-desc"
-                  data-aos="fade-up"
-                  data-aos-duration="1000"
-                >
-                  <div class="border-line"></div>
-                  <div class="std_desc_one text-center pt-3">
-                    <h6 class="font-weight-bold color-orange">Jenifer Deo</h6>
-                    <h6><b>ID:</b>4153</h6>
-                  </div>
-                  <div class="std_desc_two text-center">
-                    <h6><b>Class:</b>One</h6>
-                    <h6><b>Dep:</b>Web Development</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="student-block">
-                <div class="student-img">
-                  <img
-                    src="assets/images/student_4.jpg"
-                    class="img-fluid d-block m-auto"
-                    alt="Student"
-                  />
-                </div>
-                <div
-                  class="student-desc"
-                  data-aos="fade-up"
-                  data-aos-duration="1000"
-                >
-                  <div class="border-line"></div>
-                  <div class="std_desc_one text-center pt-3">
-                    <h6 class="font-weight-bold color-orange">Mark Luis</h6>
-                    <h6><b>ID:</b>1263</h6>
-                  </div>
-                  <div class="std_desc_two text-center">
-                    <h6><b>Class:</b>One</h6>
-                    <h6><b>Dep:</b>Web Design</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="d-flex justify-content-center my-5" v-if="loading">
+            <b-spinner variant="success" style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
+          </div>
+          <div class="row" v-else>
+            <StudentCard
+              class="col-md-6 mb-4"
+              :student="student"
+              v-for="student in students"
+              :key="student._id"
+            />
+          </div>
+          <div class="d-flex justify-content-between mt-5">
+            <a href="#">
+              <i class="fas fa-arrow-left fa-2x color-orange"></i>
+            </a>
+            <a href="#">
+              <i class="fas fa-arrow-right fa-2x color-orange"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -192,8 +90,71 @@
 </template>
 
 <script>
+import StudentCard from "@/components/front/StudentCard";
+import SearchForm from "@/components/front/SearchStudentForm";
+import { mapGetters } from "vuex";
+import Axios from "axios";
 export default {
-  name: "Student-Page"
+  name: "Student-Page",
+  components: { StudentCard, SearchForm },
+  data() {
+    return {
+      selectedSession: null,
+      selectedClass: null,
+      loading: false,
+      searchString: "",
+      student: null
+    };
+  },
+  computed: {
+    ...mapGetters({
+      // students: "students/students",
+      sessions: "class/sessions",
+      session: "class/session"
+    }),
+    classes: {
+      get: function() {
+        return this.session.classes;
+      }
+    },
+    students() {
+      let student = this.student;
+      let classes = this.$store.state.class.singleClass.students;
+      let allStudents = this.$store.state.students.students;
+      if (student) return student;
+      if (classes) {
+        return classes;
+      } else return allStudents;
+    }
+  },
+  watch: {
+    selectedSession(v) {
+      this.$store.dispatch("class/getSession", v);
+    },
+    selectedClass(v) {
+      this.student = null;
+      this.$store.dispatch("class/getClass", v);
+    }
+  },
+  methods: {
+    getClass() {
+      this.$store.dispatch("class/");
+    },
+    getSession() {
+      this.$store.dispatch("class/getSession", this.selectedSession);
+    },
+    async searchStudent(v) {
+      // let { data } = await Axios.get(
+      //   `${process.env.baseUrl}/api/student/search`,
+      //   {
+      //     params: {
+      //       searchString: this.searchString
+      //     }
+      //   }
+      // ).catch(err => new Error(err));
+      this.student = v;
+    }
+  }
 };
 </script>
 

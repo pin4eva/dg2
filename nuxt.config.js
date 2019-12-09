@@ -47,7 +47,8 @@ export default {
     "@/plugins/server.js",
     "@/plugins/cookie.js",
     "@/plugins/axios.js",
-    "@/plugins/socket.js"
+    "@/plugins/socket.js",
+    "@/plugins/test.js"
   ],
   /*
    ** Nuxt.js dev-modules

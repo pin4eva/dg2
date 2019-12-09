@@ -21,6 +21,7 @@
                     v-model="student"
                     placeholder="Enter Your Registration Number"
                     :state="regNO"
+                    @blur="checkRegNO"
                   ></b-form-input>
                 </div>
                 <div class="form-group col-md-4">
@@ -112,6 +113,26 @@
         <h2 class="font-weight-bold text-center">Here Is Your Result</h2>
         <div class="row justify-content-center">
           <div class="col-md-8">
+            <div class="d-flex justify-content-between my-4">
+              <div>
+                <h5>
+                  <b>Name</b>
+                  : {{results.student.firstName}} {{results.student.lastName}}
+                </h5>
+                <h5>
+                  <b>Class</b>
+                  : {{results.className}}
+                </h5>
+                <h5>
+                  <b>Teacher</b>
+                  : {{results.teacher}}
+                </h5>
+              </div>
+              <div>
+                <img :src="results.student.image" altm width="150" />
+              </div>
+            </div>
+
             <div class="table-responsive">
               <table class="table table-bordered mb-0">
                 <thead>
@@ -144,14 +165,13 @@ export default {
   name: "Student-Result-Page",
   data() {
     return {
-      nextRow: true,
       session: null,
       className: null,
       student: null,
       regNO: null,
       type: null,
       term: null,
-      results: null,
+
       loading: false,
       getBtn: false
     };
@@ -159,7 +179,8 @@ export default {
   computed: {
     ...mapGetters({
       sessions: "class/sessions",
-
+      results: "assessments/result",
+      nextRow: "assessments/nextRow",
       single: "class/session"
     }),
     classes() {
@@ -174,10 +195,10 @@ export default {
   watch: {
     session(v) {
       this.getClass(v);
-    },
-    student(v) {
-      this.checkRegNO(v);
     }
+    // student(v) {
+    //   this.checkRegNO(v);
+    // }
   },
   methods: {
     async getClass(v) {
@@ -187,20 +208,19 @@ export default {
       if (!this.student || !this.session || !this.className)
         return alert("Fill all input");
 
-      this.nextRow = !this.nextRow;
+      this.$store.commit("assessments/setNextRow", false);
     },
-    async checkRegNO(v) {
+    async checkRegNO() {
       let { data } = await Axios.get(
         `${process.env.baseUrl}/api/student/reg/`,
         {
           params: {
-            student: v
+            student: this.student
           }
         }
       ).catch(err => new Error(err));
       this.regNO = data.status;
       if (data.status == false) return alert("Invalid Registration number");
-      console.log(data);
     },
     async getResult() {
       this.loading = true;
@@ -222,9 +242,9 @@ export default {
       ).catch(err => new Error(err));
       this.loading = false;
       if (!data) return alert("Your result is not ready yet");
-      this.results = data;
-
       console.log(data);
+
+      this.$store.commit("assessments/setResult", data);
     }
   }
 };

@@ -133,7 +133,7 @@
                             <b-form-checkbox></b-form-checkbox>
                           </b-td>
                           <b-td>{{c.name}}</b-td>
-                          <b-td v-if="c.teacher">{{c.teacher.profile.firstName}}</b-td>
+                          <b-td v-if="c.teacher">{{c.teacher}}</b-td>
                         </b-tr>
                       </b-tbody>
                     </b-table-simple>
@@ -259,7 +259,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="notice-box-wrap">
+                <div class="notice-box-wrap" v-if="teacher.profile.notice">
                   <div
                     class="notice-list"
                     v-for="notice in teacher.profile.notice "
@@ -364,8 +364,8 @@ export default {
     ...mapGetters({
       sessions: "class/sessions",
       classes: "class/classes",
-      teacher: "teachers/teacher",
-      profile: "teachers/teachers_profile"
+      teacher: "teachers/teacher"
+      // profile: "teachers/teachers_profile"
     })
   },
   watch: {

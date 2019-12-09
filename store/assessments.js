@@ -2,12 +2,16 @@ import Axios from "axios";
 
 const state = () => ({
   assessments: [],
-  classRec: []
+  classRec: [],
+  result: null,
+  nextRow: true
 });
 
 const getters = {
   assessments: state => state.assessments || [],
-  classRec: state => state.classRec || []
+  classRec: state => state.classRec || [],
+  result: state => state.result,
+  nextRow: state => state.nextRow
 };
 const mutations = {
   addAssessments(state, payload) {
@@ -15,6 +19,12 @@ const mutations = {
   },
   setClassRec(state, payload) {
     state.classRec = payload;
+  },
+  setResult(state, payload) {
+    state.result = payload;
+  },
+  setNextRow(state, payload) {
+    state.nextRow = payload;
   }
 };
 const actions = {
